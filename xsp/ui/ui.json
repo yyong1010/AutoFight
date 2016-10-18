@@ -1,0 +1,583 @@
+{
+   "cancelname" : "取消",
+   "config" : "save_AutoDonate.dat",
+   "height" : 1350,
+	 "width" : 1450,
+   "okname" : "开始运行",
+   "style" : "default",
+   "views" : [
+      {
+         "style" : "default",
+         "text" : "基础设置",
+         "type" : "Page",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "size" : 40,
+               "text" : "基础功能选择：",
+               "type" : "Label"
+            },
+            {
+               "id" : "BasicFunction",
+               "list" : "觉醒,御魂,探索",
+               "select" : "0",
+               "type" : "CheckBoxGroup"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "size" : 40,
+               "text" : "部落援军上限：",
+               "type" : "Label"
+            },
+            {
+               "id" : "WakenType",
+               "list" : "火,风,水,雷",
+               "select" : "1",
+               "type" : "RadioGroup"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "0,0,0,0",
+               "size" : 40,
+               "text" : "增援部队种类：",
+               "type" : "Label"
+            },
+            {
+               "id" : "DonateTroops",
+               "list" : "弓箭,胖子,法师",
+               "select" : "0@1@2",
+               "type" : "CheckBoxGroup"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "size" : 40,
+               "text" : "增援黑水法术种类：",
+               "type" : "Label"
+            },
+            {
+               "id" : "DrakSpell",
+               "list" : "毒药法术,地震法术,急速法术",
+               "select" : "0",
+               "type" : "CheckBoxGroup"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "size" : 40,
+               "text" : "过滤部落战信息：",
+               "type" : "Label"
+            },
+            {
+               "id" : "Filter",
+               "list" : "是,否",
+               "select" : "0",
+               "type" : "RadioGroup"
+            },
+            {
+               "align" : "right",
+               "color" : "238,0,0",
+               "size" : 30,
+               "text" : "注意：部队优先顺序为胖子,法师,弓箭\n法术优先顺序为急速,毒药,地震",
+               "type" : "Label"
+            }
+         ]
+      },
+      {
+         "style" : "default",
+         "text" : "收集设置",
+         "type" : "Page",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "size" : 40,
+               "text" : "收集循环次数设置：",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "CycleIndex",
+               "prompt" : "如出现收集遗漏的情况可适当加大循环次数",
+               "size" : 40,
+               "text" : "20",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "size" : 40,
+               "text" : "收集间隔时间设置：",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "Interval",
+               "prompt" : "单位为秒",
+               "size" : 40,
+               "text" : "300",
+               "type" : "Edit"
+            },
+            {
+               "align" : "right",
+               "color" : "238,0,0",
+               "size" : 30,
+               "text" : "\n注意：循环次数由你拥有的收集器总数决定\n收集间隔时间的单位为秒",
+               "type" : "Label"
+            }
+         ]
+      },
+      {
+         "style" : "custom",
+         "text" : "制造设置",
+         "type" : "Page",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "10,10,60,40",
+               "size" : 40,
+               "text" : "野蛮人",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "Barbarian",
+               "prompt" : "",
+               "rect" : "10,40,50,40",
+               "size" : 40,
+               "text" : "32",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "80,10,60,40",
+               "size" : 40,
+               "text" : "弓箭手",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "Archer",
+               "prompt" : "",
+               "rect" : "80,40,50,40",
+               "size" : 40,
+               "text" : "40",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "150,10,60,40",
+               "size" : 40,
+               "text" : "巨人",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "Giant",
+               "prompt" : "",
+               "rect" : "150,40,50,40",
+               "size" : 40,
+               "text" : "16",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "220,10,60,40",
+               "size" : 40,
+               "text" : "哥布林",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "Goblin",
+               "prompt" : "",
+               "rect" : "220,40,50,40",
+               "size" : 40,
+               "text" : "8",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "290,10,60,40",
+               "size" : 40,
+               "text" : "炸弹人",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "WallBreaker",
+               "prompt" : "",
+               "rect" : "290,40,50,40",
+               "size" : 40,
+               "text" : "8",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "10,90,60,40",
+               "size" : 40,
+               "text" : "气球兵",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "Balloon",
+               "prompt" : "",
+               "rect" : "10,120,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "80,90,60,40",
+               "size" : 40,
+               "text" : "法师",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "Wizard",
+               "prompt" : "",
+               "rect" : "80,120,50,40",
+               "size" : 40,
+               "text" : "4",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "150,90,60,40",
+               "size" : 40,
+               "text" : "天使",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "Healer",
+               "prompt" : "",
+               "rect" : "150,120,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "220,90,60,40",
+               "size" : 40,
+               "text" : "飞龙",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "Dragon",
+               "prompt" : "",
+               "rect" : "220,120,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "290,90,60,40",
+               "size" : 40,
+               "text" : "皮卡",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "PEKKA",
+               "prompt" : "",
+               "rect" : "290,120,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "10,170,60,40",
+               "size" : 40,
+               "text" : "亡灵",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "Minion",
+               "prompt" : "",
+               "rect" : "10,200,50,40",
+               "size" : 40,
+               "text" : "4",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "80,170,60,40",
+               "size" : 40,
+               "text" : "野猪",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "HogRider",
+               "prompt" : "",
+               "rect" : "80,200,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "150,170,60,40",
+               "size" : 40,
+               "text" : "女武神",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "Valkyrie",
+               "prompt" : "",
+               "rect" : "150,200,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "220,170,60,40",
+               "size" : 40,
+               "text" : "石头",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "Golem",
+               "prompt" : "",
+               "rect" : "220,200,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "290,170,60,40",
+               "size" : 40,
+               "text" : "女巫",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "Witch",
+               "prompt" : "",
+               "rect" : "290,200,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "360,170,60,40",
+               "size" : 40,
+               "text" : "天狗",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "LavaHound",
+               "prompt" : "",
+               "rect" : "360,200,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "10,250,80,40",
+               "size" : 40,
+               "text" : "雷电法术",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "LightningSpell",
+               "prompt" : "",
+               "rect" : "10,280,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "90,250,80,40",
+               "size" : 40,
+               "text" : "疗伤法术",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "HealingSpell",
+               "prompt" : "",
+               "rect" : "90,280,50,40",
+               "size" : 40,
+               "text" : "4",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "170,250,80,40",
+               "size" : 40,
+               "text" : "狂暴法术",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "RageSpell",
+               "prompt" : "",
+               "rect" : "170,280,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "250,250,80,40",
+               "size" : 40,
+               "text" : "弹跳法术",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "JumpSpell",
+               "prompt" : "",
+               "rect" : "250,280,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "330,250,80,40",
+               "size" : 40,
+               "text" : "冰冻法术",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "FreezeSpell",
+               "prompt" : "",
+               "rect" : "330,280,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "10,330,80,40",
+               "size" : 40,
+               "text" : "毒药法术",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "PosionSpell",
+               "prompt" : "",
+               "rect" : "10,360,50,40",
+               "size" : 40,
+               "text" : "3",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "90,330,80,40",
+               "size" : 40,
+               "text" : "地震法术",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "EarthquakeSpell",
+               "prompt" : "",
+               "rect" : "90,360,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "rect" : "170,330,80,40",
+               "size" : 40,
+               "text" : "急速法术",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "HasteSpell",
+               "prompt" : "",
+               "rect" : "170,360,50,40",
+               "size" : 40,
+               "text" : "0",
+               "type" : "Edit"
+            },
+            {
+               "align" : "right",
+               "color" : "238,0,0",
+               "rect" : "10,420,440,40",
+               "size" : 30,
+               "text" : "注意：请按实际情况输入数字！",
+               "type" : "Label"
+            }
+         ]
+      }
+   ]
+}

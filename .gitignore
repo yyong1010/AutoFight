@@ -1,0 +1,6 @@
+
+*.xsp
+
+*.xspproj
+
+xsp/res/Thumbs.db
