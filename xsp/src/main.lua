@@ -34,6 +34,7 @@ function main()
 		
 		if string.find(setting["BasicFunction"], "0", 1) then
 			juexingdefault()
+			--selectWakenType()
 		end
    
 		
