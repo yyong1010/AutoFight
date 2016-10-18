@@ -37,6 +37,22 @@
                "select" : "1",
                "type" : "RadioGroup"
             },
+						            {
+               "align" : "left",
+               "color" : "30,144,255",
+               "size" : 40,
+               "text" : "觉醒次数",
+               "type" : "Label"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "id" : "wakenTimes",
+               "prompt" : "输入数字",
+               "size" : 40,
+               "text" : "20",
+               "type" : "Edit"
+            },
             {
                "align" : "left",
                "color" : "30,144,255",
