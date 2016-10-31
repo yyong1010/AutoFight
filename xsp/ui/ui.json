@@ -2,121 +2,211 @@
    "cancelname" : "取消",
    "config" : "save_AutoDonate.dat",
    "height" : 1350,
-	 "width" : 1450,
+   "width" : 1450,
    "okname" : "开始运行",
    "style" : "default",
    "views" : [
       {
-         "style" : "default",
+         "style" : "custom",
          "text" : "基础设置",
          "type" : "Page",
          "views" : [
             {
                "align" : "left",
                "color" : "30,144,255",
-               "size" : 40,
+					"rect" : "20,10,600,400",
+               "size" : 32,
                "text" : "基础功能选择：",
                "type" : "Label"
             },
             {
-               "id" : "BasicFunction",
-               "list" : "觉醒,御魂,结界,探索",
+               "id" : "WakenFunction",
+					"rect" : "20,80,200,100",
+               "list" : "觉醒",
                "select" : "0",
-               "type" : "RadioGroup"
+					"size" : 30,
+               "type" : "CheckBoxGroup"
             },
-            {
-               "align" : "left",
-               "color" : "30,144,255",
-               "size" : 40,
-               "text" : "觉醒类型：",
-               "type" : "Label"
-            },
-            {
+				{
                "id" : "WakenType",
+					"rect" : "240,80,200,60",
                "list" : "火,风,水,雷",
-               "select" : "1",
-               "type" : "RadioGroup"
-            },
-						{
-               "align" : "left",
-               "color" : "30,144,255",
-               "size" : 40,
-               "text" : "觉醒次数",
-               "type" : "Label"
+               "select" : "0",
+               "size" : 30,
+               "type" : "ComboBox"
             },
             {
+               "align" : "left",
+               "color" : "0,0,0",
+               "rect" : "480,80,160,120",
+               "size" : 30,
+               "text" : "攻击次数",
+               "type" : "Label"
+            },
+	          {
                "align" : "left",
                "color" : "144,144,144",
+					"rect" : "650,80,180,60",
                "id" : "wakenTimes",
                "prompt" : "输入数字",
-               "size" : 40,
+               "size" : 30,
                "text" : "20",
                "type" : "Edit"
             },
-						{
-               "align" : "left",
-               "color" : "30,144,255",
-               "size" : 40,
-               "text" : "御魂次数",
-               "type" : "Label"
+            {
+               "id" : "YuhunFunction",
+					"rect" : "20,180,200,100",
+               "list" : "御魂",
+               "select" : "0",
+					"size" : 30,
+               "type" : "CheckBoxGroup"
             },
             {
                "align" : "left",
+               "color" : "0,0,0",
+					"rect" : "240,185,160,120",
+               "size" : 30,
+               "text" : "攻击次数",
+               "type" : "Label"
+            },
+	          {
+               "align" : "left",
                "color" : "144,144,144",
+					"rect" : "410,180,180,60",
                "id" : "yuhunTimes",
                "prompt" : "输入数字",
-               "size" : 40,
+               "size" : 30,
                "text" : "20",
                "type" : "Edit"
             },
 						{
+               "id" : "JieJieFunction",
+					"rect" : "20,280,200,100",
+               "list" : "结界",
+               "select" : "1",
+					"size" : 30,
+               "type" : "CheckBoxGroup"
+            },
+	            {
                "align" : "left",
-               "color" : "30,144,255",
-               "size" : 40,
-               "text" : "结界突破次数",
+               "color" : "0,0,0",
+					"rect" : "240,285,160,120",
+               "size" : 30,
+               "text" : "攻击次数",
                "type" : "Label"
             },
-            {
+	          {
                "align" : "left",
                "color" : "144,144,144",
+					"rect" : "410,280,180,60",
                "id" : "jiejieTimes",
                "prompt" : "输入数字",
-               "size" : 40,
+               "size" : 30,
                "text" : "20",
                "type" : "Edit"
             },
             {
+               "id" : "DiscoverFunction",
+					"rect" : "20,380,200,100",
+               "list" : "探索",
+					"size" : 30,
+               "select" : "1",
+               "type" : "CheckBoxGroup"
+            },
+						{
+               "id" : "onlyExp",
+					"rect" : "240,380,500,60",
+               "list" : "是否只打经验怪",
+               "select" : "1",
+					"size" : 30,
+               "type" : "CheckBoxGroup"
+            },
+            {
                "align" : "left",
-               "color" : "30,144,255",
-               "size" : 40,
-               "text" : "探索次数",
+               "color" : "0,0,0",
+					"rect" : "580,385,160,120",
+               "size" : 30,
+               "text" : "攻击次数",
+               "type" : "Label"
+            },
+	         {
+               "align" : "left",
+               "color" : "144,144,144",
+					"rect" : "750,380,180,60",
+               "id" : "discoverTimes",
+               "prompt" : "输入数字",
+               "size" : 30,
+               "text" : "20",
+               "type" : "Edit"
+            },
+				{
+               "id" : "SealFunction",
+					"rect" : "20,480,200,100",
+               "list" : "妖气封印",
+					"size" : 30,
+               "select" : "1",
+               "type" : "CheckBoxGroup"
+            },
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+							 "rect" : "240,485,160,120",
+               "size" : 30,
+               "text" : "攻击次数",
+               "type" : "Label"
+            },
+	         {
+               "align" : "left",
+               "color" : "144,144,144",
+					"rect" : "410,480,180,60",
+               "id" : "sealTimes",
+               "prompt" : "输入数字",
+               "size" : 30,
+               "text" : "20",
+               "type" : "Edit"
+            },
+				{
+               "id" : "sealType",
+					"rect" : "240,580,800,160",
+               "list" : "黑使鬼,姑惑鸟",
+               "select" : "0",
+					"size" : 30,
+               "type" : "CheckBoxGroup"
+            },
+			   {
+               "align" : "left",
+               "color" : "255,0,0",
+					"rect" : "710,480,500,160",
+					"text" : "注意：妖气封印请在厅院界面或者组队开启脚本，建议不要两个同时勾选，可以提高组进的概率",
+               "select" : "0",
+					"size" : 30,
                "type" : "Label"
             },
             {
                "align" : "left",
-               "color" : "144,144,144",
-               "id" : "discoverTimes",
-               "prompt" : "输入数字",
-               "size" : 40,
-               "text" : "3",
-               "type" : "Edit"
+               "color" : "255,0,0",
+               "rect" : "40,680,1300,400",
+               "text" : "1、觉醒、御魂、结界突破、探索请在探索界面开始运行脚本，并会按顺序执行，请自行注意体力情况;\n2、在觉醒时，有些手机操作栏会遮挡觉醒选择箭头，解决方案是可以先把人物在地图走的远一点的地方再开启脚本或者迅速拉一下状态栏，菜单栏会消失;\n3、只打经验怪在有些情况下会判别失效，可增大探索次数，勤能补拙；\n4、探索章节在章节中也可以执行，方便自定选章节探索；\n5、结界突破从9宫格第一格打到最后一格算一次，每格会打一次，打不过不会重打（感觉再打也不会过的），会自动收取3、6、9过程奖励；\n6、其他注意事项请看重要说明,感谢使用；",
+               "select" : "0",
+               "size" : 30,
+               "type" : "Label"
             }
          ]
       },
-      {
-         "style" : "default",
+			{
+         "style" : "custom",
          "text" : "重要说明",
          "type" : "Page",
          "views" : [
             {
                "align" : "left",
                "color" : "30,144,255",
-               "size" : 40,
-							"text" : "1、请自行前往探索界面再开始运行脚本;\n2、探索章节目前只会自动选取右下角最后一个，请先自行固定，偶尔小几率怪物突然转身会战斗失效，可手动点击战斗脚本会继续跟踪;\n3、支持分辨率1920*1080，home键放在右边，海马模拟器测试通过;\n4、初始版本，难免有不足之处，请多包涵，运行中有问题请加Q群542050185或联系QQ：13632124，请留言不一定实时在线；",
+					"rect" : "40,40,1300,500",
+					"size" : 40,
+               "text" : "1、本脚本完全属于个人爱好编写而成，主要是为了自己玩的方便点，不一定满足所有人需求，请见谅;\n2、作者本人初始两个ssr，所以对妖气封印不是太感冒，所以只写了黑使鬼和姑惑鸟两个比较有用的，有需求可以qq留言，后期更新时加上;\n3、探索章节目前只会自动选取右下角最后一个，请先自行固定，偶尔小几率怪物突然转身会战斗失效，可手动点击战斗脚本会继续跟踪;\n4、支持分辨率1920*1080，home键放在右边，海马模拟器测试通过;\n5、初始版本，难免有不足之处，请多包涵，运行中有问题请加Q群542050185或联系QQ：13632124，请留言不一定实时在线；",
                "type" : "Label"
-            }           
+            }
          ]
       }
-
    ]
 }

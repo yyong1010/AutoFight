@@ -86,3 +86,10 @@ function cmpColor(array, s, isKeepScreen)
   lockscreen(false)
   return true
 end
+
+
+function writeFile(file_name,string)
+ local f = assert(io.open(file_name, 'a'))
+ f:write(string)
+ f:close()
+end

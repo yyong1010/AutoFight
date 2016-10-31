@@ -32,8 +32,12 @@ function juexingdefault()
       printFunction("--点击开始战斗")
       ss()
       checkFightisOver()--检查战斗是否结束
-      askagain()
-      fighttimes = fighttimes + 1			
+			fighttimes = fighttimes + 1
+			if fighttimes < tonumber(wakenTimes) then
+				askagain(1)
+      else
+				askagain(0)
+			end 
     end    
   end 
 end

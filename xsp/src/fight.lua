@@ -30,7 +30,7 @@ function checkFightisOver()
       tap(948,556) --点击屏幕
       printFunction("--点击屏幕点福娃")
       ss(5*1000)
-      tap(948,556) --点击屏幕
+      tap(948,656) --点击屏幕
       printFunction("--点击屏幕收奖励")
       ss(2*1000)
       fightisover = true
@@ -46,10 +46,15 @@ function checkFightisOver()
   end
 end
 
-function askagain()
+function askagain(isa)
   local xAg, yAg = findImageInRegionFuzzy("askagain.png", 90, 1020, 600, 1200, 680, 0xffffff)
   if xAg ~= -1 and yAg~= -1 then
-    tap(1109,639) --点击再邀请
-    printFunction("--点击再邀请")
+		if isa == 1  then
+			tap(1109,639) --点击再邀请
+			printFunction("--点击再邀请")
+		else
+			tap(764,639) --点击再邀请
+			printFunction("--点击取消邀请")
+		end
   end
 end
