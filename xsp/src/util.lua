@@ -285,3 +285,7 @@ function zoomout()
 	
 	tap(math.random(1,5),math.random(1,5))
 end
+
+function showHUDx(tt)
+	showHUD(runing,tt,24,"0xffffffff","0xcc000000",0,800,1020,320,50)
+end 

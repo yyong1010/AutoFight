@@ -2,6 +2,7 @@ function checkTeamReady()
 	local teamReady = false
   while(not teamReady) do
     printFunction("等待队伍进入...")
+		showHUDx("等待队伍进入...")
     local xUp, yUp = findColorInRegionFuzzy(0xcec6bd, 100, 1293, 432, 1361, 482)
     if xUp ~= -1 and yUp~= -1 then
       printFunction("队伍齐了")
