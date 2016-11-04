@@ -1,16 +1,40 @@
 function checkTeamReady()
 	local teamReady = false
+  local twoisOK = setting["twoisOK"]
+  local waitTimes = 0
   while(not teamReady) do
-    printFunction("等待队伍进入...")
+    printFunction("等待队伍进入..."..waitTimes)
 		showHUDx("等待队伍进入...")
     local xUp, yUp = findColorInRegionFuzzy(0xcec6bd, 100, 1293, 432, 1361, 482)
-    if xUp ~= -1 and yUp~= -1 then
+    local xNd, yNd = findColorInRegionFuzzy(0xcec6bd, 100, 1137, 797, 1149, 790)
+    if twoisOK == "0" and waitTimes > 12 then
+      if (xUp ~= -1 and yUp~= -1) or (xNd ~= -1 and yNd~= -1) then
+        printFunction("队伍齐了")
+        teamReady = true
+        ss()
+      end
+    end
+
+    if (xUp ~= -1 and yUp~= -1) and (xNd ~= -1 and yNd~= -1) then
       printFunction("队伍齐了")
       teamReady = true
       ss()
     end
-    ss()
+
+    if waitTimes > 20 then
+      tap(456,895)
+      showHUDx("超时离开组队，重新进入")
+      printFunction("离开组队")
+      ss(2*1000)
+      tap(1138,647)
+      ss(5*1000)
+      break
+    end
+
+    ss(1000)
+    waitTimes = waitTimes + 1
   end
+  return teamReady
 end
 
 
@@ -54,7 +78,7 @@ function askagain(isa)
 			tap(1109,639) --点击再邀请
 			printFunction("--点击再邀请")
 		else
-			tap(764,639) --点击再邀请
+			tap(764,639) --点击取消邀请
 			printFunction("--点击取消邀请")
 		end
   end
