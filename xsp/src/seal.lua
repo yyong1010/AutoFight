@@ -9,7 +9,7 @@ function sealDefault()
   ss(5*1000)
 
   while(fighttimes < tonumber(aTimes)) do
-    showHUDx("正在执行妖气封印")
+    showHUDx("正在执行妖气封印 "..fighttimes.." 次")
 
     local xLS, yLS = findImageInRegionFuzzy("team.png", 80, 300, 930, 430, 980, 0xffffff)
     local xTS, yTS = findImageInRegionFuzzy("teamTitle.png", 80, 910, 70, 1000, 100, 0xffffff)
@@ -53,9 +53,9 @@ function findSeal(mName)
         isJoin = doSeal(v)
       end
       if not isJoin then
-          tap(1258,891)
+          tapR(1258,891)
           printFunction("--点击刷新")
-          waitRandomSS()
+          waitRandomSS(4,12)
       end
     end
   end
@@ -66,10 +66,10 @@ function doSeal(mName)
   local isFound = false
   for y=302,658,178 do
     local xS, yS = findImageInRegionFuzzy(mName..".png",  80, 480, y-25, 580, y+25, 0xffffff)
-		
+
     if xS ~= -1 and yS ~= -1 then
       printFunction("--找到封印>>>>:"..mName)
-      tap(1513,yS)  --点击组队
+      tapR(1513,yS)  --点击组队
       s(1500)
 			--local xtS, ytS = findImageInRegionFuzzy("teamTitle.png", 90, 910, 70, 1000, 100, 0xffffff)
       --local xtBS, ytBS = findImageInRegionFuzzy("BteamTitle.png", 90, 910, 70, 1000, 100, 0xffffff)
@@ -116,11 +116,15 @@ function parseSealType(st)
   local sst = {}
 
   if string.find(setting["sealType"], "0", 1) then
-    sst[1] = "black"
+    sst[#sst+1] = "black"
   end
   if string.find(setting["sealType"], "1", 1) then
-    sst[2] = "bird"
+    sst[#sst+1] = "bird"
   end
+  if string.find(setting["sealType"], "2", 1) then
+    sst[#sst+1] = "jiaotu"
+  end
+
   return sst
 end
 
@@ -136,9 +140,3 @@ function swipTop()
   ss(2*1000)
 end
 
-function waitRandomSS()
-	math.randomseed(tostring(os.time()):reverse():sub(1, 6))  --设置随机数种子
-	local stime = math.random(4,12)
-	ss(stime*100)
-	printFunction("--随机等待"..stime)
-end

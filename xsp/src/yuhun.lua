@@ -3,7 +3,6 @@ function yuhundefault()
   local fighttimes = 0
   local aTimes = setting["yuhunTimes"]
   local isSolo = setting["isYuhunSolo"]
-  printFunction(">>>>isSolo:"..isSolo)
 
   local createisOK = createYuhun()
 
@@ -11,7 +10,7 @@ function yuhundefault()
     if isSolo ~= "0" then
       teamReady = checkTeamReady()--检查队伍是否到齐
       if teamReady then
-        tap(1449,914)-- 开始战斗
+        tapR(1449,914)-- 开始战斗
         printFunction("--点击开始战斗")
         showHUDx("开始御魂次数 "..tostring(fighttimes+1))
         ss()
@@ -28,7 +27,7 @@ function yuhundefault()
       end
     else
       showHUDx("单人进入")
-      tap(1440,810)--点击挑战
+      tapR(1440,810)--点击挑战
       ss(2*1000)
       printFunction("--开始单人战斗")
       showHUDx("开始御魂次数 "..tostring(fighttimes+1))
@@ -53,13 +52,13 @@ function createYuhun()
     s(5*1000)
     if isSolo ~= "0" then
       showHUD(runing,"创建组队，如果卡住请手动点击，脚本会自动继续运行",18,"0xffffffff","0x4c000000",0,760,1020,400,50)
-      tap(976,809)--点击组队
+      tapR(976,809)--点击组队
       printFunction("--点击组队")
-      s(2*1000)
-      tap(1580,906)--点击创建队伍
+      waitRandomSS(25,45)
+      tapR(1580,906)--点击创建队伍
       printFunction("--点击创建队伍")
-      s(2*1000)
-      tap(1313,850)--点击创建
+      waitRandomSS(45,65)
+      tapR(1313,850)--点击创建
       printFunction("--点击创建")
       s(1000)
     end

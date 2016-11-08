@@ -2,16 +2,21 @@ function checkTeamReady()
 	local teamReady = false
   local twoisOK = setting["twoisOK"]
   local waitTimes = 0
+  local wT = waitRandom(12,15)
+  local wTs = waitRandom(18,23)
+
   while(not teamReady) do
     printFunction("等待队伍进入..."..waitTimes)
 		showHUDx("等待队伍进入...")
     local xUp, yUp = findColorInRegionFuzzy(0xcec6bd, 100, 1293, 432, 1361, 482)
     local xNd, yNd = findColorInRegionFuzzy(0xcec6bd, 100, 1137, 797, 1149, 790)
-    if twoisOK == "0" and waitTimes > 12 then
+
+    if twoisOK == "0" and waitTimes > wT then
       if (xUp ~= -1 and yUp~= -1) or (xNd ~= -1 and yNd~= -1) then
         printFunction("队伍齐了")
         teamReady = true
         ss()
+        break
       end
     end
 
@@ -19,15 +24,17 @@ function checkTeamReady()
       printFunction("队伍齐了")
       teamReady = true
       ss()
+      break
     end
 
-    if waitTimes > 20 then
+    if waitTimes > wTs then
+      teamReady = false
       tap(456,895)
       showHUDx("超时离开组队，重新进入")
       printFunction("离开组队")
-      ss(2*1000)
+      waitRandomSS(20,45)
       tap(1138,647)
-      ss(5*1000)
+      waitRandomSS(45,75)
       break
     end
 
@@ -51,13 +58,13 @@ function checkFightisOver()
     if xFs ~= -1 and yFs~= -1 then
       tap(948,556) --点击屏幕
       printFunction("--点击屏幕看经验")
-      ss(2*1000)
+      waitRandomSS(19,25)
       tap(948,556) --点击屏幕
       printFunction("--点击屏幕点福娃")
-      ss(5*1000)
+      waitRandomSS(50,75)
       tap(948,656) --点击屏幕
       printFunction("--点击屏幕收奖励")
-      ss(2*1000)
+      waitRandomSS(19,25)
       fightisover = true
 			break
     end

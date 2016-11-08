@@ -187,7 +187,7 @@ sortTable = function (s, func)
 		local isFirst = true
 		local curK, curV = nil, nil
 		for k2,v2 in pairs(copy) do
-			if isFirst then 
+			if isFirst then
 				curK = k2
 				curV = v2
 				isFirst = false
@@ -256,19 +256,19 @@ end
 function zoomout()
 	local x1, y1, x2, y2 = 1225, 100 , 325, 1000
     local step, x, y = 20, x1 , y1
-	
+
 	touchDown(1,x2-50,y2+50)
 	mSleep(30)
     touchDown(2, x, y)
 
-    local function move(from, to) 
+    local function move(from, to)
       if from > to then
-        do 
-          return -1 * step 
+        do
+          return -1 * step
         end
-      else 
-        return step 
-      end 
+      else
+        return step
+      end
     end
 
     while (math.abs(x-x2) >= step) or (math.abs(y-y2) >= step) do
@@ -279,13 +279,36 @@ function zoomout()
     end
     touchMove(2, x2, y2)
     mSleep(30)
-	
+
     touchUp(2, x2, y2)
 	touchUp(1,x2-50,y2+50)
-	
+
 	tap(math.random(1,5),math.random(1,5))
 end
 
 function showHUDx(tt)
 	showHUD(runing,tt,24,"0xffffffff","0xcc000000",0,800,1020,320,50)
-end 
+end
+
+function waitRandom(st,ed)
+	math.randomseed(tostring(os.time()):reverse():sub(1, 6))  --设置随机数种子
+	local stime = math.random(st,ed)
+	printFunction(">>返回随机数："..stime)
+	return stime
+end
+
+function waitRandomSS(st,ed)
+	math.randomseed(tostring(os.time()):reverse():sub(1, 6))  --设置随机数种子
+	local stime = math.random(st,ed)
+	printFunction("--随机等待"..stime)
+	ss(stime*100)
+end
+
+function tapR(xp,yp)
+	math.randomseed(tostring(os.time()):reverse():sub(1, 6))  --设置随机数种子
+	local disxp = math.random(5,25)
+	printFunction(">>返回随机数："..disxp)
+	local x =  xp + disxp
+	local y =  yp + disxp
+	tap(x,y)
+end
