@@ -306,9 +306,16 @@ end
 
 function tapR(xp,yp)
 	math.randomseed(tostring(os.time()):reverse():sub(1, 6))  --设置随机数种子
-	local disxp = math.random(5,25)
+	local disxp = math.random(0,25)
 	printFunction(">>返回随机数："..disxp)
 	local x =  xp + disxp
 	local y =  yp + disxp
 	tap(x,y)
+end
+
+function wFile(content,fileName)
+	local fn = fileName or "[public]a.txt"
+	local f = assert(io.open(fn, 'a'))
+	f:write(content)
+	f:close()
 end

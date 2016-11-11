@@ -38,6 +38,8 @@ function main()
     require "seal"
     s(2000)
 
+    --wFile("testtest\n")
+
     if setting["WakenFunction"] == "0" then
       juexingdefault()
 			s(15*1000)

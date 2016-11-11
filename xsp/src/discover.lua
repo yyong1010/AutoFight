@@ -39,7 +39,7 @@ function discoverDetail()
   local i,j = 0,0
   local bossIsKO = false
 	local onlyExp = setting["onlyExp"]
-  --local rtimes,ltimes = waitRandom(3,5),waitRandom(3,5)
+  local rtimes,ltimes = waitRandom(3,5),waitRandom(3,5)
   while(i < 5 and not bossIsKO) do
     swipRight()
     printFunction("--向右划"..i)
@@ -143,7 +143,10 @@ function checkExpModels()
         --f:write(xPS1..":"..yPS1..","..xPS2..":"..yPS2..","..xPS3..":"..yPS3..","..xPS4..":"..yPS4..","..xPS5..":"..yPS5..","..xPS6..":"..yPS6..","..xPS7..":"..yPS7..","..xPS8..":"..yPS8)
         --f:flush()
         --f:close()
-        printFunction(xPS1..":"..yPS1..","..xPS2..":"..yPS2..","..xPS3..":"..yPS3..","..xPS4..":"..yPS4..","..xPS5..":"..yPS5..","..xPS6..":"..yPS6..","..xPS7..":"..yPS7..","..xPS8..":"..yPS8)
+        local rec = xPS1..":"..yPS1..","..xPS2..":"..yPS2..","..xPS3..":"..yPS3..","..xPS4..":"..yPS4..","..xPS5..":"..yPS5..","..xPS6..":"..yPS6..","..xPS7..":"..yPS7..","..xPS8..":"..yPS8.."\n"
+        printFunction(rec)
+        --wFile(rec)
+
 				ss(5*1000)
 				checkFightisOver()
 				ss(5*1000)

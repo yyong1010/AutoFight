@@ -11,7 +11,8 @@ function sealDefault()
   while(fighttimes < tonumber(aTimes)) do
     showHUDx("正在执行妖气封印 "..fighttimes.." 次")
 
-    local xLS, yLS = findImageInRegionFuzzy("team.png", 80, 300, 930, 430, 980, 0xffffff)
+    --local xLS, yLS = findImageInRegionFuzzy("team.png", 80, 300, 930, 430, 980, 0xffffff)
+    local xLS, yLS = findColorInRegionFuzzy(0xe8e0cf, 100, 354, 909, 356, 911)
     local xTS, yTS = findImageInRegionFuzzy("teamTitle.png", 80, 910, 70, 1000, 100, 0xffffff)
     if xTS ~=-1 and yTS ~= -1 then
       local xBS, yBS = findImageInRegionFuzzy("dBottom.png", 90, 870, 150, 920, 210, 0xffffff)
@@ -29,7 +30,7 @@ function sealDefault()
     end
 
     if xLS ~= -1 and yLS ~= -1 then
-      tap(xLS,yLS)  --点击组队
+      tapR(xLS,yLS)  --点击组队
       printFunction("--点击组队")
       ss(5*1000)
       selectSeal()
