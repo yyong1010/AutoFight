@@ -1,5 +1,5 @@
 function checkTeamReady()
-	local teamReady = false
+  local teamReady = false
   local twoisOK = setting["twoisOK"]
   local waitTimes = 0
   local wT = waitRandom(12,15)
@@ -7,7 +7,7 @@ function checkTeamReady()
 
   while(not teamReady) do
     printFunction("等待队伍进入..."..waitTimes)
-		showHUDx("等待队伍进入...")
+    showHUDx("等待队伍进入...")
     local xUp, yUp = findColorInRegionFuzzy(0xcec6bd, 100, 1293, 432, 1361, 482)
     local xNd, yNd = findColorInRegionFuzzy(0xcec6bd, 100, 1137, 797, 1149, 790)
 
@@ -46,9 +46,9 @@ end
 
 
 function checkFightisOver()
-	local fightisover = false
-  while(not fightisover) do
-    local xUp, yUp = findImageInRegionFuzzy("readytofight.png", 90, 1650, 900, 1900, 1100, 0xffffff)
+  local fightisover = -1  --0失败，1成功
+  while(fightisover < 0) do
+  local xUp, yUp = findImageInRegionFuzzy("readytofight.png", 90, 1650, 900, 1900, 1100, 0xffffff)
     if xUp ~= -1 and yUp~= -1 then
       tap(1741,824) --点击准备
       printFunction("--点击准备")
@@ -65,28 +65,29 @@ function checkFightisOver()
       tap(948,656) --点击屏幕
       printFunction("--点击屏幕收奖励")
       waitRandomSS(19,25)
-      fightisover = true
-			break
+      fightisover = 1
+      break
     end
-		local xFl, yFl = findImageInRegionFuzzy("fightfail.png", 90, 630, 220, 730, 280, 0xffffff)
+    local xFl, yFl = findImageInRegionFuzzy("fightfail.png", 90, 630, 220, 730, 280, 0xffffff)
     if xFl ~= -1 and yFl ~= -1 then
       tap(948,556) --点击屏幕
       printFunction("--点击屏幕")
       ss(2*1000)
-      fightisover = true
+      fightisover = 0
     end
   end
+  return fightisover
 end
 
 function askagain(isa)
   local xAg, yAg = findImageInRegionFuzzy("askagain.png", 90, 1020, 600, 1200, 680, 0xffffff)
   if xAg ~= -1 and yAg~= -1 then
-		if isa == 1  then
-			tap(1109,639) --点击再邀请
-			printFunction("--点击再邀请")
-		else
-			tap(764,639) --点击取消邀请
-			printFunction("--点击取消邀请")
-		end
+    if isa == 1  then
+      tap(1109,639) --点击再邀请
+      printFunction("--点击再邀请")
+    else
+      tap(764,639) --点击取消邀请
+      printFunction("--点击取消邀请")
+    end
   end
 end

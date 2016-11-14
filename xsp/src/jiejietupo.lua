@@ -14,40 +14,62 @@ function jiejiedefault()
       s(5*1000)
     end
 
-    while(fighttimes < tonumber(aTimes)) do
+    while(true) do
       showHUDx("开始突破结界次数 "..tostring(fighttimes+1))
       local xJs, yJs = 572, 253
       local ax, ay = 492, 180
-      local colorjiejie = 0xa4937b
+      local colorjiejie = 0xafa08b
       --循环第一行
       for i=1,3 do
+				if fighttimes > tonumber(aTimes) then
+					break
+				end
         printFunction("循环第一行"..i)
 				showHUDx("开始突破结界次数 "..tostring(fighttimes+1)..":1行"..i)
-        fightjiejie(xJs,yJs,colorjiejie)
+        if fightjiejie(xJs,yJs,colorjiejie) > 0 then
+					fighttimes = fighttimes + 1
+				end
         xJs = xJs + ax
       end
-
+			
+			if fighttimes > tonumber(aTimes) then
+				break
+			end
+						
       --循环第二行
       xJs = 572
       yJs = yJs + ay
       for i=1,3 do
+				if fighttimes > tonumber(aTimes) then
+					break
+				end
         printFunction("循环第二行"..i)
 				showHUDx("开始突破结界次数 "..tostring(fighttimes+1)..":2行"..i)
-        fightjiejie(xJs,yJs,colorjiejie)
+        if fightjiejie(xJs,yJs,colorjiejie) > 0 then
+					fighttimes = fighttimes + 1
+				end
         xJs = xJs + ax
       end
+
+			if fighttimes > tonumber(aTimes) then
+				break
+			end
 
       --循环第三行
       xJs = 572
       yJs = yJs + ay
       for i=1,3 do
+				if fighttimes > tonumber(aTimes) then
+					break
+				end
         printFunction("循环第三行"..i)
 				showHUDx("开始突破结界次数 "..tostring(fighttimes+1)..":3行"..i)
-        fightjiejie(xJs,yJs,colorjiejie)
+        if fightjiejie(xJs,yJs,colorjiejie) > 0 then
+					fighttimes = fighttimes + 1
+				end
         xJs = xJs + ax
-      end
-
-      fighttimes = fighttimes + 1
+      end			
+			break
     end
 
 		ss(5*1000)
@@ -64,12 +86,13 @@ end
 function fightjiejie(xa,ya,colorjiejie)
   local xUp, yUp = findColorInRegionFuzzy(colorjiejie, 100, xa-5, ya-5, xa+5, ya+5)
   local xUq, yUq = findImageInRegionFuzzy("jiejiejiangpai.png", 60, xa-15, ya-15, xa+15, ya+15, 0xffffff)
+	local fightStatus = 0
 
   if (xUp ~= -1 and yUp~= -1)then
     tap(xUp, yUp) -- 选取
     s(1000)
     tap(xUp, yUp+116) -- 开始战斗
-    checkFightisOver()--检查战斗是否结束
+    fightStatus = checkFightisOver()--检查战斗是否结束
     checkisBack()--检查界面是否已回到可选界面
     checkisFuWa()--检查福娃
     s(1000)
@@ -78,11 +101,12 @@ function fightjiejie(xa,ya,colorjiejie)
     tap(xUq, yUq) -- 选取
     s(1000)
     tap(xUq, yUq+116) -- 开始战斗
-    checkFightisOver()--检查战斗是否结束
+    fightStatus = checkFightisOver()--检查战斗是否结束
     checkisBack()--检查界面是否已回到可选界面
     checkisFuWa()--检查福娃
     s(1000)
   end
+	return fightStatus
 end
 
 function checkisFuWa()

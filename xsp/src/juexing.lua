@@ -16,8 +16,9 @@ function juexingdefault()
         printFunction("--点击开始战斗")
         showHUDx("开始觉醒次数 "..tostring(fighttimes+1))
         ss()
-        checkFightisOver()--检查战斗是否结束
-        fighttimes = fighttimes + 1
+        if checkFightisOver() > 0  then--检查战斗是否结束
+          fighttimes = fighttimes + 1
+        end
         if fighttimes < tonumber(wakenTimes) then
           askagain(1)
         else
@@ -34,9 +35,10 @@ function juexingdefault()
       printFunction("--开始单人战斗")
       showHUDx("开始觉醒次数 "..tostring(fighttimes+1))
       ss()
-      checkFightisOver()--检查战斗是否结束
-      ss(18*1000)
-      fighttimes = fighttimes + 1
+      if checkFightisOver() > 0 then--检查战斗是否结束
+        fighttimes = fighttimes + 1
+      end 
+      ss(18*1000) 
     end
   end
 
