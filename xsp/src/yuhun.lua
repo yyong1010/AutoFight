@@ -15,8 +15,8 @@ function yuhundefault()
         showHUDx("开始御魂次数 "..tostring(fighttimes+1))
         ss()
         if checkFightisOver() > 0 then--检查战斗是否结束
-          fighttimes = fighttimes + 1
-        end 
+					fighttimes = fighttimes + 1
+				end 
         if fighttimes < tonumber(aTimes) then
           askagain(1)
         else
@@ -34,9 +34,9 @@ function yuhundefault()
       showHUDx("开始御魂次数 "..tostring(fighttimes+1))
       ss()
       if checkFightisOver() > 0 then--检查战斗是否结束
-        fighttimes = fighttimes + 1
-      end
-      ss(18*1000)      
+				fighttimes = fighttimes + 1
+			end
+			ss(18*1000)      
     end
   end
 
@@ -45,7 +45,7 @@ end
 
 function createYuhun()
   local createisOK = false
-  local xPS, yPS = findImageInRegionFuzzy("yuhun.png", 90, 240, 980, 370, 1025, 0xffffff)
+  local xPS, yPS = findMultiColorInRegionFuzzy(0xf8f3e0,"-1|4|0xf8f3df,16|0|0xf3eedc,26|6|0xf8f3e0",90,240, 980, 370, 1025)
   local isSolo = setting["isYuhunSolo"]
   printFunction("x:"..xPS.."y:"..yPS)
   if xPS ~= -1 and yPS ~= -1 then

@@ -17,8 +17,8 @@ function juexingdefault()
         showHUDx("开始觉醒次数 "..tostring(fighttimes+1))
         ss()
         if checkFightisOver() > 0  then--检查战斗是否结束
-          fighttimes = fighttimes + 1
-        end
+					fighttimes = fighttimes + 1
+				end
         if fighttimes < tonumber(wakenTimes) then
           askagain(1)
         else
@@ -35,10 +35,10 @@ function juexingdefault()
       printFunction("--开始单人战斗")
       showHUDx("开始觉醒次数 "..tostring(fighttimes+1))
       ss()
-      if checkFightisOver() > 0 then--检查战斗是否结束
+			if checkFightisOver() > 0 then--检查战斗是否结束
         fighttimes = fighttimes + 1
-      end 
-      ss(18*1000) 
+			end	
+			ss(18*1000)	
     end
   end
 
@@ -73,7 +73,7 @@ end
 
 function createWaken()
   local createisOK = false
-  local xPS, yPS = findImageInRegionFuzzy("juexing.png", 90, 80, 970, 210, 1048, 0xffffff)
+  local xPS, yPS =  findMultiColorInRegionFuzzy(0x403bd9,"11|0|0x5496e8,21|0|0x4476df,12|2|0x45a0e2",90,80, 970, 210, 1048);
   local isSolo = setting["isWakenSolo"]
   printFunction("x:"..xPS.."y:"..yPS)
   if xPS ~= -1 and yPS ~= -1 then

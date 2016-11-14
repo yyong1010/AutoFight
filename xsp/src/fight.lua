@@ -1,5 +1,5 @@
 function checkTeamReady()
-  local teamReady = false
+	local teamReady = false
   local twoisOK = setting["twoisOK"]
   local waitTimes = 0
   local wT = waitRandom(12,15)
@@ -7,7 +7,7 @@ function checkTeamReady()
 
   while(not teamReady) do
     printFunction("等待队伍进入..."..waitTimes)
-    showHUDx("等待队伍进入...")
+		showHUDx("等待队伍进入...")
     local xUp, yUp = findColorInRegionFuzzy(0xcec6bd, 100, 1293, 432, 1361, 482)
     local xNd, yNd = findColorInRegionFuzzy(0xcec6bd, 100, 1137, 797, 1149, 790)
 
@@ -46,15 +46,15 @@ end
 
 
 function checkFightisOver()
-  local fightisover = -1  --0失败，1成功
-  while(fightisover < 0) do
-  local xUp, yUp = findImageInRegionFuzzy("readytofight.png", 90, 1650, 900, 1900, 1100, 0xffffff)
+	local fightisover = -1  --0失败，1成功
+  while(fightisover < 0) do	
+    local xUp, yUp = findMultiColorInRegionFuzzy(0xddb276,"14|0|0xddb276,25|6|0xdfb77b,34|8|0xdfb67a",90,1650, 900, 1900, 1100)
     if xUp ~= -1 and yUp~= -1 then
       tap(1741,824) --点击准备
       printFunction("--点击准备")
     end
     s(1000)
-    local xFs, yFs = findImageInRegionFuzzy("fightsuccess.png", 90, 655, 240, 770, 310, 0xffffff)
+    local xFs, yFs = findMultiColorInRegionFuzzy(0x8e1a11,"16|-5|0xcdbeaa,28|0|0xcebfab,44|0|0x851e14",90, 655, 240, 770, 310)
     if xFs ~= -1 and yFs~= -1 then
       tap(948,556) --点击屏幕
       printFunction("--点击屏幕看经验")
@@ -66,9 +66,9 @@ function checkFightisOver()
       printFunction("--点击屏幕收奖励")
       waitRandomSS(19,25)
       fightisover = 1
-      break
+			break
     end
-    local xFl, yFl = findImageInRegionFuzzy("fightfail.png", 90, 630, 220, 730, 280, 0xffffff)
+		local xFl, yFl = findMultiColorInRegionFuzzy(0xb19d86,"-2|6|0xb39f88,5|5|0xb6a38c,16|0|0x514a5b,14|13|0xb8a690,6|20|0x5b5265,10|18|0x584f62",90,630, 220, 730, 280)
     if xFl ~= -1 and yFl ~= -1 then
       tap(948,556) --点击屏幕
       printFunction("--点击屏幕")
@@ -76,18 +76,18 @@ function checkFightisOver()
       fightisover = 0
     end
   end
-  return fightisover
+	return fightisover
 end
 
 function askagain(isa)
-  local xAg, yAg = findImageInRegionFuzzy("askagain.png", 90, 1020, 600, 1200, 680, 0xffffff)
+  local xAg, yAg = findMultiColorInRegionFuzzy(0xf4b25f,"3|9|0xf4b25f,5|7|0xf4b25f,2|13|0xf4b25f",90,1020, 600, 1200, 680)
   if xAg ~= -1 and yAg~= -1 then
-    if isa == 1  then
-      tap(1109,639) --点击再邀请
-      printFunction("--点击再邀请")
-    else
-      tap(764,639) --点击取消邀请
-      printFunction("--点击取消邀请")
-    end
+		if isa == 1  then
+			tap(1109,639) --点击再邀请
+			printFunction("--点击再邀请")
+		else
+			tap(764,639) --点击取消邀请
+			printFunction("--点击取消邀请")
+		end
   end
 end
