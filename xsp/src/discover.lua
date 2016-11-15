@@ -3,8 +3,8 @@ function discover()
   local fighttimes = 0
   local aTimes = setting["discoverTimes"]
   local specailChapter = 1
-	showHUD(runing,"请在选定章节内界面或探索界面执行脚本",18,"0xffffffff","0x4c000000",0,760,1020,400,50)
-	ss(5*1000)
+  showHUD(runing,"请在选定章节内界面或探索界面执行脚本",18,"0xffffffff","0x4c000000",0,760,1020,400,50)
+  ss(5*1000)
   while(fighttimes < tonumber(aTimes)) do
     showHUDx("开始探索次数 "..tostring(fighttimes+1))
     local xLS, yLS = findImageInRegionFuzzy("indiscover.png", 90, 1600, 950, 1690, 1000, 0xffffff)
@@ -12,12 +12,12 @@ function discover()
       specailChapter = selectSpecailChapter()
       discoverDetail()
     else
-			if fighttimes > 0 then
+      if fighttimes > 0 then
         waitRandomSS(45,65)
         selectChapter(specailChapter)
-			else
+      else
         selectDefaultChapter()
-			end
+      end
     end
 
     s(5*1000)
@@ -38,17 +38,17 @@ end
 function discoverDetail()
   local i,j = 0,0
   local bossIsKO = false
-	local onlyExp = setting["onlyExp"]
+  local onlyExp = setting["onlyExp"]
   local rtimes,ltimes = waitRandom(3,5),waitRandom(3,5)
   while(i < 5 and not bossIsKO) do
     swipRight()
     printFunction("--向右划"..i)
     i = i + 1
-		if onlyExp == "0" then
-			checkExpModels()
-		else
-			bossIsKO = swap()
-		end
+    if onlyExp == "0" then
+      checkExpModels()
+    else
+      bossIsKO = swap()
+    end
   end
 
 
@@ -56,11 +56,11 @@ function discoverDetail()
     swipLeft()
     printFunction("--向左划"..j)
     j = j + 1
-		if onlyExp == "0" then
-			checkExpModels()
-		else
-			bossIsKO = swap()
-		end
+    if onlyExp == "0" then
+      checkExpModels()
+    else
+      bossIsKO = swap()
+    end
   end
 
 end
@@ -79,7 +79,7 @@ function checkGift()
 end
 
 function swap()
-	printFunction("--全打模式")
+  printFunction("--全打模式")
   local bossIsKO = false
   for x=200,1400,200 do
     keepScreen(true)
@@ -120,40 +120,43 @@ function swap()
 end
 
 function checkExpModels()
-	printFunction("--只打经验怪")
-  for x=200,1400,200 do
-    keepScreen(true)
-		local xS, yS = findImageInRegionFuzzy("tofight2.png", 70, x, 300, x+320, 950, 0xffffff)
-    keepScreen(false)
-    if xS~= -1 and yS ~=-1 then
-			keepScreen(true)
-			local xPS1, yPS1 = findImageInRegionFuzzy("exp1.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
-			local xPS2, yPS2 = findImageInRegionFuzzy("exp2.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
-			local xPS3, yPS3 = findImageInRegionFuzzy("exp3.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
-			local xPS4, yPS4 = findImageInRegionFuzzy("exp4.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
-			local xPS5, yPS5 = findImageInRegionFuzzy("exp5.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
-			local xPS6, yPS6 = findImageInRegionFuzzy("exp6.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
-      local xPS7, yPS7 = findImageInRegionFuzzy("exp7.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
-      local xPS8, yPS8 = findImageInRegionFuzzy("exp8.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
-			keepScreen(false)
-			if (xPS1 ~= -1 and yPS1 ~= -1) or (xPS2 ~= -1 and yPS2 ~= -1) or (xPS3 ~= -1 and yPS3 ~= -1) or (xPS4 ~= -1 and yPS4 ~= -1) or (xPS5 ~= -1 and yPS5 ~= -1) or (xPS6 ~= -1 and yPS6 ~= -1) then
-				tap(xS,yS)
-				printFunction("--点击战斗".."x:"..xS.."y:"..yS)
-        --local f = assert(io.open("[public]test.txt", "a"))
-        --f:write(xPS1..":"..yPS1..","..xPS2..":"..yPS2..","..xPS3..":"..yPS3..","..xPS4..":"..yPS4..","..xPS5..":"..yPS5..","..xPS6..":"..yPS6..","..xPS7..":"..yPS7..","..xPS8..":"..yPS8)
-        --f:flush()
-        --f:close()
-        local rec = xPS1..":"..yPS1..","..xPS2..":"..yPS2..","..xPS3..":"..yPS3..","..xPS4..":"..yPS4..","..xPS5..":"..yPS5..","..xPS6..":"..yPS6..","..xPS7..":"..yPS7..","..xPS8..":"..yPS8.."\n"
-        printFunction(rec)
-        --wFile(rec)
+  printFunction("--只打经验怪")
+  local isHaveFight = true
+  local i = 1
+  while (isHaveFight) do
+    printFunction("--搜索次数"..i)
+    isHaveFight = false
+    for x=200,1400,200 do
+      keepScreen(true)
+      local xS, yS = findImageInRegionFuzzy("tofight2.png", 70, x, 300, x+320, 950, 0xffffff)
+      keepScreen(false)
+      if xS~= -1 and yS ~=-1 then
+        keepScreen(true)
+        local xPS1, yPS1 = findMultiColorInRegionFuzzy(0x3e7d86,"6|1|0x2e6575,5|7|0x8b8a8a,5|12|0x7a1313,2|14|0x9b2121,8|14|0x851f1e",90,xS-200, yS, x+200, yS+250)
+        --local xPS1, yPS1 = findImageInRegionFuzzy("exp1.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
+        local xPS2, yPS2 = findMultiColorInRegionFuzzy(0x5e8e8e,"3|-2|0x2e5974,3|2|0xb87565,2|5|0x7a1f16,-1|5|0x7c635e",90,xS-200, yS, x+200, yS+250)
+        --local xPS3, yPS3 = findImageInRegionFuzzy("exp3.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
+        --local xPS7, yPS7 = findImageInRegionFuzzy("exp7.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
+        keepScreen(false)
+        --if (xPS1 ~= -1 and yPS1 ~= -1) or (xPS2 ~= -1 and yPS2 ~= -1) or (xPS3 ~= -1 and yPS3 ~= -1) or (xPS4 ~= -1 and yPS4 ~= -1) or (xPS5 ~= -1 and yPS5 ~= -1) or (xPS6 ~= -1 and yPS6 ~= -1) then
+        if (xPS1 ~= -1 and yPS1 ~= -1) or (xPS2 ~= -1 and yPS2 ~= -1) then
+          tap(xS,yS)
+          printFunction("--点击战斗".."x:"..xS.."y:"..yS)
 
-				ss(5*1000)
-				checkFightisOver()
-				ss(5*1000)
-			end
+          --local rec = xPS1..":"..yPS1..","..xPS2..":"..yPS2..","..xPS3..":"..yPS3..","..xPS4..":"..yPS4..","..xPS5..":"..yPS5..","..xPS6..":"..yPS6..","..xPS7..":"..yPS7..","..xPS8..":"..yPS8.."\n"
+          --local rec = xPS1..":"..yPS1..","..xPS2..":"..yPS2..","..xPS7..":"..yPS7.."\n"
+          --printFunction(rec)
+          --wFile(rec)
+
+          ss(5*1000)
+          checkFightisOver()
+          isHaveFight = true
+          ss(5*1000)
+        end
+      end
     end
+    i = i + 1
   end
-
 end
 
 
