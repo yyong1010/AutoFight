@@ -38,7 +38,8 @@ function main()
     require "seal"
     require "shiju"
     s(2000)
-    
+		
+		    
     if setting["AutoDayWork"] == "0" then
       setting["WakenFunction"] = "0"
       setting["YuhunFunction"] = "0"

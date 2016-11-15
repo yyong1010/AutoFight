@@ -48,7 +48,8 @@ end
 function checkFightisOver()
 	local fightisover = -1  --0失败，1成功
   while(fightisover < 0) do	
-    local xUp, yUp = findMultiColorInRegionFuzzy(0xddb276,"14|0|0xddb276,25|6|0xdfb77b,34|8|0xdfb67a",90,1650, 900, 1900, 1100)
+    --local xUp, yUp = findMultiColorInRegionFuzzy(0xddb276,"14|0|0xddb276,25|6|0xdfb77b,34|8|0xdfb67a",90,1650, 900, 1900, 1100)
+		local xUp, yUp = findMultiColorInRegionFuzzy(0xe3be82,"19|0|0xdaae71,37|4|0xdfb67a,42|-27|0x534841,19|-14|0xa18b6b",90,1650, 900, 1900, 1100);
     if xUp ~= -1 and yUp~= -1 then
       tap(1741,824) --点击准备
       printFunction("--点击准备")

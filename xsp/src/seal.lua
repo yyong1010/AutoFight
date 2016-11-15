@@ -59,6 +59,9 @@ function findSeal(mName)
         tapR(1258,891)
         printFunction("--点击刷新")
         waitRandomSS(4,12)
+			else
+				printFunction("--退出刷新")
+				break
       end
     end
   end
