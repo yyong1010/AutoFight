@@ -45,7 +45,7 @@ function discoverDetail()
     printFunction("--向右划"..i)
     i = i + 1
     if onlyExp == "0" then
-      checkExpModels()
+      bossIsKO = checkExpModels()
     else
       bossIsKO = swap()
     end
@@ -57,7 +57,7 @@ function discoverDetail()
     printFunction("--向左划"..j)
     j = j + 1
     if onlyExp == "0" then
-      checkExpModels()
+      bossIsKO = checkExpModels()
     else
       bossIsKO = swap()
     end
@@ -66,8 +66,9 @@ function discoverDetail()
 end
 
 function checkGift()
-  for x=650,1250,25 do
-    local xB, yB = findImageInRegionFuzzy("gift.png", 80, x, 432, x+200, 863, 0)
+  for x=600,1250,25 do
+    --local xB, yB = findImageInRegionFuzzy("gift.png", 80, x, 432, x+200, 863, 0)
+    local xB, yB = findMultiColorInRegionFuzzy(0xfff4d3,"16|10|0x783015,35|20|0xfff4d3,35|4|0xfff4d3,-1|18|0xfff5d3",95, x, 432, x+200, 863)
     if xB~= -1 and yB ~=-1 then
       tap(xB,yB)
       printFunction("--点击礼物")
@@ -80,41 +81,49 @@ end
 
 function swap()
   printFunction("--全打模式")
+  local isHaveFight = true
   local bossIsKO = false
-  for x=200,1400,200 do
-    keepScreen(true)
-    --local xPS, yPS = findImageInRegionFuzzy("exp2.png", 80, y, 540, y+96, 892, 0xffffff)
-    --if xPS ~= -1 and yPS ~= -1 then
-    --  printFunction("i:"..i.."x:"..xPS.."y:"..yPS)
-    --local xS, yS = findImageInRegionFuzzy("tofight2.png", 90, xPS-250, yPS-220, xPS+150, yPS-120, 0xffffff)
-    local xS, yS = findImageInRegionFuzzy("tofight2.png", 70, x, 300, x+320, 950, 0xffffff)
-    keepScreen(false)
-    if xS~= -1 and yS ~=-1 then
-      tap(xS,yS)
-      printFunction("--点击战斗".."x:"..xS.."y:"..yS)
-      ss(5*1000)
-      checkFightisOver()
-      ss(5*1000)
-    end
-    -- end
-    keepScreen(true)
-    local xB, yB = findImageInRegionFuzzy("bossfight.png", 70, 753, 187, 1270, 600, 0xffffff)
-    keepScreen(false)
-    if xB~= -1 and yB ~=-1 then
-      tap(xB,yB)
-      printFunction("--点击BOSS战斗".."x:"..xB.."y:"..yB)
-      ss(5*1000)
-      checkFightisOver()
-      ss(10*1000)
-      checkGift()
-      ss(5*1000)
-      bossIsKO = true
-      break
-    end
+  local i = 1
+  while (isHaveFight) do
+    printFunction("--搜索次数"..i)
+    isHaveFight = false
+    for x=200,1400,200 do
+      keepScreen(true)
+      --local xPS, yPS = findImageInRegionFuzzy("exp2.png", 80, y, 540, y+96, 892, 0xffffff)
+      --if xPS ~= -1 and yPS ~= -1 then
+      --  printFunction("i:"..i.."x:"..xPS.."y:"..yPS)
+      --local xS, yS = findImageInRegionFuzzy("tofight2.png", 90, xPS-250, yPS-220, xPS+150, yPS-120, 0xffffff)
+      local xS, yS = findImageInRegionFuzzy("tofight2.png", 70, x, 300, x+320, 950, 0xffffff)
+      keepScreen(false)
+      if xS~= -1 and yS ~=-1 then
+        tap(xS,yS)
+        printFunction("--点击战斗".."x:"..xS.."y:"..yS)
+        ss(5*1000)
+        checkFightisOver()
+        isHaveFight = true
+        ss(5*1000)
+      end
+      -- end
+      keepScreen(true)
+      local xB, yB = findImageInRegionFuzzy("bossfight.png", 70, 753, 150, 1270, 600, 0xffffff)
+      keepScreen(false)
+      if xB~= -1 and yB ~=-1 then
+        tap(xB,yB)
+        printFunction("--点击BOSS战斗".."x:"..xB.."y:"..yB)
+        ss(5*1000)
+        checkFightisOver()
+        ss(10*1000)
+        checkGift()
+        ss(5*1000)
+        bossIsKO = true
+        break
+      end
 
-    --x,y = findMultiColorInRegionFuzzy(0x2d1c08,"-5|-10|0xe4ceab,-8|1|0xe0cf9e,8|-2|0xae9c78,0|9|0xe2d09c,1|22|0xfca911",90,y, 540, y+48, 892);
-    --printFunction("x:"..x.."y:"..y)
-    --keepScreen(false)
+      --x,y = findMultiColorInRegionFuzzy(0x2d1c08,"-5|-10|0xe4ceab,-8|1|0xe0cf9e,8|-2|0xae9c78,0|9|0xe2d09c,1|22|0xfca911",90,y, 540, y+48, 892);
+      --printFunction("x:"..x.."y:"..y)
+      --keepScreen(false)
+    end
+    i = i + 1
   end
   return bossIsKO
 end
@@ -122,6 +131,7 @@ end
 function checkExpModels()
   printFunction("--只打经验怪")
   local isHaveFight = true
+  local bossIsKO = false
   local i = 1
   while (isHaveFight) do
     printFunction("--搜索次数"..i)
@@ -153,6 +163,20 @@ function checkExpModels()
           isHaveFight = true
           ss(5*1000)
         end
+      end
+      keepScreen(true)
+      local xB, yB = findImageInRegionFuzzy("bossfight.png", 70, 753, 150, 1270, 600, 0xffffff)
+      keepScreen(false)
+      if xB~= -1 and yB ~=-1 then
+        tap(xB,yB)
+        printFunction("--点击BOSS战斗".."x:"..xB.."y:"..yB)
+        ss(5*1000)
+        checkFightisOver()
+        ss(10*1000)
+        checkGift()
+        ss(5*1000)
+        bossIsKO = true
+        break
       end
     end
     i = i + 1
