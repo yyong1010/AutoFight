@@ -1,6 +1,6 @@
 {
    "cancelname" : "取消",
-   "config" : "save_AutoDonate.dat",
+   "config" : "save_Lumberyard_Oni.dat",
    "height" : 1350,
    "width" : 1450,
    "okname" : "开始运行",
@@ -304,7 +304,7 @@
                "type" : "Label"
             }
          ]
-      },			
+      },
       {
          "style" : "custom",
          "text" : "重要说明",
