@@ -3,30 +3,49 @@ function juexingdefault()
   local fighttimes = 0
   local wakenTimes = setting["wakenTimes"]
   local isSolo = setting["isWakenSolo"]
+  local isJoinTeam = setting["isJoinTeam"]
   local teamReady = false
+  local isHaveAnswer = 0
   printFunction(">>>>isSolo:"..isSolo)
 
   local createisOK = createWaken()
 
   while(fighttimes < tonumber(wakenTimes) and createisOK) do
     if isSolo ~= "0" then
-      teamReady = checkTeamReady()--检查队伍是否到齐
-      if teamReady then
-        tap(1449,914)-- 开始战斗
-        printFunction("--点击开始战斗")
-        showHUDx("开始觉醒次数 "..tostring(fighttimes+1))
-        ss()
-        if checkFightisOver() > 0  then--检查战斗是否结束
-					fighttimes = fighttimes + 1
-				end
-        if fighttimes < tonumber(wakenTimes) then
-          askagain(1)
+      if isJoinTeam ~= "0" then --队长进入
+        teamReady = checkTeamReady()--检查队伍是否到齐
+        if teamReady then
+          tap(1449,914)-- 开始战斗
+          printFunction("--点击开始战斗")
+          showHUDx("开始觉醒次数 "..tostring(fighttimes+1))
+          ss()
+          if checkFightisOver() > 0  then--检查战斗是否结束
+  					fighttimes = fighttimes + 1
+  				end
+          if fighttimes < tonumber(wakenTimes) then
+            askagain(1)
+          else
+            askagain(0)
+          end
         else
-          askagain(0)
+          showHUDx("重新进入觉醒")
+          createisOK = createWaken()
         end
-      else
-        showHUDx("重新进入觉醒")
-        createisOK = createWaken()
+      else --队员进入
+				showHUDx("开始觉醒次数 "..tostring(fighttimes+1))
+        if findTeamWork(isHaveAnswer) == 2 then
+          fighttimes = fighttimes + 1
+        end
+
+        if fighttimes < tonumber(wakenTimes) then
+          isHaveAnswer = answeragain(1)
+          if isHaveAnswer == 0 then
+            showHUDx("重新进入觉醒")
+            createisOK = createWaken()
+          end
+        else
+          isHaveAnswer = answeragain(0)
+        end
       end
     else
       showHUDx("单人进入")
@@ -37,8 +56,8 @@ function juexingdefault()
       ss()
 			if checkFightisOver() > 0 then--检查战斗是否结束
         fighttimes = fighttimes + 1
-			end	
-			ss(18*1000)	
+			end
+			ss(18*1000)
     end
   end
 
@@ -75,6 +94,7 @@ function createWaken()
   local createisOK = false
   local xPS, yPS =  findMultiColorInRegionFuzzy(0x403bd9,"11|0|0x5496e8,21|0|0x4476df,12|2|0x45a0e2",90,80, 970, 210, 1048);
   local isSolo = setting["isWakenSolo"]
+  local isJoinTeam = setting["isJoinTeam"]
   printFunction("x:"..xPS.."y:"..yPS)
   if xPS ~= -1 and yPS ~= -1 then
     tap(xPS,yPS+25)--点击觉醒
@@ -84,16 +104,7 @@ function createWaken()
     selectWakenType()
     if isSolo ~= "0" then
       showHUD(runing,"创建组队，如果卡住请手动点击，脚本会自动继续运行",18,"0xffffffff","0x4c000000",0,760,1020,400,50)
-      tapR(976,809)--点击组队
-      printFunction("--点击组队")
-      waitRandomSS(25,45)
-      tapR(1580,906)--点击创建队伍
-      printFunction("--点击创建队伍")
-      waitRandomSS(45,65)
-
-      tapR(1313,850)--点击创建
-      printFunction("--点击创建")
-      s(1000)
+      creatTeamPanel(isJoinTeam)
     end
 
     createisOK = true

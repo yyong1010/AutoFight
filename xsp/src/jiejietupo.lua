@@ -123,6 +123,7 @@ function checkisFuWa()
       break
     end
     i = i +1
+    ss()
   end
 end
 

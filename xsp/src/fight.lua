@@ -47,7 +47,7 @@ end
 
 function checkFightisOver()
 	local fightisover = -1  --0失败，1成功
-  while(fightisover < 0) do	
+  while(fightisover < 0) do
     --local xUp, yUp = findMultiColorInRegionFuzzy(0xddb276,"14|0|0xddb276,25|6|0xdfb77b,34|8|0xdfb67a",90,1650, 900, 1900, 1100)
 		local xUp, yUp = findMultiColorInRegionFuzzy(0xe3be82,"19|0|0xdaae71,37|4|0xdfb67a,42|-27|0x534841,19|-14|0xa18b6b",90,1650, 900, 1900, 1100);
     if xUp ~= -1 and yUp~= -1 then
@@ -92,3 +92,33 @@ function askagain(isa)
 		end
   end
 end
+
+function answeragain(isa)
+  local i = 0
+  local isHaveAnswer = 0 --0无邀请，1有邀请
+	showHUDx("等待再邀请信息")
+  while (i < 30) do
+		
+    local xAg, yAg  = findMultiColorInRegionFuzzy(0xf4b25f,"6|0|0xf4b25f,6|6|0xf4b25f,0|6|0xf4b25f", 95, 1125, 612, 1135, 625)
+
+    if xAg ~= -1 and yAg~= -1 then
+      isHaveAnswer = 1
+      if isa == 1  then
+        tap(1124,641) --点击再邀请
+        printFunction("--点击接受邀请")
+				ss(1500)
+				break
+      else
+        tap(786,639) --点击取消邀请
+        printFunction("--点击我很忙")
+				break
+      end
+    end
+    ss(1000)
+    i = i + 1
+  end
+
+  return isHaveAnswer
+end
+
+

@@ -103,10 +103,26 @@
                "text" : "20",
                "type" : "Edit"
             },
+						{
+               "align" : "left",
+               "color" : "0,0,0",
+               "rect" : "80,290,260,100",
+               "size" : 30,
+               "text" : "觉醒御魂",
+               "type" : "Label"
+            },
+            {
+               "id" : "isJoinTeam",
+               "rect" : "240,285,560,100",
+               "list" : "是否以组员身份进入",
+               "select" : "0",
+               "size" : 30,
+               "type" : "CheckBoxGroup"
+            },
             {
                "id" : "twoisOK",
-               "rect" : "240,285,960,100",
-               "list" : "觉醒御魂是否可二人组队（等待不足三人15秒左右后）",
+               "rect" : "640,285,960,100",
+							"list" : "是否可二人组队（等三人不足15秒左右）",
                "select" : "0",
                "size" : 30,
                "type" : "CheckBoxGroup"

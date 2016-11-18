@@ -99,9 +99,11 @@ function swap()
         tap(xS,yS)
         printFunction("--点击战斗".."x:"..xS.."y:"..yS)
         ss(5*1000)
-        checkFightisOver()
+        if checkIsClick() then
+          checkFightisOver()
+          ss(5*1000)
+        end
         isHaveFight = true
-        ss(5*1000)
       end
       -- end
       keepScreen(true)
@@ -111,12 +113,14 @@ function swap()
         tap(xB,yB)
         printFunction("--点击BOSS战斗".."x:"..xB.."y:"..yB)
         ss(5*1000)
-        checkFightisOver()
-        ss(10*1000)
-        checkGift()
-        ss(5*1000)
-        bossIsKO = true
-        break
+        if checkIsClick() then
+          checkFightisOver()
+          ss(10*1000)
+          checkGift()
+          ss(5*1000)
+          bossIsKO = true
+          break
+        end
       end
 
       --x,y = findMultiColorInRegionFuzzy(0x2d1c08,"-5|-10|0xe4ceab,-8|1|0xe0cf9e,8|-2|0xae9c78,0|9|0xe2d09c,1|22|0xfca911",90,y, 540, y+48, 892);
@@ -159,9 +163,11 @@ function checkExpModels()
           --wFile(rec)
 
           ss(5*1000)
-          checkFightisOver()
+          if checkIsClick() then
+            checkFightisOver()
+            ss(5*1000)
+          end
           isHaveFight = true
-          ss(5*1000)
         end
       end
       keepScreen(true)
@@ -171,12 +177,14 @@ function checkExpModels()
         tap(xB,yB)
         printFunction("--点击BOSS战斗".."x:"..xB.."y:"..yB)
         ss(5*1000)
-        checkFightisOver()
-        ss(10*1000)
-        checkGift()
-        ss(5*1000)
-        bossIsKO = true
-        break
+        if checkIsClick() then
+          checkFightisOver()
+          ss(10*1000)
+          checkGift()
+          ss(5*1000)
+          bossIsKO = true
+          break
+        end
       end
     end
     i = i + 1
@@ -237,6 +245,23 @@ function selectSpecailChapter()
     cnum = 4
   end
   return cnum
+end
+
+function checkIsClick()
+  local i = 0
+  local isClick = false
+  while (i < 10) do
+    local x, y = findMultiColorInRegionFuzzy(0x32181c,"9|0|0x32181c,6|7|0x32191c,0|7|0x32191c", 95, 1665, 940, 1680, 955)
+    if x == -1 then
+      printFunction("找不到啦")
+      isClick = true
+      break
+    end
+    ss(1000)
+    i = i + 1
+  end
+  printFunction("检查是否有点到"..tostring(isClick))
+  return isClick
 end
 
 
