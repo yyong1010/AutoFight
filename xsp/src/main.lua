@@ -39,7 +39,7 @@ function main()
     require "shiju"
     require "teamWork"
     s(2000)
-
+		
 
     if setting["AutoDayWork"] == "0" then
       setting["WakenFunction"] = "0"

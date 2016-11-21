@@ -3,10 +3,13 @@ function jiejiedefault()
   local fighttimes = 0
   local aTimes = setting["jiejieTimes"]
 
-  local xPS, yPS = findImageInRegionFuzzy("jiejie.png", 90, 550, 970, 690, 1048, 0xffffff)
-  local xQs, yQs = findImageInRegionFuzzy("jiejietitle.png", 50, 890, 60, 1000, 100, 0xffffff)
+  --local xPS, yPS = findImageInRegionFuzzy("jiejie.png", 90, 550, 970, 690, 1048, 0xffffff)
+  --local xQs, yQs = findImageInRegionFuzzy("jiejietitle.png", 50, 890, 60, 1000, 100, 0xffffff)
+	
+	local xPS, yPS = findMultiColorInRegionFuzzy(0xf2ecda,"12|2|0xe5e0ce,12|11|0x4e87ea,1|10|0xf8f3e0", 90,615,980,630,995)
+	local xQs, yQs = findMultiColorInRegionFuzzy(0x5d4c3c,"4|1|0x5b4a3a,13|1|0x877f72,26|6|0xf8f3e0,6|6|0x625141", 90,902,70,930,78)	
 
-  printFunction("x:"..xPS.."y:"..yPS)
+  printFunction("x:"..xPS.."y:"..yPS.."x1:"..xQs.."y:"..yPS)
   if (xPS ~= -1 and yPS ~= -1) or (xQs ~= -1 and yQs ~= -1) then
     if (xPS ~= -1 and yPS ~= -1) then
       tap(xPS,yPS+25)--点击结界突破
@@ -112,8 +115,12 @@ end
 function checkisFuWa()
   local i = 1
   while(i < 10) do
-    local xFs, yFs = findImageInRegionFuzzy("fuwa.png", 90, 890, 610, 1020, 670, 0xffffff)
-    if xFs ~= -1 and yFs~= -1 then
+    --local xFs, yFs = findImageInRegionFuzzy("fuwa.png", 90, 890, 610, 1020, 670, 0xffffff)
+		--local xFs, yFs = findMultiColorInRegionFuzzy(0x000000,"10|0|0x74360d,22|1|0x000000,20|8|0x76370d,6|8|0x000000",90,910,620,940,630);
+		local xFs, yFs  = findMultiColorInRegionFuzzy(0xff9362,"13|-1|0xff9363,9|8|0xfe8550,-6|8|0xfe8854",90,914,560,935,576);
+		local xFs1, yFs1  = findMultiColorInRegionFuzzy(0xbb461a,"11|1|0xbb461a,10|6|0xbb461a,0|5|0xbb461a",90,914,560,935,576);
+		printFunction("x:"..xFs.."y:"..yFs.."x1:"..xFs1.."y1:"..yFs1)
+    if (xFs ~= -1 and yFs~= -1) or (xFs1 ~= -1 and yFs1 ~= -1) then
       tap(948,556) --点击屏幕
       printFunction("--点击屏幕点福娃")
       ss(5*1000)
@@ -130,7 +137,7 @@ end
 function checkisBack()
   local i = 1
   while(i < 10) do
-    local xFs, yFs = findImageInRegionFuzzy("jiejietitle.png", 50, 890, 60, 1000, 100, 0xffffff)
+    local xFs, yFs = findMultiColorInRegionFuzzy(0x5d4c3c,"4|1|0x5b4a3a,13|1|0x877f72,26|6|0xf8f3e0,6|6|0x625141", 95,902,70,930,78)	
     if xFs ~= -1 and yFs~= -1 then
       printFunction("--返回选取界面")
       break

@@ -7,9 +7,9 @@ function discover()
   ss(5*1000)
   while(fighttimes < tonumber(aTimes)) do
     showHUDx("开始探索次数 "..tostring(fighttimes+1))
-    local xLS, yLS = findImageInRegionFuzzy("indiscover.png", 90, 1600, 950, 1690, 1000, 0xffffff)
+    local xLS, yLS = findMultiColorInRegionFuzzy(0x43331a,"1|1|0x43331b,6|6|0x3c2e1f,7|7|0x3d2e1e", 95, 1445, 934, 1455, 945) --出战式神的颜色
     if xLS ~= -1 and yLS ~= -1 then
-      specailChapter = selectSpecailChapter()
+      specailChapter = selectSpecailChapter() --特定章节
       discoverDetail()
     else
       if fighttimes > 0 then
@@ -21,7 +21,7 @@ function discover()
     end
 
     s(5*1000)
-    local xLS, yLS = findImageInRegionFuzzy("indiscover.png", 90, 1600, 950, 1690, 1000, 0xffffff)
+    local xLS, yLS =  findMultiColorInRegionFuzzy(0x43331a,"1|1|0x43331b,6|6|0x3c2e1f,7|7|0x3d2e1e", 95, 1445, 934, 1455, 945) --出战式神的颜色
     if xLS ~= -1 and yLS ~= -1 then
       tap(68,100)
       printFunction("--点击退出")
@@ -93,7 +93,8 @@ function swap()
       --if xPS ~= -1 and yPS ~= -1 then
       --  printFunction("i:"..i.."x:"..xPS.."y:"..yPS)
       --local xS, yS = findImageInRegionFuzzy("tofight2.png", 90, xPS-250, yPS-220, xPS+150, yPS-120, 0xffffff)
-      local xS, yS = findImageInRegionFuzzy("tofight2.png", 70, x, 300, x+320, 950, 0xffffff)
+      --local xS, yS = findImageInRegionFuzzy("tofight2.png", 70, x, 300, x+320, 950, 0xffffff)
+			local xS, yS = findMultiColorInRegionFuzzy(0x414a7b,"16|3|0xd5d5f6,12|10|0xfcfdfe,5|11|0xf0f0fe", 95,  x, 300, x+320, 950)
       keepScreen(false)
       if xS~= -1 and yS ~=-1 then
         tap(xS,yS)
@@ -107,7 +108,8 @@ function swap()
       end
       -- end
       keepScreen(true)
-      local xB, yB = findImageInRegionFuzzy("bossfight.png", 70, 753, 150, 1270, 600, 0xffffff)
+      --local xB, yB = findImageInRegionFuzzy("bossfight.png", 70, 753, 150, 1270, 600, 0xffffff)
+			local xB, yB =findMultiColorInRegionFuzzy(0x4a588a,"-5|9|0xebc374,5|8|0xd91212,-11|-7|0x2f1e16", 90,753, 150, 1270, 600)
       keepScreen(false)
       if xB~= -1 and yB ~=-1 then
         tap(xB,yB)
@@ -142,7 +144,8 @@ function checkExpModels()
     isHaveFight = false
     for x=200,1400,200 do
       keepScreen(true)
-      local xS, yS = findImageInRegionFuzzy("tofight2.png", 70, x, 300, x+320, 950, 0xffffff)
+      --local xS, yS = findImageInRegionFuzzy("tofight2.png", 70, x, 300, x+320, 950, 0xffffff)
+			local xS, yS = findMultiColorInRegionFuzzy(0x414a7b,"16|3|0xd5d5f6,12|10|0xfcfdfe,5|11|0xf0f0fe", 95,  x, 300, x+320, 950)
       keepScreen(false)
       if xS~= -1 and yS ~=-1 then
         keepScreen(true)
@@ -171,7 +174,8 @@ function checkExpModels()
         end
       end
       keepScreen(true)
-      local xB, yB = findImageInRegionFuzzy("bossfight.png", 70, 753, 150, 1270, 600, 0xffffff)
+      --local xB, yB = findImageInRegionFuzzy("bossfight.png", 70, 753, 150, 1270, 600, 0xffffff)
+			local xB, yB =findMultiColorInRegionFuzzy(0x4a588a,"-5|9|0xebc374,5|8|0xd91212,-11|-7|0x2f1e16", 90,753, 150, 1270, 600)
       keepScreen(false)
       if xB~= -1 and yB ~=-1 then
         tap(xB,yB)
@@ -189,6 +193,7 @@ function checkExpModels()
     end
     i = i + 1
   end
+	return bossIsKO
 end
 
 
@@ -200,7 +205,8 @@ function selectChapter(cnum)
   printFunction("--点击当前章节"..cnum..x1..y1)
   showHUDx("选取当前章节")
   waitRandomSS(35,55)
-  local xPS, yPS = findImageInRegionFuzzy("discover.png", 90, 1360, 760, 1480, 820, 0xffffff)
+  --local xPS, yPS = findImageInRegionFuzzy("discover.png", 90, 1360, 760, 1480, 820, 0xffffff)
+	local xPS, yPS =findMultiColorInRegionFuzzy(0xf4b25f,"8|-2|0xf4b25f,3|4|0xf4b25f,-2|3|0xf4b25f", 95,1425,765,1435,775)
   if xPS ~= -1 and yPS ~= -1 then
     tapR(xPS,yPS)
     printFunction("--点击探索")
@@ -219,7 +225,8 @@ function selectDefaultChapter()
   printFunction("--点击最后一章")
   showHUDx("默认选取右边最后章节")
   waitRandomSS(30,55)
-  local xPS, yPS = findImageInRegionFuzzy("discover.png", 90, 1360, 760, 1480, 820, 0xffffff)
+  --local xPS, yPS = findImageInRegionFuzzy("discover.png", 90, 1360, 760, 1480, 820, 0xffffff)
+	local xPS, yPS =findMultiColorInRegionFuzzy(0xf4b25f,"8|-2|0xf4b25f,3|4|0xf4b25f,-2|3|0xf4b25f", 95,1425,765,1435,775)
   if xPS ~= -1 and yPS ~= -1 then
     tap(xPS,yPS)
     printFunction("--点击探索")
@@ -230,9 +237,9 @@ end
 
 function selectSpecailChapter()
   local cnum = 1
-  local x12, y12 = findColorInRegionFuzzy(0x1a1537, 95, 178, 178, 182, 182)
-  local x13, y13 = findColorInRegionFuzzy(0x011020, 95, 178, 178, 182, 182)
-  local x14, y14 = findColorInRegionFuzzy(0x570f0d, 95, 178, 178, 182, 182)
+  local x12, y12 = findMultiColorInRegionFuzzy(0x2a336d,"13|4|0x202252,24|3|0x1b1639,12|9|0x1c1c42", 95,114,155,140,170)
+  local x13, y13 = findMultiColorInRegionFuzzy(0x001a2b,"5|0|0x0e3a4e,10|0|0x236d86,7|3|0x236c85", 95,114,155,140,170) 
+  local x14, y14 = findMultiColorInRegionFuzzy(0x640d0a,"6|0|0x610a08,27|0|0x190d0c,23|18|0x3b2012", 95,225,210,256,231)
   if x12 ~= -1 and y12 ~= -1 then
     cnum = 2
   end
@@ -244,6 +251,7 @@ function selectSpecailChapter()
   if x14 ~= -1 and y14 ~= -1 then
     cnum = 4
   end
+	printFunction("返回特定章节："..cnum)
   return cnum
 end
 
@@ -251,7 +259,7 @@ function checkIsClick()
   local i = 0
   local isClick = false
   while (i < 10) do
-    local x, y = findMultiColorInRegionFuzzy(0x32181c,"9|0|0x32181c,6|7|0x32191c,0|7|0x32191c", 95, 1665, 940, 1680, 955)
+    local x, y =  findMultiColorInRegionFuzzy(0x43331a,"1|1|0x43331b,6|6|0x3c2e1f,7|7|0x3d2e1e", 95, 1445, 934, 1455, 945) --出战式神的颜色
     if x == -1 then
       printFunction("找不到啦")
       isClick = true
@@ -266,13 +274,13 @@ end
 
 
 function swipRight()
-  local xp, yp, dis = waitRandom(350,390), waitRandom(700,850),waitRandom(400,600)
+  local xp, yp, dis = waitRandom(_fsh/3-50,_fsh/3+50), waitRandom(_fsw/2-20,_fsw/2+20),waitRandom(_fsh/3.2,_fsh/3.2+150)
   swip(xp+dis,yp,xp,yp)
   waitRandomSS(20,35)
 end
 
 function swipLeft()
-  local xp, yp, dis = waitRandom(350,390), waitRandom(700,850),waitRandom(400,600)
+  local xp, yp, dis = waitRandom(_fsh/3-50,_fsh/3+50), waitRandom(_fsw/2-20,_fsw/2+20),waitRandom(_fsh/3.2,_fsh/3.2+150)
   swip(xp,yp,xp+dis,yp)
   waitRandomSS(20,35)
 end

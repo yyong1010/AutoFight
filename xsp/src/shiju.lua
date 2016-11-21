@@ -9,9 +9,9 @@ function shijuDefault()
 
     --local xLS, yLS = findImageInRegionFuzzy("team.png", 80, 300, 930, 430, 980, 0xffffff)
     local xLS, yLS = findColorInRegionFuzzy(0xe8e0cf, 100, 354, 909, 356, 911) --庭院组队颜色
-    local xTS, yTS = findImageInRegionFuzzy("teamTitle.png", 80, 910, 70, 1000, 100, 0xffffff)
+    local xTS, yTS = findMultiColorInRegionFuzzy(0xe7d6ce,"8|1|0xc39094,9|-8|0x6c3740,0|-8|0xc25f70", 95,1754,99,1765,110)
     if xTS ~=-1 and yTS ~= -1 then
-      local xBS, yBS = findImageInRegionFuzzy("dBottom.png", 90, 870, 150, 920, 210, 0xffffff)
+      local xBS, yBS = findMultiColorInRegionFuzzy(0x23160c,"8|0|0x7b7262,8|4|0x645b4b,1|4|0x897e67", 95,890,170,901,176)
       if xBS ~=-1 and yBS ~= -1 then
         s(1000)
         selectShiju()
@@ -86,7 +86,7 @@ function selectShiju()
   swipBottom()  --向下拉
   printFunction("--向下拉")
 
-  tapR(384,521)  --点击妖气封印
+  tapR(384,521)  --点击石距
   printFunction("--点击石距")
   ss(2*1000)
 
