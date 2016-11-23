@@ -43,15 +43,20 @@ end
 
 function findShiju()
   local i =  1
-  local isJoin = false
-  while (not isJoin) do
+  local isJoin = 0
+  while (isJoin < 1) do
 
     printFunction("--寻找石距:")
-    isJoin = doShiju()
+    isJoin = doTeamWork()
 
-    tapR(1258,891)
-    printFunction("--点击刷新")
-    waitRandomSS(4,12)
+      if isJoin < 1 then
+        tapR(1258,891)
+        printFunction("--点击刷新")
+        waitRandomSS(4,12)
+      else
+        printFunction("--退出刷新")
+        break
+      end
 
   end
 end

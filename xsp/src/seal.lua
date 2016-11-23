@@ -16,13 +16,15 @@ function sealDefault()
     fightresult = 0
 
     --local xLS, yLS = findImageInRegionFuzzy("team.png", 80, 300, 930, 430, 980, 0xffffff)
-    local xLS, yLS = findColorInRegionFuzzy(0xe8e0cf, 100, 354, 909, 356, 911)  --庭院组队颜色
+    --local xLS, yLS = findColorInRegionFuzzy(0xe8e0cf, 100, 354, 909, 356, 911)  --庭院组队颜色
+    local xLS, yLS = findMultiColorInRegionFuzzy(0xcbc7b6,"5|0|0x9360a4,5|3|0xa27cb3,0|3|0xc8c4b3", 90,402,956,407,959)
     --local xTS, yTS = findImageInRegionFuzzy("teamTitle.png", 80, 910, 70, 1000, 100, 0xffffff)
-		local xTS, yTS = findMultiColorInRegionFuzzy(0xe7d6ce,"8|1|0xc39094,9|-8|0x6c3740,0|-8|0xc25f70", 95,1754,99,1765,110)
+		local xTS, yTS = findMultiColorInRegionFuzzy(0xe7d6ce,"8|1|0xc39094,9|-8|0x6c3740,0|-8|0xc25f70", 90,1754,99,1765,110)--组队界面右上角大叉颜色
     if xTS ~=-1 and yTS ~= -1 then
+      printFunction("-->>>>已经在组队界面")
 			createisOK = true
       --local xBS, yBS = findImageInRegionFuzzy("dBottom.png", 90, 870, 150, 920, 210, 0xffffff)
-			local xBS, yBS = findMultiColorInRegionFuzzy(0x23160c,"8|0|0x7b7262,8|4|0x645b4b,1|4|0x897e67", 95,890,170,901,176)
+			local xBS, yBS = findMultiColorInRegionFuzzy(0x23160c,"8|0|0x7b7262,8|4|0x645b4b,1|4|0x897e67", 90,890,170,901,176)--箭头下标颜色
       if xBS ~=-1 and yBS ~= -1 then
         s(1000)
         selectSeal()
@@ -39,6 +41,7 @@ function sealDefault()
     end
 
     if xLS ~= -1 and yLS ~= -1 then
+      printFunction("-->>>>在庭院界面")
 			createisOK = true
       tapR(xLS,yLS)  --点击组队
       printFunction("--点击组队")
@@ -50,6 +53,8 @@ function sealDefault()
     if fightresult == 2 then
       fighttimes = fighttimes + 1
     end
+    ss(10*1000)
+    printFunction("-->>>>循环结束")
   end
   showHUDx("结束执行妖气封印")
 end
@@ -86,7 +91,7 @@ function doSeal(mName)
 	end
   for y=302,658,178 do
     local xS, yS = findImageInRegionFuzzy(mName..".png",  80, 480, y-25, 580, y+25, 0xffffff)
-
+    --xS,yS  = 1,302
     if xS ~= -1 and yS ~= -1 then
       printFunction("--找到封印>>>>:"..mName)
       tapR(1513,yS)  --点击组队
@@ -105,6 +110,9 @@ function doSeal(mName)
       end
       ]]
       isFound = teamWorkFight()
+      if isFound ~= 0 then
+        break
+      end
     end
   end
   return isFound
@@ -118,7 +126,7 @@ function selectSeal()
 		tap(415,422)  --点击妖气封印
     printFunction("--点击妖气封印")
     ss(2*1000)
-    
+
   else
     swipTop()  --向上拉
     printFunction("--向上拉")

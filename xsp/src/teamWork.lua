@@ -44,13 +44,14 @@ end
 
 function teamWorkFight()
   local isFound = 0 --0没找到，1战斗失败，2战斗成功
-	local wtimes = 60 --设置等待次数
+	local wtimes = 45 --设置等待次数
   local i,j = 0,0
   while(j < 6) do
 		--printFunction("》》》》jjjjjjjjjjjjjjjjjj:"..j)
     local xUp, yUp = findColorInRegionFuzzy(0xdd6951, 100, 463, 873, 465, 876)-- 离开队伍的颜色
     if xUp ~= -1 and xUp ~= -1 then
       while (isFound < 1 and i < wtimes) do
+        printFunction("等待战斗开始.."..i)
         local xUq, yUq  = findMultiColorInRegionFuzzy(0x534e77,"6|0|0x4b4770,6|10|0x5a567f,-1|10|0x5f5a7b", 95,1890,935,1905,950)--战斗页面右边的紫色叶子颜色
 
         if xUq ~= -1 and xUq ~= -1 then
@@ -62,6 +63,8 @@ function teamWorkFight()
             break
           else
             isFound = 1
+            ss(2*1000)
+            break
           end
         end
 
@@ -94,6 +97,26 @@ function teamWorkFight()
       end
 			break
     end
+
+    if isFound == 0 then
+      --直接进入战斗
+      local xUq, yUq  = findMultiColorInRegionFuzzy(0x534e77,"6|0|0x4b4770,6|10|0x5a567f,-1|10|0x5f5a7b", 95,1890,935,1905,950)--战斗页面右边的紫色叶子颜色
+
+      if xUq ~= -1 and xUq ~= -1 then
+        --showHUDx("进入战斗")
+        printFunction("-->>>>>直接Team进入战斗>>>>:")
+        if checkFightisOver() > 0 then
+          isFound = 2
+          ss(2*1000)
+          break
+        else
+          isFound = 1
+          ss(2*1000)
+          break
+        end
+      end
+    end
+
 		s()
 		j = j + 1
   end
