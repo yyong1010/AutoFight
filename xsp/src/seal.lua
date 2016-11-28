@@ -53,14 +53,16 @@ function sealDefault()
     if fightresult == 2 then
       fighttimes = fighttimes + 1
     end
-    ss(10*1000)
+    ss(5*1000)
     printFunction("-->>>>循环结束")
   end
   showHUDx("结束执行妖气封印")
 end
 
 
-function findSeal(mName)
+--function findSeal(mName)
+	--return findSeal2(mName)
+	--[[
   local i =  1
   local isJoin = 0  --0没找到，1战斗失败，2战斗成功
   while (isJoin < 1) do
@@ -72,7 +74,7 @@ function findSeal(mName)
       if isJoin < 1 then
         tapR(1258,891)
         printFunction("--点击刷新")
-        waitRandomSS(4,12)
+        waitRandomSS(4,8)
 			else
 				printFunction("--退出刷新")
 				break
@@ -81,11 +83,14 @@ function findSeal(mName)
   end
   printFunction("返回战斗结果:"..isJoin)
   return isJoin
-end
+	]]
+--end
 
 
 function doSeal(mName)
   local isFound = 0
+  local xS1, yS1
+  local xS2, yS2
 	if _fsw == 720 then
 		mName = mName.."720"
 	end
@@ -95,23 +100,15 @@ function doSeal(mName)
     if xS ~= -1 and yS ~= -1 then
       printFunction("--找到封印>>>>:"..mName)
       tapR(1513,yS)  --点击组队
-      ss()
-      --local xtS, ytS = findImageInRegionFuzzy("teamTitle.png", 90, 910, 70, 1000, 100, 0xffffff)
-      --local xtBS, ytBS = findImageInRegionFuzzy("BteamTitle.png", 90, 910, 70, 1000, 100, 0xffffff)
-      --[[
-      local xUp, yUp = findColorInRegionFuzzy(0xdd6951, 100, 463, 873, 465, 876)
-      --if (xtS == -1 and ytS == -1) and (xtBS == -1 and ytBS == -1) then
-      if xUp ~= -1 and xUp ~= -1 then
-        printFunction("--进入战斗>>>>:"..mName)
-        checkFightisOver()
-        isFound = true
-        ss(5*1000)
-        break
-      end
-      ]]
-      isFound = teamWorkFight()
-      if isFound ~= 0 then
-        break
+      ss(2*1000)
+      xS1, yS1 = findColorInRegionFuzzy(0xf4b25f, 90, 1491, 302, 1493, 305) --第一个组队按钮
+      xS2, yS2 = findColorInRegionFuzzy(0x624726, 90, 1491, 302, 1493, 305) --第一个按钮灰色
+      if (xS1 == -1) and (xS2 == -1)  then
+        printFunction("--找到封印>>>>:点进去啦")
+        isFound = teamWorkFight(true) --变成队长也可以开战
+        if isFound ~= 0 then
+          break
+        end
       end
     end
   end

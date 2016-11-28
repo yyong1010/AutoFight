@@ -1,5 +1,6 @@
 function shijuDefault()
   local fighttimes = 0
+	local fightresult = 0
 
   showHUD(runing,"请在厅院(卷轴打开)或组队界面执行脚本",18,"0xffffffff","0x4c000000",0,760,1020,400,50)
   ss(5*1000)
@@ -16,14 +17,14 @@ function shijuDefault()
         s(1000)
         selectShiju()
 				ss()
-        findShiju()
+        fightresult = findShiju()
       else
         tap(438,173)  --点击收缩菜单
         printFunction("--点击收缩菜单")
         s(1000)
         selectShiju()
         ss()
-        findShiju()
+        fightresult = findShiju()
       end
     end
 
@@ -33,14 +34,16 @@ function shijuDefault()
       ss(5*1000)
       selectShiju()
       ss()
-      findShiju()
+      fightresult = findShiju()
     end
-    fighttimes = fighttimes + 1
+    if fightresult == 2 then
+      fighttimes = fighttimes + 1
+    end
   end
   showHUDx("结束执行石距")
 end
 
-
+--[[
 function findShiju()
   local i =  1
   local isJoin = 0
@@ -60,12 +63,13 @@ function findShiju()
 
   end
 end
+]]
 
 
 function doShiju()
   local isFound = false
 
-  local xS, yS = findColorInRegionFuzzy(0xf4b25f, 100, 1491, 302, 1493, 305)
+  local xS, yS = findColorInRegionFuzzy(0xf4b25f, 100, 1491, 302, 1493, 305) --第一个组队按钮
 
   if xS ~= -1 and yS ~= -1 then
     printFunction("--找到石距>>>>:")
