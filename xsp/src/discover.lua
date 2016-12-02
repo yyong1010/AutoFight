@@ -6,6 +6,7 @@ function discover()
   showHUD(runing,"请在选定章节内界面或探索界面执行脚本",18,"0xffffffff","0x4c000000",0,760,1020,400,50)
   ss(5*1000)
   while(fighttimes < tonumber(aTimes)) do
+    checkinvite()
     showHUDx("开始探索次数 "..tostring(fighttimes+1))
     local xLS, yLS = findMultiColorInRegionFuzzy(0x43331a,"1|1|0x43331b,6|6|0x3c2e1f,7|7|0x3d2e1e", 95, 1445, 934, 1455, 945) --出战式神的颜色
     if xLS ~= -1 and yLS ~= -1 then
@@ -41,6 +42,7 @@ function discoverDetail()
   local onlyExp = setting["onlyExp"]
   local rtimes,ltimes = waitRandom(3,5),waitRandom(3,5)
   while(i < 5 and not bossIsKO) do
+    checkinvite()
     swipRight()
     printFunction("--向右划"..i)
     i = i + 1
@@ -53,6 +55,7 @@ function discoverDetail()
 
 
   while(j < 5 and not bossIsKO) do
+    checkinvite()
     swipLeft()
     printFunction("--向左划"..j)
     j = j + 1
@@ -85,6 +88,7 @@ function swap()
   local bossIsKO = false
   local i = 1
   while (isHaveFight) do
+    checkinvite()
     printFunction("--搜索次数"..i)
     isHaveFight = false
     for x=200,1400,200 do
@@ -101,7 +105,7 @@ function swap()
         printFunction("--点击战斗".."x:"..xS.."y:"..yS)
         ss(5*1000)
         if checkIsClick() then
-          checkFightisOver()
+          checkFightisOver(true)
           ss(5*1000)
         end
         isHaveFight = true
@@ -116,7 +120,7 @@ function swap()
         printFunction("--点击BOSS战斗".."x:"..xB.."y:"..yB)
         ss(5*1000)
         if checkIsClick() then
-          checkFightisOver()
+          checkFightisOver(true)
           ss(10*1000)
           checkGift()
           ss(5*1000)
@@ -140,6 +144,7 @@ function checkExpModels()
   local bossIsKO = false
   local i = 1
   while (isHaveFight) do
+    checkinvite()
     printFunction("--搜索次数"..i)
     isHaveFight = false
     for x=200,1400,200 do
@@ -167,7 +172,7 @@ function checkExpModels()
 
           ss(5*1000)
           if checkIsClick() then
-            checkFightisOver()
+            checkFightisOver(true)
             ss(5*1000)
           end
           isHaveFight = true
@@ -182,7 +187,7 @@ function checkExpModels()
         printFunction("--点击BOSS战斗".."x:"..xB.."y:"..yB)
         ss(5*1000)
         if checkIsClick() then
-          checkFightisOver()
+          checkFightisOver(true)
           ss(10*1000)
           checkGift()
           ss(5*1000)
@@ -198,6 +203,7 @@ end
 
 
 function selectChapter(cnum)
+  checkinvite()
   local chapterTbl ={{860,504},{734,470},{635,488},{737,476}}
   local x1 = chapterTbl[cnum][1]
   local y1 = chapterTbl[cnum][2]
@@ -205,6 +211,7 @@ function selectChapter(cnum)
   printFunction("--点击当前章节"..cnum..x1..y1)
   showHUDx("选取当前章节")
   waitRandomSS(35,55)
+  checkinvite()
   --local xPS, yPS = findImageInRegionFuzzy("discover.png", 90, 1360, 760, 1480, 820, 0xffffff)
 	local xPS, yPS =findMultiColorInRegionFuzzy(0xf4b25f,"8|-2|0xf4b25f,3|4|0xf4b25f,-2|3|0xf4b25f", 95,1425,765,1435,775)
   if xPS ~= -1 and yPS ~= -1 then
@@ -221,10 +228,12 @@ function selectChapter(cnum)
 end
 
 function selectDefaultChapter()
+  checkinvite()
   tap(1755,835) --选取最后一章
   printFunction("--点击最后一章")
   showHUDx("默认选取右边最后章节")
   waitRandomSS(30,55)
+  checkinvite()
   --local xPS, yPS = findImageInRegionFuzzy("discover.png", 90, 1360, 760, 1480, 820, 0xffffff)
 	local xPS, yPS =findMultiColorInRegionFuzzy(0xf4b25f,"8|-2|0xf4b25f,3|4|0xf4b25f,-2|3|0xf4b25f", 95,1425,765,1435,775)
   if xPS ~= -1 and yPS ~= -1 then
@@ -236,9 +245,10 @@ function selectDefaultChapter()
 end
 
 function selectSpecailChapter()
+  checkinvite()
   local cnum = 1
   local x12, y12 = findMultiColorInRegionFuzzy(0x2a336d,"13|4|0x202252,24|3|0x1b1639,12|9|0x1c1c42", 95,114,155,140,170)
-  local x13, y13 = findMultiColorInRegionFuzzy(0x001a2b,"5|0|0x0e3a4e,10|0|0x236d86,7|3|0x236c85", 95,114,155,140,170) 
+  local x13, y13 = findMultiColorInRegionFuzzy(0x001a2b,"5|0|0x0e3a4e,10|0|0x236d86,7|3|0x236c85", 95,114,155,140,170)
   local x14, y14 = findMultiColorInRegionFuzzy(0x640d0a,"6|0|0x610a08,27|0|0x190d0c,23|18|0x3b2012", 95,225,210,256,231)
   if x12 ~= -1 and y12 ~= -1 then
     cnum = 2
@@ -256,6 +266,7 @@ function selectSpecailChapter()
 end
 
 function checkIsClick()
+  checkinvite()
   local i = 0
   local isClick = false
   while (i < 10) do
@@ -273,14 +284,3 @@ function checkIsClick()
 end
 
 
-function swipRight()
-  local xp, yp, dis = waitRandom(_fsh/3-50,_fsh/3+50), waitRandom(_fsw/2-20,_fsw/2+20),waitRandom(_fsh/3.2,_fsh/3.2+150)
-  swip(xp+dis,yp,xp,yp)
-  waitRandomSS(20,35)
-end
-
-function swipLeft()
-  local xp, yp, dis = waitRandom(_fsh/3-50,_fsh/3+50), waitRandom(_fsw/2-20,_fsw/2+20),waitRandom(_fsh/3.2,_fsh/3.2+150)
-  swip(xp,yp,xp+dis,yp)
-  waitRandomSS(20,35)
-end

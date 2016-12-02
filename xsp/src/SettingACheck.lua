@@ -1,3 +1,5 @@
+_isVIP = true
+
 _isDebug = true
 
 _fsw, _fsh = getScreenSize()

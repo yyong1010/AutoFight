@@ -8,6 +8,7 @@ function yuhundefault()
   local createisOK = createYuhun()
 
   while(fighttimes < tonumber(aTimes) and createisOK) do
+    checkinvite()
     if isSolo ~= "0" then
       if isJoinTeam ~= "0" then --队长进入
         teamReady = checkTeamReady()--检查队伍是否到齐
@@ -62,6 +63,7 @@ function yuhundefault()
 end
 
 function createYuhun()
+  checkinvite()
   local createisOK = false
   local xPS, yPS = findMultiColorInRegionFuzzy(0xf8f3e0,"-1|4|0xf8f3df,16|0|0xf3eedc,26|6|0xf8f3e0",90,240, 980, 370, 1025)
   local isSolo = setting["isYuhunSolo"]

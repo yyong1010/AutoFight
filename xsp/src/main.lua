@@ -15,20 +15,13 @@ function main()
   require "SettingACheck"--加载全局设置
 	init("0", 1)--初始化触摸操控脚本
   start,setting = showUI("ui.json")--显示UI并获取设置
-  
-  
+
   if start == 0 or setting["BasicFunction"] == "" then
     printFunction("取消执行")
     lua_exit()--取消则退出
   end
-  
+
   if start == 1 then
-    printFunction("start over:"..setting["WakenFunction"])
-    printFunction("WakenType:"..setting["WakenType"])
-    printFunction("YuhunFunction:"..setting["YuhunFunction"])
-    printFunction("JieJieFunction:"..setting["JieJieFunction"])
-    printFunction("DiscoverFunction:"..setting["DiscoverFunction"])
-    
     require "Init"--参数初始化
     require "fight"
     require "juexing"
@@ -38,11 +31,17 @@ function main()
     require "seal"
     require "seal2"
     require "shiju"
-		require "shiju2"
     require "teamWork"
-    s(2000)
-    
-    
+    printTable(setting)
+    ss(5*1000)
+
+
+    --changeSS()
+    --voidRed(1202,1402)
+    --swipRight(349,918,1150)
+    --tap(833,805)
+    --checkinvite()
+
     if setting["AutoDayWork"] == "0" then
       setting["WakenFunction"] = "0"
       setting["YuhunFunction"] = "0"
@@ -58,19 +57,19 @@ function main()
       setting["onlyExp"] = 1
       setting["jiejieTimes"] = 3
     end
-    
-    
+
+
     if setting["WakenFunction"] == "0" then
       juexingdefault()
       s(15*1000)
     end
-    
+
     if setting["YuhunFunction"] == "0" then
       yuhundefault()
       s(15*1000)
     end
-   
-  
+
+
     if setting["JieJieFunction"] == "0" then
       jiejiedefault()
       s(15*1000)
@@ -80,25 +79,25 @@ function main()
       discover()
       s(15*1000)
     end
-        
-    
+
+
     if setting["SealFunction"] == "0" then
       sealDefault()
       s(15*1000)
     end
-    
+
     if setting["ShijuFunction"] == "0" then
       shijuDefault()
       s(15*1000)
     end
-    
+
     if setting["AutoLockSreen"] == "0" then
       flag = appIsRunning("com.netease.onmyoji");
       if flag == 1 then
         closeApp("com.netease.onmyoji")
       end
     end
-    
+
   end
 end
 

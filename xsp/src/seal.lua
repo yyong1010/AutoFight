@@ -11,6 +11,7 @@ function sealDefault()
   ss(5*1000)
 
   while(fighttimes < tonumber(aTimes) and createisOK) do
+    checkinvite()
     showHUDx("正在执行妖气封印次数 "..tostring(fighttimes+1))
 		createisOK = false
     fightresult = 0
@@ -19,25 +20,15 @@ function sealDefault()
     --local xLS, yLS = findColorInRegionFuzzy(0xe8e0cf, 100, 354, 909, 356, 911)  --庭院组队颜色
     local xLS, yLS = findMultiColorInRegionFuzzy(0xcbc7b6,"5|0|0x9360a4,5|3|0xa27cb3,0|3|0xc8c4b3", 90,402,956,407,959)
     --local xTS, yTS = findImageInRegionFuzzy("teamTitle.png", 80, 910, 70, 1000, 100, 0xffffff)
-		local xTS, yTS = findMultiColorInRegionFuzzy(0xe7d6ce,"8|1|0xc39094,9|-8|0x6c3740,0|-8|0xc25f70", 90,1754,99,1765,110)--组队界面右上角大叉颜色
+		local xTS, yTS = findMultiColorInRegionFuzzy(0xcc5e74,"7|0|0xffd9d9,7|5|0xe6d5d5,0|5|0xe8d7cf", 90,1791,181,1798,186)--组队界面右上角大叉颜色
     if xTS ~=-1 and yTS ~= -1 then
       printFunction("-->>>>已经在组队界面")
 			createisOK = true
-      --local xBS, yBS = findImageInRegionFuzzy("dBottom.png", 90, 870, 150, 920, 210, 0xffffff)
-			local xBS, yBS = findMultiColorInRegionFuzzy(0x23160c,"8|0|0x7b7262,8|4|0x645b4b,1|4|0x897e67", 90,890,170,901,176)--箭头下标颜色
-      if xBS ~=-1 and yBS ~= -1 then
-        s(1000)
-        selectSeal()
-        ss()
-        fightresult = findSeal(sealType)
-      else
-        tap(438,173)  --点击收缩菜单
-        printFunction("--点击收缩菜单")
-        s(1000)
-        selectSeal()
-        ss()
-        fightresult = findSeal(sealType)
-      end
+
+      selectSeal()
+      ss()
+      fightresult = findSeal(sealType)
+
     end
 
     if xLS ~= -1 and yLS ~= -1 then
@@ -60,81 +51,27 @@ function sealDefault()
 end
 
 
---function findSeal(mName)
-	--return findSeal2(mName)
-	--[[
-  local i =  1
-  local isJoin = 0  --0没找到，1战斗失败，2战斗成功
-  while (isJoin < 1) do
-    for k,v in ipairs(mName) do
-
-      printFunction("--寻找封印:"..v)
-      isJoin = doSeal(v)
-
-      if isJoin < 1 then
-        tapR(1258,891)
-        printFunction("--点击刷新")
-        waitRandomSS(4,8)
-			else
-				printFunction("--退出刷新")
-				break
-      end
-    end
-  end
-  printFunction("返回战斗结果:"..isJoin)
-  return isJoin
-	]]
---end
-
-
-function doSeal(mName)
-  local isFound = 0
-  local xS1, yS1
-  local xS2, yS2
-	if _fsw == 720 then
-		mName = mName.."720"
-	end
-  for y=302,658,178 do
-    local xS, yS = findImageInRegionFuzzy(mName..".png",  80, 480, y-25, 580, y+25, 0xffffff)
-    --xS,yS  = 1,302
-    if xS ~= -1 and yS ~= -1 then
-      printFunction("--找到封印>>>>:"..mName)
-      tapR(1513,yS)  --点击组队
-      ss(2*1000)
-      xS1, yS1 = findColorInRegionFuzzy(0xf4b25f, 90, 1491, 302, 1493, 305) --第一个组队按钮
-      xS2, yS2 = findColorInRegionFuzzy(0x624726, 90, 1491, 302, 1493, 305) --第一个按钮灰色
-      if (xS1 == -1) and (xS2 == -1)  then
-        printFunction("--找到封印>>>>:点进去啦")
-        isFound = teamWorkFight(true) --变成队长也可以开战
-        if isFound ~= 0 then
-          break
-        end
-      end
-    end
-  end
-  return isFound
-end
-
 function selectSeal()
+  checkinvite()
   local sealFound = setting["sealFound"]
   if sealFound == "1" then
     swipBottom()  --向下拉
     printFunction("--向下拉")
-		tap(415,422)  --点击妖气封印
+    ss()
+    checkinvite()
+		tap(374,581)  --点击妖气封印
     printFunction("--点击妖气封印")
     ss(2*1000)
-
   else
     swipTop()  --向上拉
     printFunction("--向上拉")
     ss(1000)
-    tap(370,272)
+    checkinvite()
+    tap(377,222)
     printFunction("--点击全部")
     ss(2*1000)
   end
 
-  tap(438,173)  --点击收缩菜单
-  printFunction("--点击收缩菜单")
 end
 
 function parseSealType(st)
@@ -157,12 +94,14 @@ end
 
 function swipBottom()
   local xp, yp = 400, 682
+  checkinvite()
   swip(xp,yp,xp,yp-300)
   ss(2*1000)
 end
 
 function swipTop()
   local xp, yp = 400, 382
+  checkinvite()
   swip(xp,yp,xp,yp+300)
   ss(2*1000)
 end

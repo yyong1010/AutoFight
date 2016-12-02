@@ -11,6 +11,7 @@ function juexingdefault()
   local createisOK = createWaken()
 
   while(fighttimes < tonumber(wakenTimes) and createisOK) do
+    checkinvite()
     if isSolo ~= "0" then
       if isJoinTeam ~= "0" then --队长进入
         teamReady = checkTeamReady()--检查队伍是否到齐
@@ -65,6 +66,7 @@ function juexingdefault()
 end
 
 function selectWakenType()
+  checkinvite()
   local wakenType = setting["WakenType"]
   if wakenType == "0" then
     tap(42,532)
@@ -91,6 +93,7 @@ function selectWakenType()
 end
 
 function createWaken()
+  checkinvite()
   local createisOK = false
   local xPS, yPS =  findMultiColorInRegionFuzzy(0x403bd9,"11|0|0x5496e8,21|0|0x4476df,12|2|0x45a0e2",90,80, 970, 210, 1048);
   local isSolo = setting["isWakenSolo"]
