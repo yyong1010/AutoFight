@@ -4,18 +4,21 @@ function findTeamWork()
   local wtimes = 45 --设置等待次数
   local xS1, yS1,xS2, yS2,xS, yS
   local isCaptainOK = false
+	local isClick = false
+  local refleshTimes = setting["RefleshTimes"] or 300
   while (isFound < 1) do
 
     checkinvite()
+		isClick = false
     printFunction("--寻找组队:")
 
     xS, yS = findMultiColorInRegionFuzzy(0xe5c472,"3|0|0x724928,7|0|0x6a4120,5|3|0x5f3115", 90,1590,312,1597,315) --新的组队颜色
 
     if xS ~= -1 and yS ~= -1 then
       printFunction("--找到可组队伍>>>>:")
-      tapR(xS,yS)  --点击组队
-      ss()
-
+      tap(xS,yS)  --点击组队
+      s()
+			isClick = true
     end
 
 
@@ -61,14 +64,12 @@ function findTeamWork()
               printFunction("--点击开始战斗")
               if checkFightisOver() > 0 then
                 isFound = 2
-                ss(2*1000)
-                break
               else
                 isFound = 1
-                ss(2*1000)
-                break
               end
             end
+            ss()
+            break
           end
         end
 
@@ -107,10 +108,11 @@ function findTeamWork()
 
 
     local xSR, ySR = findMultiColorInRegionFuzzy(0xf4b25f,"4|0|0xf4b25f,4|3|0xf4b25f,0|3|0xf4b25f",90,1142,912,1146,915)
-    if xSR ~= -1 and ySR ~= -1 then
-      tapR(xSR, ySR)
+    if (xSR ~= -1 and ySR ~= -1) and (not isClick) then
+      tap(xSR, ySR)
       printFunction("--点击刷新")
-      waitRandomSS(4,6)
+      --waitRandomSS(4,6)
+      s(refleshTimes)
     end
   end
   printFunction("返回战斗结果:"..isFound)
@@ -156,4 +158,23 @@ function creatTeamPanel(isJoinTeam)
     end
   end
 end
+
+function checkIsSoloClick()
+  checkinvite()
+  local i = 0
+  local isClick = false
+  while (i < 10) do
+    local x, y =  findColorInRegionFuzzy(0xf4b25f, 90, 1495,801, 1499,801) --组队按钮颜色
+    if x == -1 then
+      printFunction("找不到啦")
+      isClick = true
+      break
+    end
+    ss(1000)
+    i = i + 1
+  end
+  printFunction("检查是否有点到"..tostring(isClick))
+  return isClick
+end
+
 

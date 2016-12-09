@@ -40,8 +40,8 @@ function discoverDetail()
   local i,j = 0,0
   local bossIsKO = false
   local onlyExp = setting["onlyExp"]
-  local rtimes,ltimes = waitRandom(3,5),waitRandom(3,5)
-  while(i < 5 and not bossIsKO) do
+  local disSwipTimes = tonumber(setting["disSwipTimes"]) or 5
+  while(i < disSwipTimes and not bossIsKO) do
     checkinvite()
     swipRight()
     printFunction("--向右划"..i)
@@ -54,7 +54,7 @@ function discoverDetail()
   end
 
 
-  while(j < 5 and not bossIsKO) do
+  while(j < disSwipTimes and not bossIsKO) do
     checkinvite()
     swipLeft()
     printFunction("--向左划"..j)
@@ -113,7 +113,8 @@ function swap()
       -- end
       keepScreen(true)
       --local xB, yB = findImageInRegionFuzzy("bossfight.png", 70, 753, 150, 1270, 600, 0xffffff)
-			local xB, yB =findMultiColorInRegionFuzzy(0x4a588a,"-5|9|0xebc374,5|8|0xd91212,-11|-7|0x2f1e16", 90,753, 150, 1270, 600)
+			--local xB, yB =findMultiColorInRegionFuzzy(0x4a588a,"-5|9|0xebc374,5|8|0xd91212,-11|-7|0x2f1e16", 90,753, 150, 1270, 600)
+      local xB, yB =findMultiColorInRegionFuzzy(0xddbb66,"0|7|0xa62a2a,15|7|0xf5dcd4,15|-2|0x452c4d", 90,753, 150, 1270, 600)
       keepScreen(false)
       if xB~= -1 and yB ~=-1 then
         tap(xB,yB)
@@ -180,7 +181,8 @@ function checkExpModels()
       end
       keepScreen(true)
       --local xB, yB = findImageInRegionFuzzy("bossfight.png", 70, 753, 150, 1270, 600, 0xffffff)
-			local xB, yB =findMultiColorInRegionFuzzy(0x4a588a,"-5|9|0xebc374,5|8|0xd91212,-11|-7|0x2f1e16", 90,753, 150, 1270, 600)
+			--local xB, yB =findMultiColorInRegionFuzzy(0x4a588a,"-5|9|0xebc374,5|8|0xd91212,-11|-7|0x2f1e16", 90,753, 150, 1270, 600)
+      local xB, yB =findMultiColorInRegionFuzzy(0xddbb66,"0|7|0xa62a2a,15|7|0xf5dcd4,15|-2|0x452c4d", 90,753, 150, 1270, 600)
       keepScreen(false)
       if xB~= -1 and yB ~=-1 then
         tap(xB,yB)

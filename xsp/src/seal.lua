@@ -55,7 +55,7 @@ function selectSeal()
   checkinvite()
   local sealFound = setting["sealFound"]
   if sealFound == "1" then
-    swipBottom()  --向下拉
+    swipBottom(400,682,300)  --向下拉
     printFunction("--向下拉")
     ss()
     checkinvite()
@@ -63,7 +63,7 @@ function selectSeal()
     printFunction("--点击妖气封印")
     ss(2*1000)
   else
-    swipTop()  --向上拉
+    swipTop(400,382,300)  --向上拉
     printFunction("--向上拉")
     ss(1000)
     checkinvite()
@@ -75,36 +75,23 @@ function selectSeal()
 end
 
 function parseSealType(st)
-  local sst = {}
+  local sst
 
   if string.find(setting["sealType"], "0", 1) then
-    sst[#sst+1] = "black"
+    sst = "black"
   end
   if string.find(setting["sealType"], "1", 1) then
-    sst[#sst+1] = "bird"
+    sst = "bird"
   end
   if string.find(setting["sealType"], "2", 1) then
-    sst[#sst+1] = "jiaotu"
+    sst = "jiaotu"
   end
 	if string.find(setting["sealType"], "3", 1) then
-    sst[#sst+1] = "sea"
+    sst = "sea"
   end
   return sst
 end
 
-function swipBottom()
-  local xp, yp = 400, 682
-  checkinvite()
-  swip(xp,yp,xp,yp-300)
-  ss(2*1000)
-end
-
-function swipTop()
-  local xp, yp = 400, 382
-  checkinvite()
-  swip(xp,yp,xp,yp+300)
-  ss(2*1000)
-end
 
 function ocrSeal()
 

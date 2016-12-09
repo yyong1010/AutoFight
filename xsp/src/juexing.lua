@@ -55,10 +55,12 @@ function juexingdefault()
       printFunction("--开始单人战斗")
       showHUDx("开始觉醒次数 "..tostring(fighttimes+1))
       ss()
-			if checkFightisOver() > 0 then--检查战斗是否结束
-        fighttimes = fighttimes + 1
-			end
-			ss(18*1000)
+      if checkIsSoloClick() then
+  			if checkFightisOver() > 0 then--检查战斗是否结束
+          fighttimes = fighttimes + 1
+  			end
+  			ss(18*1000)
+      end
     end
   end
 
@@ -82,11 +84,13 @@ function selectWakenType()
   elseif wakenType =="3" then
     tap(1874,534)
     ss(1000)
+    checkinvite()
     tap(1874,534)
     printFunction("--雷觉醒")
     showHUDx("选择雷觉醒")
   end
   ss(1000)
+  checkinvite()
   tap(849,482)--点击觉醒类型
   printFunction("--点击觉醒类型")
   ss(2*1000)

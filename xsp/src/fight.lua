@@ -1,9 +1,9 @@
-function checkTeamReady()
+function checkTeamReady(sptime)
   local teamReady = false
   local twoisOK = setting["twoisOK"]
   local waitTimes = 0
-  local wT = waitRandom(12,15)
-  local wTs = waitRandom(18,23)
+  local wT = sptime or waitRandom(12,15)   --组队等待时间
+  local wTs = waitRandom(18,23)  --超时时间
 
   while(not teamReady) do
     checkinvite()
@@ -49,10 +49,11 @@ end
 function checkFightisOver(canchangeSS)
   local fightisover = -1  --0失败，1成功
   local autoChangeSS = setting["autoChangeSS"]
+  local isReady = false
   while(fightisover < 0) do
     checkinvite()
-    if autoChangeSS == "0" and canchangeSS then
-			ss(5*1000)
+    if autoChangeSS == "0" and canchangeSS and (not isReady) then
+      ss(5*1000)
       changeSS()
     end
     --local xUp, yUp = findMultiColorInRegionFuzzy(0xddb276,"14|0|0xddb276,25|6|0xdfb77b,34|8|0xdfb67a",90,1650, 900, 1900, 1100)
@@ -60,6 +61,8 @@ function checkFightisOver(canchangeSS)
     if xUp ~= -1 and yUp~= -1 then
       tap(1741,824) --点击准备
       printFunction("--点击准备")
+      --showHUDx("开始战斗")
+      isReady = true
     end
     s(1000)
     local xFs, yFs = findMultiColorInRegionFuzzy(0x8e1a11,"16|-5|0xcdbeaa,28|0|0xcebfab,44|0|0x851e14",90, 655, 240, 770, 310)
@@ -114,7 +117,9 @@ function answeragain(isa)
         tap(1124,641) --点击再邀请
         printFunction("--点击接受邀请")
         ss(3*1000)
-        local xUp, yUp = findMultiColorInRegionFuzzy(0xf8f3e0,"-1|4|0xf8f3df,16|0|0xf3eedc,26|6|0xf8f3e0",90,240, 980, 370, 1025)--御魂的颜色，判断是否还在主界面
+        checkinvite()
+        checkinvite() --执行两次，因为邀请对话框不会消失
+        local xUp, yUp = findMultiColorInRegionFuzzy(0xd5c4a2,"4|0|0xd5c4a2,10|0|0xd5c4a2,20|0|0xd5c4a2", 95,1818, 32, 1838, 32)--御魂的颜色，判断是否还在主界面
         if xUp ~= -1 and xUp ~= -1 then
           printFunction("--队伍不存在了")
           isHaveAnswer = 0
@@ -221,8 +226,27 @@ function swipLeft(xp, yp, distance)
   waitRandomSS(20,35)
 end
 
+function swipBottom(xp, yp, distance)
+  local x = xp
+  local y = yp
+  local dis = distance or waitRandom(_fsw/3.2,_fsw/3.2+150)
+  printFunction(x..","..y..","..dis)
+  swip(x,y,x,y-dis)
+  waitRandomSS(20,35)
+end
+
+function swipTop(xp, yp, distance)
+  local x = xp
+  local y = yp
+  local dis = distance or waitRandom(_fsw/3.2,_fsw/3.2+150)
+  printFunction(x..","..y..","..dis)
+  swip(x,y,x,y+dis)
+  waitRandomSS(20,35)
+end
+
+
 function voidRed(lx,rx,direction)
-  local d = 1 or direction --默认1向左，0向右
+  local d = direction or 1 --默认1向左，0向右
   local x, y = findMultiColorInRegionFuzzy(0x21181a,"0|6|0xd2c5c3,0|17|0xd25148,6|17|0xe35d4e,10|17|0xe25a4c",90,lx,909,rx,926)
   printFunction(">>>>检测是否有红达摩")
   while(x ~= -1) do
@@ -240,21 +264,45 @@ function voidRed(lx,rx,direction)
 end
 
 function checkmax()
-    local x1,y1 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,1100,570,1145,650)--右战
-    local x2,y2 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,400,340,460,450)--左战
-    local x3,y3 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,435,222,490,300)--左观
-    local x4,y4 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,596,189,650,260)--右观
-    local isnomax = (x1 == -1 and y1 == -1) and (x2 == -1 and y2 == -1) and (x3 == -1 and y3 == -1) and (x4 == -1 and y4 == -1)
-    printFunction( x1..":"..y1..","..x2..":"..y2..","..x3..":"..y3..","..x4..":"..y4)
-    printFunction("检测是否已经换完:"..tostring(isnomax))
-    return isnomax,x1,y1,x2,y2,x3,y3,x4,y4
+  local x1,y1 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,1100,570,1145,650)--右战
+  local x2,y2 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,400,340,460,450)--左战
+  local x3,y3 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,435,222,490,300)--左观
+  local x4,y4 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,596,189,650,260)--右观
+  local isnomax = (x1 == -1 and y1 == -1) and (x2 == -1 and y2 == -1) and (x3 == -1 and y3 == -1) and (x4 == -1 and y4 == -1)
+  printFunction( x1..":"..y1..","..x2..":"..y2..","..x3..":"..y3..","..x4..":"..y4)
+  printFunction("检测是否已经换完:"..tostring(isnomax))
+  return isnomax,x1,y1,x2,y2,x3,y3,x4,y4
 end
 
 function checkinvite()
-  local x, y = findMultiColorInRegionFuzzy(0xdd6951,"10|0|0xdd6951,146|0|0xf4b25f,151|0|0xf4b25f", 95,875,642,1026,642)
-  if (x ~= -1 and y ~= -1) then
-    tap(x,y)
-    ss()
+  if  _isVIP then
+    local x, y = findMultiColorInRegionFuzzy(0xb39279,"0|19|0xa18067,14|19|0xa18067,14|3|0xb39279", 95, 1006,299,1020,318) --名字栏背景色
+    if (x ~= -1 and y ~= -1) then
+      tap(1279,631)--确认
+      showHUD(taskstatus,"注意！有接收到协作任务",24,"0xffff0000","0xee000000",0,760,970,400,50)
+      ss()
+    end
+    x, y = findMultiColorInRegionFuzzy(0xdd6951,"10|0|0xdd6951,146|0|0xf4b25f,151|0|0xf4b25f", 95,875,642,1026,642)
+    if (x ~= -1 and y ~= -1) then
+      tap(x,y)
+      ss()
+    end
+    x, y = findMultiColorInRegionFuzzy(0xd8c8b7,"0|24|0xd2cac2,0|66|0xf4b25f", 95,1030,626,1030,692)
+    if (x ~= -1 and y ~= -1) then
+      if  (setting["autoBuyJuice"] == "0") and (_buyJuiceTimes < tonumber(setting["buyJuicetimes"])) then
+        tap(1035,704)
+        _buyJuiceTimes = _buyJuiceTimes + 1
+        printFunction("购买体力次数".._buyJuiceTimes)
+        ss(5*1000)
+        tap(998,752)
+        ss(5*1000)
+      else
+        tap(1397,286)
+        printFunction("不够买体力了")
+        ss()
+        lua_exit()
+      end
+    end
   end
 end
 

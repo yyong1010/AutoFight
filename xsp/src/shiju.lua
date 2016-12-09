@@ -41,7 +41,7 @@ end
 
 
 function selectShiju()
-  swipBottom()  --向下拉
+  swipBottom(400,682,300)  --向下拉
   printFunction("--向下拉")
   checkinvite()
 

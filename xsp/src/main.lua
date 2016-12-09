@@ -32,10 +32,12 @@ function main()
     require "seal2"
     require "shiju"
     require "teamWork"
+    require "groupjiejie"
+    require "test"
     printTable(setting)
     ss(5*1000)
 
-
+    --test()
     --changeSS()
     --voidRed(1202,1402)
     --swipRight(349,918,1150)
@@ -56,6 +58,7 @@ function main()
       setting["discoverTimes"] = 3
       setting["onlyExp"] = 1
       setting["jiejieTimes"] = 3
+      setting["groupJieJie"] = 1
     end
 
 
@@ -80,6 +83,10 @@ function main()
       s(15*1000)
     end
 
+    if setting["groupJieJie"] == "0" then
+      groupjiejiedefault()
+      s(15*1000)
+    end
 
     if setting["SealFunction"] == "0" then
       sealDefault()
