@@ -27,8 +27,12 @@ function discover()
       tap(68,100)
       printFunction("--点击退出")
       ss(2*1000)
-      tap(1161,607)
-      ss(5*1000)
+			local xBS, yBS = findMultiColorInRegionFuzzy(0xf4b25f,"4|0|0xf4b25f", 95, 1220, 600, 1224, 600)
+			if xBS ~= -1 and yBS ~= -1 then
+			printFunction("--点击退出:"..xBS..":"..yBS)
+				tap(xBS,yBS)
+				ss(5*1000)
+			end
     end
     fighttimes = fighttimes + 1
   end
@@ -117,13 +121,15 @@ function swap()
       printFunction("--点击BOSS战斗".."x:"..xB.."y:"..yB)
       ss(5*1000)
       if checkIsClick() then
-        checkFightisOver(true)
+        local fightstatus = checkFightisOver(true)
         checkisBackField()
         --ss(10*1000)
         --checkGift()
         --ss(5*1000)
-        bossIsKO = true
-        break
+				if fightstatus > 0 then
+					bossIsKO = true				
+					break
+				end
       end
     end
     
@@ -179,13 +185,15 @@ function checkExpModels()
       printFunction("--点击BOSS战斗".."x:"..xB.."y:"..yB)
       ss(5*1000)
       if checkIsClick() then
-        checkFightisOver(true)
+        local fightstatus = checkFightisOver(true)
         checkisBackField()
         --ss(10*1000)
         --checkGift()
         --ss(5*1000)
-        bossIsKO = true
-        break
+				if fightstatus > 0 then
+					bossIsKO = true				
+					break
+				end
       end
     end
     --end

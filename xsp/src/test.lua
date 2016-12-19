@@ -1,7 +1,6 @@
 
 function test()
-answeragain(1)
-
+tap(_fsh/2,_fsw/2)
 end
 
 

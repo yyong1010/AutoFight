@@ -180,4 +180,13 @@ function checkIsSoloClick()
   return isClick
 end
 
+function jointeamWork()
+	while (answeragain(1)==1) do
+		showHUDx("开始战斗")
+		findTeamWork()
+	end
+  showHUDx("结束加入队伍")
+  printFunction("--结束加入队伍")	
+end
+
 

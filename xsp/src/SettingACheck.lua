@@ -6,7 +6,7 @@ _fsw, _fsh = getScreenSize()
 _sw = _fsh - 1
 _sh = _fsw - 1
 
---_orientation = dialogRet("请选择您设备的放置方式：", "", "Home键在右", "Home键在左", 0)
+
 s()
 
 printFunction("Global Value:")
