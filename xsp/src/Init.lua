@@ -14,8 +14,11 @@ if not _isVIP then
     setting["autoChangeSS"] = 1
     setting["swiptimes"] = 1
     setting["groupJieJie"] = 1
-		setting["autoBuyJuice"] = 1
+	setting["autoBuyJuice"] = 1
+    setting["waitSecs"] = 15
 else
     printFunction(">>>>当前运行版本为VIP版")
-    showHUD(runing,"当前运行版本为VIP版,谢谢支持！",18,"0xffffffff","0x4c000000",0,760,1020,400,50)		
+    showHUD(runing,"当前运行版本为VIP版,谢谢支持！",18,"0xffffffff","0x4c000000",0,760,1020,400,50)
 end
+
+_waitSecs = tonumber(setting["waitSecs"]) or 15

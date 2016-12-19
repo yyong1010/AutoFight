@@ -35,7 +35,7 @@ function main()
     require "groupjiejie"
     require "test"
     printTable(setting)
-    ss(5*1000)
+    ss(2*1000)
 
     --test()
     --changeSS()

@@ -25,7 +25,7 @@ function findSeal(v)
       if xS ~= -1 and yS ~= -1 then
         printFunction("--找到封印>>>>:"..v)
         tap(1581,yS+25)  --点击组队
-        s()
+        s(refleshTimes)
         isClick = true
       end
     --end

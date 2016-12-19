@@ -114,7 +114,7 @@
             {
                "id" : "twoisOK",
                "rect" : "240,285,960,100",
-					"list" : "队长模式是否可二人组队（等三人不足15秒左右）",
+							 "list" : "队长模式是否可二人组队",
                "select" : "0",
                "size" : 30,
                "type" : "CheckBoxGroup"
@@ -122,8 +122,8 @@
             {
                "align" : "left",
                "color" : "255,0,0",
-               "rect" : "1030,285,920,260",
-               "text" : "VIP可设置组员进入",
+               "rect" : "850,290,920,260",
+               "text" : "VIP可自定义等待时间及组员进入",
                "select" : "0",
                "size" : 30,
                "type" : "Label"
@@ -195,7 +195,7 @@
                "id" : "disSwipTimes",
                "prompt" : "输入数字",
                "size" : 30,
-               "text" : "5",
+               "text" : "7",
                "type" : "Edit"
             },
             {
@@ -409,11 +409,29 @@
             },
             {
                "id" : "isJoinTeam",
-               "rect" : "20,480,560,100",
-               "list" : "觉醒、御魂是否以组员身份进入",
+               "rect" : "20,480,780,160",
+               "list" : "觉醒、御魂是否以组员身份进入  等待邀请时间",
                "select" : "1",
                "size" : 30,
                "type" : "CheckBoxGroup"
+            },
+            {
+               "align" : "left",
+               "color" : "144,144,144",
+               "rect" : "780,480,100,60",
+               "id" : "waitSecs",
+               "prompt" : "输入数字",
+               "size" : 30,
+               "text" : "15",
+               "type" : "Edit"
+            },
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "rect" : "890,485,660,100",
+               "size" : 30,
+               "text" : "秒（同时适用队长模式等待组员时间）",
+               "type" : "Label"
             },
             {
                "id" : "autoChangeSS",

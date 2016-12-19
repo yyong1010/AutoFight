@@ -117,7 +117,12 @@ function createWaken()
     createisOK = true
   else
     showHUDx("请在探索界面执行脚本")
-    ss(5*1000)
+    local xS3, yS3 = findColorInRegionFuzzy(0xf4b25f, 90, 1316,837, 1317,838) --组队按钮颜色
+    printFunction("xS3:"..xS3.."yS3:"..yS3)
+    if (xS3 ~= -1 and yS3 ~= -1) then
+      creatTeamPanel(isJoinTeam)
+      createisOK = true
+    end
   end
 
   return createisOK

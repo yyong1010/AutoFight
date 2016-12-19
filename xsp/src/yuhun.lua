@@ -56,7 +56,7 @@ function yuhundefault()
         if checkFightisOver() > 0 then--检查战斗是否结束
           fighttimes = fighttimes + 1
         end
-        ss(18*1000)
+        ss(5*1000)
       end
     end
   end
@@ -82,7 +82,12 @@ function createYuhun()
     createisOK = true
   else
     showHUDx("请在探索界面执行脚本")
-    ss(5*1000)
+    local xS3, yS3 = findColorInRegionFuzzy(0xf4b25f, 90, 1316,837, 1317,838) --组队按钮颜色
+    printFunction("xS3:"..xS3.."yS3:"..yS3)
+    if (xS3 ~= -1 and yS3 ~= -1) then
+      creatTeamPanel(isJoinTeam)
+      createisOK = true
+    end
   end
 
   return createisOK

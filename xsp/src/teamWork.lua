@@ -17,7 +17,7 @@ function findTeamWork()
     if xS ~= -1 and yS ~= -1 then
       printFunction("--找到可组队伍>>>>:")
       tap(xS,yS)  --点击组队
-      s()
+      s(refleshTimes)
 			isClick = true
     end
 
@@ -124,37 +124,40 @@ function creatTeamPanel(isJoinTeam)
 
   while (not isDone) do
     checkinvite()
-    local xS1, yS1 = findColorInRegionFuzzy(0xf4b25f, 90, 962,781, 963,782) --组队按钮颜色
-    if (xS1 ~= -1 and yS1 ~= -1) then
-      tapR(976,809)--点击组队
-      printFunction("--点击组队")
-      waitRandomSS(25,45)
-      if isJoinTeam == "0" then --组队进入
+    local xUp, yUp = findColorInRegionFuzzy(0xdd6951, 90, 463, 873, 465, 876)-- 离开队伍的颜色
+    if  xUp ~= -1 and xUp ~= -1 then
+      isDone = true
+      printFunction("--离开创建")
+      break
+    end
+
+    if isJoinTeam == "0" then --组队进入
         local xw2, yw2 = findColorInRegionFuzzy(0xf4b25f, 90, 1566,915, 1567,916) --组队按钮颜色
         if (xw2 ~= -1 and yw2 ~= -1) then
           isDone = true
           break
         end
       end
+
+    local xS1, yS1 = findColorInRegionFuzzy(0xf4b25f, 90, 962,781, 963,782) --组队按钮颜色
+    if (xS1 ~= -1 and yS1 ~= -1) then
+      tapR(976,809)--点击组队
+      printFunction("--点击组队")
+      ss(2*1000)
     end
 
     local xS2, yS2 = findColorInRegionFuzzy(0xf4b25f, 90, 1566,915, 1567,916) --组队按钮颜色
-    if (xS2 ~= -1 and yS2 ~= -1) then
+    if (xS2 ~= -1 and yS2 ~= -1) and (isJoinTeam ~= "0") then
       tapR(xS2,yS2)--点击创建队伍
       printFunction("--点击创建队伍")
-      waitRandomSS(45,65)
+      ss(2*1000)
     end
 
     local xS3, yS3 = findColorInRegionFuzzy(0xf4b25f, 90, 1316,837, 1317,838) --组队按钮颜色
-    if (xS3 ~= -1 and yS3 ~= -1) then
+    if (xS3 ~= -1 and yS3 ~= -1) and (isJoinTeam ~= "0") then
       tapR(1313,850)--点击创建
       printFunction("--点击创建")
-      s(2000)
-      local xUp, yUp = findColorInRegionFuzzy(0xdd6951, 90, 463, 873, 465, 876)-- 离开队伍的颜色
-      if  xUp ~= -1 and xUp ~= -1 then
-        isDone = true
-        break
-      end
+      ss(2*1000)
     end
   end
 end

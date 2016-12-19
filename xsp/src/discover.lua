@@ -4,7 +4,7 @@ function discover()
   local aTimes = setting["discoverTimes"]
   local specailChapter = 1
   showHUD(runing,"请在选定章节内界面或探索界面执行脚本",18,"0xffffffff","0x4c000000",0,760,1020,400,50)
-  ss(5*1000)
+  ss()
   while(fighttimes < tonumber(aTimes)) do
     checkinvite()
     showHUDx("开始探索次数 "..tostring(fighttimes+1))
@@ -20,8 +20,8 @@ function discover()
         selectDefaultChapter()
       end
     end
-
-    s(5*1000)
+    
+    ss(2*1000)
     local xLS, yLS =  findMultiColorInRegionFuzzy(0x43331a,"1|1|0x43331b,6|6|0x3c2e1f,7|7|0x3d2e1e", 95, 1445, 934, 1455, 945) --出战式神的颜色
     if xLS ~= -1 and yLS ~= -1 then
       tap(68,100)
@@ -43,7 +43,7 @@ function discoverDetail()
   local disSwipTimes = tonumber(setting["disSwipTimes"]) or 5
   while(i < disSwipTimes and not bossIsKO) do
     checkinvite()
-    swipRight()
+    swipRight(nil,nil,300)
     printFunction("--向右划"..i)
     i = i + 1
     if onlyExp == "0" then
@@ -52,11 +52,11 @@ function discoverDetail()
       bossIsKO = swap()
     end
   end
-
-
+  
+  
   while(j < disSwipTimes and not bossIsKO) do
     checkinvite()
-    swipLeft()
+    swipLeft(nil,nil,300)
     printFunction("--向左划"..j)
     j = j + 1
     if onlyExp == "0" then
@@ -65,7 +65,8 @@ function discoverDetail()
       bossIsKO = swap()
     end
   end
-
+  
+  checkisBackField()
 end
 
 function checkGift()
@@ -91,49 +92,45 @@ function swap()
     checkinvite()
     printFunction("--搜索次数"..i)
     isHaveFight = false
-    for x=200,1400,200 do
-      keepScreen(true)
-      --local xPS, yPS = findImageInRegionFuzzy("exp2.png", 80, y, 540, y+96, 892, 0xffffff)
-      --if xPS ~= -1 and yPS ~= -1 then
-      --  printFunction("i:"..i.."x:"..xPS.."y:"..yPS)
-      --local xS, yS = findImageInRegionFuzzy("tofight2.png", 90, xPS-250, yPS-220, xPS+150, yPS-120, 0xffffff)
-      --local xS, yS = findImageInRegionFuzzy("tofight2.png", 70, x, 300, x+320, 950, 0xffffff)
-			local xS, yS = findMultiColorInRegionFuzzy(0x414a7b,"16|3|0xd5d5f6,12|10|0xfcfdfe,5|11|0xf0f0fe", 95,  x, 300, x+320, 950)
-      keepScreen(false)
-      if xS~= -1 and yS ~=-1 then
-        tap(xS,yS)
-        printFunction("--点击战斗".."x:"..xS.."y:"..yS)
-        ss(5*1000)
-        if checkIsClick() then
-          checkFightisOver(true)
-          ss(5*1000)
-        end
+    --for x=200,1400,200 do
+    keepScreen(true)
+    local xS, yS = findMultiColorInRegionFuzzy(0x414a7b,"16|3|0xd5d5f6,12|10|0xfcfdfe,5|11|0xf0f0fe", 95,  0, 150, 1900, 950)
+    keepScreen(false)
+    if xS~= -1 and yS ~=-1 then
+      tap(xS,yS)
+      printFunction("--点击战斗".."x:"..xS.."y:"..yS)
+      ss(5*1000)
+      if checkIsClick() then
+        checkFightisOver(true)
+        checkisBackField()
         isHaveFight = true
       end
-      -- end
-      keepScreen(true)
-      --local xB, yB = findImageInRegionFuzzy("bossfight.png", 70, 753, 150, 1270, 600, 0xffffff)
-			--local xB, yB =findMultiColorInRegionFuzzy(0x4a588a,"-5|9|0xebc374,5|8|0xd91212,-11|-7|0x2f1e16", 90,753, 150, 1270, 600)
-      local xB, yB =findMultiColorInRegionFuzzy(0xddbb66,"0|7|0xa62a2a,15|7|0xf5dcd4,15|-2|0x452c4d", 90,753, 150, 1270, 600)
-      keepScreen(false)
-      if xB~= -1 and yB ~=-1 then
-        tap(xB,yB)
-        printFunction("--点击BOSS战斗".."x:"..xB.."y:"..yB)
-        ss(5*1000)
-        if checkIsClick() then
-          checkFightisOver(true)
-          ss(10*1000)
-          checkGift()
-          ss(5*1000)
-          bossIsKO = true
-          break
-        end
-      end
-
-      --x,y = findMultiColorInRegionFuzzy(0x2d1c08,"-5|-10|0xe4ceab,-8|1|0xe0cf9e,8|-2|0xae9c78,0|9|0xe2d09c,1|22|0xfca911",90,y, 540, y+48, 892);
-      --printFunction("x:"..x.."y:"..y)
-      --keepScreen(false)
     end
+    -- end
+    keepScreen(true)
+    --local xB, yB = findImageInRegionFuzzy("bossfight.png", 70, 753, 150, 1270, 600, 0xffffff)
+    --local xB, yB =findMultiColorInRegionFuzzy(0x4a588a,"-5|9|0xebc374,5|8|0xd91212,-11|-7|0x2f1e16", 90,753, 150, 1270, 600)
+    local xB, yB =findMultiColorInRegionFuzzy(0xddbb66,"0|7|0xa62a2a,15|7|0xf5dcd4,15|-2|0x452c4d", 90,753, 150, 1270, 600)
+    keepScreen(false)
+    if xB~= -1 and yB ~=-1 then
+      tap(xB,yB)
+      printFunction("--点击BOSS战斗".."x:"..xB.."y:"..yB)
+      ss(5*1000)
+      if checkIsClick() then
+        checkFightisOver(true)
+        checkisBackField()
+        --ss(10*1000)
+        --checkGift()
+        --ss(5*1000)
+        bossIsKO = true
+        break
+      end
+    end
+    
+    --x,y = findMultiColorInRegionFuzzy(0x2d1c08,"-5|-10|0xe4ceab,-8|1|0xe0cf9e,8|-2|0xae9c78,0|9|0xe2d09c,1|22|0xfca911",90,y, 540, y+48, 892);
+    --printFunction("x:"..x.."y:"..y)
+    --keepScreen(false)
+    --end
     i = i + 1
   end
   return bossIsKO
@@ -148,59 +145,53 @@ function checkExpModels()
     checkinvite()
     printFunction("--搜索次数"..i)
     isHaveFight = false
-    for x=200,1400,200 do
+    --for x=1700,1900,100 do
+    keepScreen(true)
+    --local xS, yS = findImageInRegionFuzzy("tofight2.png", 70, x, 300, x+320, 950, 0xffffff)
+    local xS, yS = findMultiColorInRegionFuzzy(0x414a7b,"16|3|0xd5d5f6,12|10|0xfcfdfe,5|11|0xf0f0fe", 95,  0, 150, 1900, 950)
+    keepScreen(false)
+    if xS~= -1 and yS ~=-1 then
+      printFunction("有找到 "..xS..":"..yS)
       keepScreen(true)
-      --local xS, yS = findImageInRegionFuzzy("tofight2.png", 70, x, 300, x+320, 950, 0xffffff)
-			local xS, yS = findMultiColorInRegionFuzzy(0x414a7b,"16|3|0xd5d5f6,12|10|0xfcfdfe,5|11|0xf0f0fe", 95,  x, 300, x+320, 950)
+      local xPS1, yPS1 = findMultiColorInRegionFuzzy(0x3e7d86,"6|1|0x2e6575,5|7|0x8b8a8a,5|12|0x7a1313,2|14|0x9b2121,8|14|0x851f1e",90,xS-250, yS, xS+250, yS+550)
+      --local xPS1, yPS1 = findImageInRegionFuzzy("exp1.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
+      local xPS2, yPS2 = findMultiColorInRegionFuzzy(0x5e8e8e,"3|-2|0x2e5974,3|2|0xb87565,2|5|0x7a1f16,-1|5|0x7c635e",90,xS-250, yS, xS+250, yS+550)
       keepScreen(false)
-      if xS~= -1 and yS ~=-1 then
-        keepScreen(true)
-        local xPS1, yPS1 = findMultiColorInRegionFuzzy(0x3e7d86,"6|1|0x2e6575,5|7|0x8b8a8a,5|12|0x7a1313,2|14|0x9b2121,8|14|0x851f1e",90,xS-200, yS, x+200, yS+250)
-        --local xPS1, yPS1 = findImageInRegionFuzzy("exp1.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
-        local xPS2, yPS2 = findMultiColorInRegionFuzzy(0x5e8e8e,"3|-2|0x2e5974,3|2|0xb87565,2|5|0x7a1f16,-1|5|0x7c635e",90,xS-200, yS, x+200, yS+250)
-        --local xPS3, yPS3 = findImageInRegionFuzzy("exp3.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
-        --local xPS7, yPS7 = findImageInRegionFuzzy("exp7.png", 70, xS-200, yS, x+200, yS+250, 0x000000)
-        keepScreen(false)
-        --if (xPS1 ~= -1 and yPS1 ~= -1) or (xPS2 ~= -1 and yPS2 ~= -1) or (xPS3 ~= -1 and yPS3 ~= -1) or (xPS4 ~= -1 and yPS4 ~= -1) or (xPS5 ~= -1 and yPS5 ~= -1) or (xPS6 ~= -1 and yPS6 ~= -1) then
-        if (xPS1 ~= -1 and yPS1 ~= -1) or (xPS2 ~= -1 and yPS2 ~= -1) then
-          tap(xS,yS)
-          printFunction("--点击战斗".."x:"..xS.."y:"..yS)
-
-          --local rec = xPS1..":"..yPS1..","..xPS2..":"..yPS2..","..xPS3..":"..yPS3..","..xPS4..":"..yPS4..","..xPS5..":"..yPS5..","..xPS6..":"..yPS6..","..xPS7..":"..yPS7..","..xPS8..":"..yPS8.."\n"
-          --local rec = xPS1..":"..yPS1..","..xPS2..":"..yPS2..","..xPS7..":"..yPS7.."\n"
-          --printFunction(rec)
-          --wFile(rec)
-
-          ss(5*1000)
-          if checkIsClick() then
-            checkFightisOver(true)
-            ss(5*1000)
-          end
-          isHaveFight = true
-        end
-      end
-      keepScreen(true)
-      --local xB, yB = findImageInRegionFuzzy("bossfight.png", 70, 753, 150, 1270, 600, 0xffffff)
-			--local xB, yB =findMultiColorInRegionFuzzy(0x4a588a,"-5|9|0xebc374,5|8|0xd91212,-11|-7|0x2f1e16", 90,753, 150, 1270, 600)
-      local xB, yB =findMultiColorInRegionFuzzy(0xddbb66,"0|7|0xa62a2a,15|7|0xf5dcd4,15|-2|0x452c4d", 90,753, 150, 1270, 600)
-      keepScreen(false)
-      if xB~= -1 and yB ~=-1 then
-        tap(xB,yB)
-        printFunction("--点击BOSS战斗".."x:"..xB.."y:"..yB)
+      printFunction("找点 "..xPS1..":"..yPS1..","..xPS2..":"..yPS2)
+      if (xPS1 ~= -1 and yPS1 ~= -1) or (xPS2 ~= -1 and yPS2 ~= -1)then
+        tap(xS,yS)
+        printFunction("--点击战斗".."x:"..xS.."y:"..yS)
         ss(5*1000)
         if checkIsClick() then
           checkFightisOver(true)
-          ss(10*1000)
-          checkGift()
-          ss(5*1000)
-          bossIsKO = true
-          break
+          checkisBackField()
+          isHaveFight = true
         end
       end
     end
+    keepScreen(true)
+    --local xB, yB = findImageInRegionFuzzy("bossfight.png", 70, 753, 150, 1270, 600, 0xffffff)
+    --local xB, yB =findMultiColorInRegionFuzzy(0x4a588a,"-5|9|0xebc374,5|8|0xd91212,-11|-7|0x2f1e16", 90,753, 150, 1270, 600)
+    local xB, yB =findMultiColorInRegionFuzzy(0xddbb66,"0|7|0xa62a2a,15|7|0xf5dcd4,15|-2|0x452c4d", 90,753, 150, 1270, 600)
+    keepScreen(false)
+    if xB~= -1 and yB ~=-1 then
+      tap(xB,yB)
+      printFunction("--点击BOSS战斗".."x:"..xB.."y:"..yB)
+      ss(5*1000)
+      if checkIsClick() then
+        checkFightisOver(true)
+        checkisBackField()
+        --ss(10*1000)
+        --checkGift()
+        --ss(5*1000)
+        bossIsKO = true
+        break
+      end
+    end
+    --end
     i = i + 1
   end
-	return bossIsKO
+  return bossIsKO
 end
 
 
@@ -215,11 +206,11 @@ function selectChapter(cnum)
   waitRandomSS(35,55)
   checkinvite()
   --local xPS, yPS = findImageInRegionFuzzy("discover.png", 90, 1360, 760, 1480, 820, 0xffffff)
-	local xPS, yPS =findMultiColorInRegionFuzzy(0xf4b25f,"8|-2|0xf4b25f,3|4|0xf4b25f,-2|3|0xf4b25f", 95,1425,765,1435,775)
+  local xPS, yPS =findMultiColorInRegionFuzzy(0xf4b25f,"8|-2|0xf4b25f,3|4|0xf4b25f,-2|3|0xf4b25f", 95,1425,765,1435,775)
   if xPS ~= -1 and yPS ~= -1 then
     tapR(xPS,yPS)
     printFunction("--点击探索")
-    s(5*1000)
+    checkisBackField()
     discoverDetail()
   else
     printFunction("--没有找到当前章节，重新选取默认")
@@ -237,11 +228,11 @@ function selectDefaultChapter()
   waitRandomSS(30,55)
   checkinvite()
   --local xPS, yPS = findImageInRegionFuzzy("discover.png", 90, 1360, 760, 1480, 820, 0xffffff)
-	local xPS, yPS =findMultiColorInRegionFuzzy(0xf4b25f,"8|-2|0xf4b25f,3|4|0xf4b25f,-2|3|0xf4b25f", 95,1425,765,1435,775)
+  local xPS, yPS =findMultiColorInRegionFuzzy(0xf4b25f,"8|-2|0xf4b25f,3|4|0xf4b25f,-2|3|0xf4b25f", 95,1425,765,1435,775)
   if xPS ~= -1 and yPS ~= -1 then
     tap(xPS,yPS)
     printFunction("--点击探索")
-    s(5*1000)
+    checkisBackField()
     discoverDetail()
   end
 end
@@ -255,15 +246,15 @@ function selectSpecailChapter()
   if x12 ~= -1 and y12 ~= -1 then
     cnum = 2
   end
-
+  
   if x13 ~= -1 and y13 ~= -1 then
     cnum = 3
   end
-
+  
   if x14 ~= -1 and y14 ~= -1 then
     cnum = 4
   end
-	printFunction("返回特定章节："..cnum)
+  printFunction("返回特定章节："..cnum)
   return cnum
 end
 
@@ -278,11 +269,26 @@ function checkIsClick()
       isClick = true
       break
     end
-    ss(1000)
+    ss(500)
     i = i + 1
   end
   printFunction("检查是否有点到"..tostring(isClick))
   return isClick
 end
+
+function checkisBackField()
+  checkinvite()
+  printFunction("检查是否回探索界面")
+  while true do
+    local xLS, yLS =  findMultiColorInRegionFuzzy(0x43331a,"1|1|0x43331b,6|6|0x3c2e1f,7|7|0x3d2e1e", 95, 1445, 934, 1455, 945) --出战式神的颜色
+    if xLS ~= -1 and yLS ~= -1 then
+      printFunction("已经回探索界面")
+      break
+    end
+  end
+  
+  
+end
+
 
 

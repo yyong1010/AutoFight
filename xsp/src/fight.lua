@@ -1,19 +1,22 @@
 function checkTeamReady(sptime)
   local teamReady = false
   local twoisOK = setting["twoisOK"]
-  local waitTimes = 0
-  local wT = sptime or waitRandom(12,15)   --组队等待时间
-  local wTs = waitRandom(18,23)  --超时时间
+  local waitTimes = 1
+  local wT = sptime or 5  --组队等待时间
+  local wTs = _waitSecs  --超时时间
 
   while(not teamReady) do
-    checkinvite()
+    --checkinvite()
     printFunction("等待队伍进入..."..waitTimes)
     showHUDx("等待队伍进入...")
-    local xUp, yUp = findColorInRegionFuzzy(0xcec6bd, 100, 1293, 432, 1361, 482)
-    local xNd, yNd = findColorInRegionFuzzy(0xcec6bd, 100, 1137, 797, 1149, 790)
+    local xUp, yUp = findColorInRegionFuzzy(0xcec6bd, 95, 1293, 432, 1361, 482)
+    local xNd, yNd = findColorInRegionFuzzy(0xcec6bd, 95, 1137, 797, 1149, 790)
+
+    --local xUp, yUp,xNd, yNd = -1,-1,-1,-1
 
     if twoisOK == "0" and waitTimes > wT then
       if (xUp ~= -1 and yUp~= -1) or (xNd ~= -1 and yNd~= -1) then
+        checkinvite()
         printFunction("队伍齐了")
         teamReady = true
         ss()
@@ -22,6 +25,7 @@ function checkTeamReady(sptime)
     end
 
     if (xUp ~= -1 and yUp~= -1) and (xNd ~= -1 and yNd~= -1) then
+      checkinvite()
       printFunction("队伍齐了")
       teamReady = true
       ss()
@@ -29,6 +33,7 @@ function checkTeamReady(sptime)
     end
 
     if waitTimes > wTs then
+      checkinvite()
       teamReady = false
       tap(456,895)
       showHUDx("超时离开组队，重新进入")
@@ -38,6 +43,7 @@ function checkTeamReady(sptime)
       waitRandomSS(45,75)
       break
     end
+
 
     ss(1000)
     waitTimes = waitTimes + 1
@@ -107,7 +113,8 @@ function answeragain(isa)
   local i = 0
   local isHaveAnswer = 0 --0无邀请，1有邀请
   showHUDx("等待再邀请信息")
-  while (i < 30) do
+  printFunction("--等待再邀请信息")
+  while (i < _waitSecs) do
 
     local xAg, yAg  = findMultiColorInRegionFuzzy(0xf4b25f,"6|0|0xf4b25f,6|6|0xf4b25f,0|6|0xf4b25f", 95, 1125, 612, 1135, 625)
 
@@ -209,12 +216,12 @@ function changeSS()
 end
 
 function swipRight(xp, yp, distance)
-  local x = xp or waitRandom(_fsh/3-50,_fsh/3+50)
+  local x = xp or waitRandom(_fsh/5-50,_fsh/5+50)
   local y = yp or waitRandom(_fsw/2-20,_fsw/2+20)
-  local dis = distance or waitRandom(_fsh/3.2,_fsh/3.2+150)
+  local dis = distance or waitRandom(_fsh/7,_fsh/7+150)
   printFunction(x..","..y..","..dis)
   swip(x+dis,y,x,y)
-  waitRandomSS(20,35)
+  s()
 end
 
 function swipLeft(xp, yp, distance)
@@ -223,7 +230,7 @@ function swipLeft(xp, yp, distance)
   local dis = distance or waitRandom(_fsh/3.2,_fsh/3.2+150)
   printFunction(x..","..y..","..dis)
   swip(x,y,x+dis,y)
-  waitRandomSS(20,35)
+  s()
 end
 
 function swipBottom(xp, yp, distance)
