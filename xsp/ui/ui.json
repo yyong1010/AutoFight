@@ -215,6 +215,14 @@
                "type" : "Edit"
             },
             {
+               "id" : "checkBox",
+               "rect" : "1000,480,800,100",
+               "list" : "捡宝箱(测试功能，12、13、14章不会捡)",
+               "size" : 30,
+               "select" : "1",
+               "type" : "CheckBoxGroup"
+            },
+            {
                "align" : "left",
                "color" : "255,0,0",
                "rect" : "240,560,1520,260",

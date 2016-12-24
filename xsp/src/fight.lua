@@ -116,16 +116,17 @@ function answeragain(isa)
   printFunction("--等待再邀请信息")
   while (i < _waitSecs) do
 
-    local xAg, yAg  = findMultiColorInRegionFuzzy(0xf4b25f,"6|0|0xf4b25f,6|6|0xf4b25f,0|6|0xf4b25f", 95, 1125, 612, 1135, 625)
+    --findMultiColorInRegionFuzzy(0xf4b25f,"6|0|0xf4b25f,6|6|0xf4b25f,0|6|0xf4b25f", 95, 1125, 612, 1135, 625)
+     local xAg, yAg = findMultiColorInRegionFuzzy(0xdf6d5c,"0|9|0xda6f5e,71|1|0xdccbbb,72|7|0xe9d8c8,141|12|0x5eb967,140|20|0x56b15e", 95,63,374,206,394)
 
     if xAg ~= -1 and yAg~= -1 then
       isHaveAnswer = 1
       if isa == 1  then
-        tap(1124,641) --点击再邀请
+        tap(205,394) --点击再邀请
         printFunction("--点击接受邀请")
         ss(3*1000)
         checkinvite()
-        checkinvite() --执行两次，因为邀请对话框不会消失
+        --checkinvite() --执行两次，因为邀请对话框不会消失
         local xUp, yUp = findMultiColorInRegionFuzzy(0xd5c4a2,"4|0|0xd5c4a2,10|0|0xd5c4a2,20|0|0xd5c4a2", 95,1818, 32, 1838, 32)--御魂的颜色，判断是否还在主界面
         if xUp ~= -1 and xUp ~= -1 then
           printFunction("--队伍不存在了")
@@ -133,7 +134,7 @@ function answeragain(isa)
         end
         break
       else
-        tap(786,639) --点击取消邀请
+        tap(63,374) --点击取消邀请
         printFunction("--点击我很忙")
         break
       end
@@ -289,11 +290,11 @@ function checkinvite()
       showHUD(taskstatus,"注意！有接收到协作任务",24,"0xffff0000","0xee000000",0,760,970,400,50)
       ss()
     end
-    x, y = findMultiColorInRegionFuzzy(0xdd6951,"10|0|0xdd6951,146|0|0xf4b25f,151|0|0xf4b25f", 95,875,642,1026,642)
-    if (x ~= -1 and y ~= -1) then
-      tap(x,y)
-      ss()
-    end
+    --x, y = findMultiColorInRegionFuzzy(0xdd6951,"10|0|0xdd6951,146|0|0xf4b25f,151|0|0xf4b25f", 95,875,642,1026,642)
+    --if (x ~= -1 and y ~= -1) then
+    --  tap(x,y)
+    --  ss()
+    --end
     x, y = findMultiColorInRegionFuzzy(0xd8c8b7,"0|24|0xd2cac2,0|66|0xf4b25f", 95,1030,626,1030,692)
     if (x ~= -1 and y ~= -1) then
       if  (setting["autoBuyJuice"] == "0") and (_buyJuiceTimes < tonumber(setting["buyJuicetimes"])) then

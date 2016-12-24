@@ -12,10 +12,10 @@
 function main()
   print("hello")
   require "util"--加载工具
-  require "SettingACheck"--加载全局设置	
+  require "SettingACheck"--加载全局设置
   start,setting = showUI("ui.json")--显示UI并获取设置
 	_orientation = setting["orientation"] == "0" and 2 or 1
-	init("0", _orientation)--初始化触摸操控脚本	
+	init("0", _orientation)--初始化触摸操控脚本
 
   if start == 0 or setting["BasicFunction"] == "" then
     printFunction("取消执行")

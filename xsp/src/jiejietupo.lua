@@ -20,8 +20,8 @@ function jiejiedefault()
     while(fighttimes < tonumber(aTimes)) do
       checkinvite()
       showHUDx("开始突破结界次数 "..tostring(fighttimes+1))
-      local xJs, yJs = 670, 253
-      local ax, ay = 492, 180
+      local xJs, yJs = 543, 234
+      local ax, ay = 517, 200
       local colorjiejie = 0xcac1b1
       --local colorjiejie = 0xafa08b
       --循环第一行
@@ -39,7 +39,7 @@ function jiejiedefault()
       end
 
       --循环第二行
-      xJs = 670
+      xJs = 543
       yJs = yJs + ay
       for i=1,3 do
         if fighttimes < tonumber(aTimes) then
@@ -54,7 +54,7 @@ function jiejiedefault()
       end
 
       --循环第三行
-      xJs = 670
+      xJs = 543
       yJs = yJs + ay
       for i=1,3 do
         if fighttimes < tonumber(aTimes) then
@@ -90,7 +90,7 @@ function fightjiejie(xa,ya,colorjiejie)
 
     tap(xUp, yUp) -- 选取
     s(1000)
-    tap(xUp, yUp+116) -- 开始战斗
+    tap(xUp, yUp+150) -- 开始战斗
     fightStatus = checkFightisOver()--检查战斗是否结束
     checkisBack()--检查界面是否已回到可选界面
     checkisFuWa()--检查福娃

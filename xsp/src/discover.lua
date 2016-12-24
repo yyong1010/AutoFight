@@ -20,20 +20,21 @@ function discover()
         selectDefaultChapter()
       end
     end
-    
+
     ss(2*1000)
     local xLS, yLS =  findMultiColorInRegionFuzzy(0x43331a,"1|1|0x43331b,6|6|0x3c2e1f,7|7|0x3d2e1e", 95, 1445, 934, 1455, 945) --出战式神的颜色
     if xLS ~= -1 and yLS ~= -1 then
       tap(68,100)
       printFunction("--点击退出")
       ss(2*1000)
-			local xBS, yBS = findMultiColorInRegionFuzzy(0xf4b25f,"4|0|0xf4b25f", 95, 1220, 600, 1224, 600)
-			if xBS ~= -1 and yBS ~= -1 then
-			printFunction("--点击退出:"..xBS..":"..yBS)
-				tap(xBS,yBS)
-				ss(5*1000)
-			end
+      local xBS, yBS = findMultiColorInRegionFuzzy(0xf4b25f,"4|0|0xf4b25f", 95, 1220, 600, 1224, 600)
+      if xBS ~= -1 and yBS ~= -1 then
+        printFunction("--点击退出:"..xBS..":"..yBS)
+        tap(xBS,yBS)
+        ss(5*1000)
+      end
     end
+    checkisBox()
     fighttimes = fighttimes + 1
   end
   showHUDx("结束执行探索")
@@ -56,8 +57,8 @@ function discoverDetail()
       bossIsKO = swap()
     end
   end
-  
-  
+
+
   while(j < disSwipTimes and not bossIsKO) do
     checkinvite()
     swipLeft(nil,nil,300)
@@ -69,7 +70,7 @@ function discoverDetail()
       bossIsKO = swap()
     end
   end
-  
+
   checkisBackField()
 end
 
@@ -126,13 +127,13 @@ function swap()
         --ss(10*1000)
         --checkGift()
         --ss(5*1000)
-				if fightstatus > 0 then
-					bossIsKO = true				
-					break
-				end
+        if fightstatus > 0 then
+          bossIsKO = true
+          break
+        end
       end
     end
-    
+
     --x,y = findMultiColorInRegionFuzzy(0x2d1c08,"-5|-10|0xe4ceab,-8|1|0xe0cf9e,8|-2|0xae9c78,0|9|0xe2d09c,1|22|0xfca911",90,y, 540, y+48, 892);
     --printFunction("x:"..x.."y:"..y)
     --keepScreen(false)
@@ -190,10 +191,10 @@ function checkExpModels()
         --ss(10*1000)
         --checkGift()
         --ss(5*1000)
-				if fightstatus > 0 then
-					bossIsKO = true				
-					break
-				end
+        if fightstatus > 0 then
+          bossIsKO = true
+          break
+        end
       end
     end
     --end
@@ -254,11 +255,11 @@ function selectSpecailChapter()
   if x12 ~= -1 and y12 ~= -1 then
     cnum = 2
   end
-  
+
   if x13 ~= -1 and y13 ~= -1 then
     cnum = 3
   end
-  
+
   if x14 ~= -1 and y14 ~= -1 then
     cnum = 4
   end
@@ -294,8 +295,30 @@ function checkisBackField()
       break
     end
   end
-  
-  
+end
+
+function checkisBox()
+  if setting["checkBox"] == "0" then
+    checkinvite()
+    printFunction("检查是否有箱子")
+    local i = 1
+    local disX,disY = 0,0
+    while i < 5 do
+      local xLS, yLS = findMultiColorInRegionFuzzy(0x4f282a,"0|7|0xd8531c,10|8|0xdbaa45,10|22|0xb63819,26|22|0x4d0405,29|11|0x925b18", 90, 418, 187, 1477, 861)
+      if xLS ~= -1 and yLS ~= -1 then
+        printFunction("找到箱子")
+        tap(xLS,yLS)
+        disX = _fsh/2 - xLS
+        disY = _fsw/2 - yLS
+        checkisFuWa()
+        tap(_fsh/2 + disX,_fsw/2 + disY)
+        printFunction("disX:"..disX..",disY:"..disY)
+        break
+      end
+      ss(1000)
+      i = i + 1
+    end
+  end
 end
 
 

@@ -25,6 +25,7 @@ function groupjiejiedefault()
     local isAllDone = bl[1]==2 and bl[2] == 2 and bl[3] == 2
 
     while(not isAllDone) do
+      checkisBack()
       checkinvite()
       tt1 = bl[1] == 2 and "阴阳寮1:完成" or "阴阳寮1等待:".. os.difftime(os.time(),t[1])
       tt2 = bl[2] == 2 and " 阴阳寮2:完成" or " 阴阳寮2等待:".. os.difftime(os.time(),t[2])
@@ -33,7 +34,7 @@ function groupjiejiedefault()
       for i=1,3 do
         if (bl[i] ~= 2 and os.difftime(os.time(),t[i]) > 599) then
           printFunction("选取阴阳寮"..i..",等待时间"..os.difftime(os.time(),t[i]))
-          tap(473,260*i)
+          tap(600,300*i)
           ss()
           bl[i] = fightGroupjiejie()
 					t[i]= os.time()
@@ -61,7 +62,8 @@ function fightGroupjiejie()
   local isReversal = false
   checkinvite()
 
-  local xUp, yUp = findMultiColorInRegionFuzzy(0x656058,"2|0|0x656058,2|7|0x656058,-2|9|0x656058", 95,1184,621,1190,627)
+  local xUp, yUp = findMultiColorInRegionFuzzy(0x6c645b,"15|0|0x6c645b,33|0|0x6c645b", 95,1078,672,1111,672)
+
   if xUp ~= -1 and yUp ~= -1 then
     printFunction("已剩四个，不打了")
     isDone = 2
@@ -75,7 +77,8 @@ function fightGroupjiejie()
     stimes = stimes + 1
     printFunction("划屏次数"..stimes)
     swipBottom(1316,823,360)
-    local xUq, yUq = findColorInRegionFuzzy(0xcac1b1,95,1187,260,1187,390) --寻找第一个
+    --local xUq, yUq = findMultiColorInRegionFuzzy(0xd8c8b7,"15|0|0xd8c8b7,33|0|0xd8c8b7", 95,1078,265,1111,265) --寻找第一个
+    local xUq, yUq = findMultiColorInRegionFuzzy(0x9e8d75,"0|4|0x9e8d75,0|10|0x9e8d75", 95,1209,223,1209,308)
     printFunction("x"..xUq..",y"..yUq)
     if xUq == -1 and yUq == -1 then
       swipTop(1316,400,180)
@@ -86,11 +89,12 @@ function fightGroupjiejie()
 
   while (not isClick and astimes < stimes*2) do
 
-    local xUq, yUq = findColorInRegionFuzzy(0xcac1b1,95,1187,260,1187,390) --寻找第一个
+    --local xUq, yUq = findMultiColorInRegionFuzzy(0xd8c8b7,"15|0|0xd8c8b7,33|0|0xd8c8b7", 95,1078,265,1111,265) --寻找第一个
+    local xUq, yUq = findMultiColorInRegionFuzzy(0x9e8d75,"0|4|0x9e8d75,0|10|0x9e8d75", 95,1209,223,1209,308)
     if xUq ~= -1 and yUq ~= -1 then
-      tap(xUq,yUq)
+      tap(xUq-100,yUq)
       ss()
-      local xs ,ys = findColorInRegionFuzzy(0xf4b25f, 90, xUq-10,yUq, xUq-10,yUq+330) --组队按钮颜色
+      local xs ,ys = findColorInRegionFuzzy(0xf4b25f, 95, xUq-100,yUq, xUq-60,yUq+330) --组队按钮颜色
       if xs ~= -1 and ys ~= -1 then
         isClick = true
         printFunction("找到结界:"..xs..":"..ys)
