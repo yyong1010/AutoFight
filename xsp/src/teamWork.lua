@@ -139,9 +139,9 @@ function creatTeamPanel(isJoinTeam)
         end
       end
 
-    local xS1, yS1 = findColorInRegionFuzzy(0xf4b25f, 90, 962,781, 963,782) --组队按钮颜色
+    local xS1, yS1 = findColorInRegionFuzzy(0xf4b25f, 90, 960,717, 963,782) --组队按钮颜色
     if (xS1 ~= -1 and yS1 ~= -1) then
-      tapR(976,809)--点击组队
+      tapR(xS1,yS1)--点击组队
       printFunction("--点击组队")
       ss(2*1000)
     end
@@ -186,7 +186,7 @@ function jointeamWork()
 		findTeamWork()
 	end
   showHUDx("结束加入队伍")
-  printFunction("--结束加入队伍")	
+  printFunction("--结束加入队伍")
 end
 
 

@@ -71,28 +71,22 @@ function selectWakenType()
   checkinvite()
   local wakenType = setting["WakenType"]
   if wakenType == "0" then
-    tap(42,532)
+    tap(407,550)
     printFunction("--火觉醒")
     showHUDx("选择火觉醒")
   elseif wakenType =="1" then
+    tap(807,550)
     printFunction("--风觉醒")
     showHUDx("选择风觉醒")
   elseif wakenType =="2" then
-    tap(1874,534)
+    tap(1207,550)
     printFunction("--水觉醒")
     showHUDx("选择水觉醒")
   elseif wakenType =="3" then
-    tap(1874,534)
-    ss(1000)
-    checkinvite()
-    tap(1874,534)
+    tap(1607,550)
     printFunction("--雷觉醒")
     showHUDx("选择雷觉醒")
   end
-  ss(1000)
-  checkinvite()
-  tap(849,482)--点击觉醒类型
-  printFunction("--点击觉醒类型")
   ss(2*1000)
 end
 

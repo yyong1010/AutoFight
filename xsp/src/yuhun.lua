@@ -47,7 +47,7 @@ function yuhundefault()
       end
     else
       showHUDx("单人进入")
-      tapR(1440,810)--点击挑战
+      tapR(1431,725)--点击挑战
       ss(2*1000)
       printFunction("--开始单人战斗")
       showHUDx("开始御魂次数 "..tostring(fighttimes+1))
@@ -74,7 +74,9 @@ function createYuhun()
   if xPS ~= -1 and yPS ~= -1 then
     tap(xPS,yPS+25)--点击觉醒
     printFunction("--点击御魂")
-    s(5*1000)
+    s(3*1000)
+    tap(621,563)
+    s(3*1000)
     if isSolo ~= "0" then
       showHUD(runing,"创建组队，如果卡住请手动点击，脚本会自动继续运行",18,"0xffffffff","0x4c000000",0,760,1020,400,50)
       creatTeamPanel(isJoinTeam)
