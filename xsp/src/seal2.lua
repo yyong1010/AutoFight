@@ -7,7 +7,7 @@ function findSeal(v)
   local isClick = false
   local refleshTimes = setting["RefleshTimes"] or 300
 
-  if _fsw == 720 then
+  if _fsw == 720 and v~= "all" then
     v = v.."720"
   end
   while (isFound < 1) do
@@ -19,7 +19,8 @@ function findSeal(v)
 
 
     --for y=280,736,152 do
-      --xS, yS = findImageInRegionFuzzy(v..".png",  80, 798, y, 885, y+50, 0xffffff)
+    --xS, yS = findImageInRegionFuzzy(v..".png",  80, 798, y, 885, y+50, 0xffffff)fggfgh
+    if v ~= "all" then
       xS, yS = findImageInRegionFuzzy(v..".png",  80, 798, 280, 885, 330, 0xffffff)
       --xS,yS  = 1,302
       if xS ~= -1 and yS ~= -1 then
@@ -28,6 +29,14 @@ function findSeal(v)
         s(refleshTimes)
         isClick = true
       end
+    else
+      xS, yS = findMultiColorInRegionFuzzy(0xe5c472,"3|0|0x724928,7|0|0x6a4120,5|3|0x5f3115", 90,1590,312,1597,315) --新的组队颜色
+
+      if xS ~= -1 and yS ~= -1 then
+        printFunction("--找到可组队伍>>>>:")
+        tap(xS,yS)  --点击组队
+      end
+    end
     --end
 
 
@@ -114,11 +123,13 @@ function findSeal(v)
       end
     end
 
-    local xSR, ySR = findMultiColorInRegionFuzzy(0xf4b25f,"4|0|0xf4b25f,4|3|0xf4b25f,0|3|0xf4b25f",90,1142,912,1146,915)
-    if (xSR ~= -1 and ySR ~= -1) and (not isClick) then
-      tap(xSR, ySR)
-      printFunction("--点击刷新")
-      s(refleshTimes)
+    if  (not isClick) then
+      local xSR, ySR = findMultiColorInRegionFuzzy(0xf4b25f,"4|0|0xf4b25f,4|3|0xf4b25f,0|3|0xf4b25f",90,1142,912,1146,915)
+      if (xSR ~= -1 and ySR ~= -1) then
+        tap(xSR, ySR)
+        printFunction("--点击刷新")
+        s(refleshTimes)
+      end
     end
 
   end

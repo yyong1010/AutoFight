@@ -76,12 +76,11 @@ end
 
 function parseSealType(st)
   local sst
-
   if string.find(setting["sealType"], "0", 1) then
-    sst = "black"
+    sst = "all"
   end
   if string.find(setting["sealType"], "1", 1) then
-    sst = "bird"
+    sst = "black"
   end
   if string.find(setting["sealType"], "2", 1) then
     sst = "jiaotu"
@@ -89,6 +88,7 @@ function parseSealType(st)
 	if string.find(setting["sealType"], "3", 1) then
     sst = "sea"
   end
+
   return sst
 end
 

@@ -286,7 +286,7 @@
             {
                "id" : "sealType",
                "rect" : "240,780,850,260",
-               "list" : "黑使鬼,姑惑鸟,椒图,海坊主",
+               "list" : "任意,黑使鬼,椒图,海坊主",
                "select" : "0",
                "size" : 30,
                "type" : "RadioGroup"

@@ -50,7 +50,7 @@ function juexingdefault()
       end
     else
       showHUDx("单人进入")
-      tap(1440,810)--点击挑战
+      tapR(1431,725)--点击挑战
       ss(2*1000)
       printFunction("--开始单人战斗")
       showHUDx("开始觉醒次数 "..tostring(fighttimes+1))
