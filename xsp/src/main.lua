@@ -35,6 +35,8 @@ function main()
     require "teamWork"
     require "groupjiejie"
     require "test"
+    require "screen"
+    require "teamdiscoverpara"
     printTable(setting)
     ss(2*1000)
 
@@ -68,6 +70,18 @@ function main()
       lua_exit()
     end
 
+    --组队探索队员
+    if setting["teamDiscover"] == "0" and string.find(setting["teamDiscoverRole"], "1", 1) then
+      _waitSecs = tonumber(setting["waitSecs"]) < 0 and 31536000 or tonumber(setting["waitSecs"])
+      jointeamDiscover()
+      lua_exit()
+    end
+
+    --组队探索队长
+    if setting["teamDiscover"] == "0" and string.find(setting["teamDiscoverRole"], "0", 1) then
+      discover()
+      lua_exit()
+    end
 
     if setting["WakenFunction"] == "0" then
       juexingdefault()

@@ -40,7 +40,7 @@
                "color" : "255,0,0",
                "rect" : "700,10,1100,400",
                "size" : 32,
-               "text" : "隆重推出伐木场自动刷初始号脚本，欢迎下载使用",
+               "text" : "脚本Q群:542050185,隆重推出伐木场自动刷初始号脚本",
                "type" : "Label"
             },
             {
@@ -391,7 +391,7 @@
             },
 						{
                "id" : "autoBuyJuice",
-               "rect" : "380,280,320,100",
+               "rect" : "320,280,320,100",
                "list" : "自动购买体力",
                "select" : "1",
                "size" : 30,
@@ -400,7 +400,7 @@
             {
                "align" : "left",
                "color" : "0,0,0",
-               "rect" : "650,285,360,160",
+               "rect" : "600,285,360,160",
                "text" : "购买次数",
                "size" : 30,
                "type" : "Label"
@@ -408,12 +408,28 @@
 						{
                "align" : "left",
                "color" : "144,144,144",
-               "rect" : "810,280,180,60",
+               "rect" : "750,280,100,60",
                "id" : "buyJuicetimes",
                "prompt" : "输入数字",
                "size" : 30,
                "text" : "3",
                "type" : "Edit"
+            },
+            {
+               "id" : "teamDiscover",
+               "rect" : "890,280,320,100",
+               "list" : "组队探索",
+               "select" : "1",
+               "size" : 30,
+               "type" : "CheckBoxGroup"
+            },
+            {
+               "id" : "teamDiscoverRole",
+               "rect" : "1100,280,500,160",
+               "list" : "队长,队员",
+               "select" : "0",
+               "size" : 30,
+               "type" : "RadioGroup"
             },
             {
                "id" : "groupJieJie",
@@ -515,17 +531,28 @@
          ]
       },
       {
-         "style" : "custom",
-         "text" : "重要说明",
+         "style" : "default",
+         "text" : "使用说明",
          "type" : "Page",
          "views" : [
+
             {
-               "align" : "left",
-               "color" : "30,144,255",
-               "rect" : "40,40,1300,500",
-               "size" : 40,
-               "text" : "！！！隆重推出伐木场自动刷初始号脚本，欢迎下载使用\n1、提供免费版、VIP版两个版本，免费版能完成大多数基础功能，喜欢的可以选购VIP版，谢谢支持;\n2、妖气封印有需求可以qq留言，后期更新时加上;\n3、支持9:16多分辨率，最好使用1080*1920，home键放在右边，海马模拟器完美测试通过;\n4、脚本是模拟手动点击，难免有不足之处，请多包涵，运行中有问题请加Q群542050185或联系QQ：13632124，请留言不一定实时在线；",
-               "type" : "Label"
+               "align" : "center",
+               "src" : "teamDiscoverCap.jpg", //这是来源为本地文件的图片
+               "type" : "Image",
+               "rect" : "180,785,960,540"
+            },
+            {
+               "align" : "center",
+               "src" : "teamDiscoverList.jpg", //这是来源为本地文件的图片
+               "type" : "Image",
+               "rect" : "180,785,960,540"
+            },
+
+                        {
+               "src" : "teamDiscoverMem.jpg", //这是来源为本地文件的图片
+               "type" : "Image",
+               "rect" : "180,785,960,540"
             }
          ]
       }

@@ -34,6 +34,9 @@ function discover()
         ss(5*1000)
       end
     end
+    if setting["teamDiscover"] == "0" then
+      askagain(1)
+    end
     checkisBox()
     fighttimes = fighttimes + 1
   end
@@ -217,7 +220,7 @@ function selectChapter(cnum)
   --local xPS, yPS = findImageInRegionFuzzy("discover.png", 90, 1360, 760, 1480, 820, 0xffffff)
   local xPS, yPS =findMultiColorInRegionFuzzy(0xf4b25f,"8|-2|0xf4b25f,3|4|0xf4b25f,-2|3|0xf4b25f", 95,1425,765,1435,775)
   if xPS ~= -1 and yPS ~= -1 then
-    tapR(xPS,yPS)
+    choseDiscoverType()
     printFunction("--点击探索")
     checkisBackField()
     discoverDetail()
@@ -239,7 +242,7 @@ function selectDefaultChapter()
   --local xPS, yPS = findImageInRegionFuzzy("discover.png", 90, 1360, 760, 1480, 820, 0xffffff)
   local xPS, yPS =findMultiColorInRegionFuzzy(0xf4b25f,"8|-2|0xf4b25f,3|4|0xf4b25f,-2|3|0xf4b25f", 95,1425,765,1435,775)
   if xPS ~= -1 and yPS ~= -1 then
-    tap(xPS,yPS)
+    choseDiscoverType()
     printFunction("--点击探索")
     checkisBackField()
     discoverDetail()
@@ -321,5 +324,21 @@ function checkisBox()
   end
 end
 
+--组队探索队长
+function choseDiscoverType()
+  if setting["teamDiscover"] == "0" and string.find(setting["teamDiscoverRole"], "0", 1) then
+    tap(981,780)
+    _Do(teamDisAsktb)
+  else
+    tap(1430,783)
+  end
+end
+
+--组队探索队员
+function jointeamDiscover()
+
+    _Do(teamDisAnswertb)
+
+end
 
 
