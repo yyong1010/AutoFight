@@ -21,11 +21,12 @@ function findSeal(v)
     --for y=280,736,152 do
     --xS, yS = findImageInRegionFuzzy(v..".png",  80, 798, y, 885, y+50, 0xffffff)fggfgh
     if v ~= "all" then
-      xS, yS = findImageInRegionFuzzy(v..".png",  80, 798, 280, 885, 330, 0xffffff)
+      xS, yS = findImageInRegionFuzzy(v..".png",  80, 798, 280, 885, 610, 0xffffff)
       --xS,yS  = 1,302
       if xS ~= -1 and yS ~= -1 then
         printFunction("--找到封印>>>>:"..v)
-        tap(1581,yS+25)  --点击组队
+        --tap(1581,yS+25)  --点击组队
+				tap(xS+783,yS+25)  --点击组队
         s(refleshTimes)
         isClick = true
       end

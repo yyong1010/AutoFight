@@ -66,7 +66,7 @@ teamDisAnswertb = {Name = "组队探索队员",
   {1898,1012,0x3f3f60},
 },
   Run = (function()
-    checkFightisOver()
+    checkFightisOver(true)
  end)
 },
 
@@ -100,4 +100,56 @@ teamDisAnswertb = {Name = "组队探索队员",
 sleep = 1000,
 csim = 90
 
+}
+
+
+fightpara = {Name = "战斗结果检查",
+
+{Name = "7战斗胜利",
+  Color = {
+    {715,245,0x7f1910},
+    {683,297,0x991c12},
+    {721,278,0xccbda8},
+    {763,295,0x931b11},
+    {897,314,0xc2ad73},
+    {1134,261,0xd1b986},
+    {1370,265,0xdcc798},
+    {1482,353,0x8a673f},
+  },
+  Run = (function()
+  tap(1127,896)
+end)
+},
+
+{Name = "7战斗胜利福娃",
+  Color = {
+    {872,395,0xa12b26},
+    {794,594,0x673113},
+    {827,616,0x834825},
+    {921,729,0x470f0f},
+    {1063,725,0x350305},
+  },
+  Run = (function()
+  tap(1127,896)
+end)
+},
+
+{Name = "7战斗胜利奖励",
+  Color = {
+    {856,683,0xd88016},
+    {955,663,0xd53745},
+    {991,676,0xcbb69a},
+    {1116,738,0xd19118},
+    {1014,776,0xba441a},
+    {956,823,0x000000},
+    {995,913,0x6e280b},
+    {1060,899,0x7f0d0e},
+  },
+  Run = (function()
+  checkGetGiftisOver()
+  return true
+end)
+},
+sleep = 1000,
+csim = 90
 }

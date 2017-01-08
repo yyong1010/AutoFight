@@ -10,12 +10,11 @@ function discover()
     showHUDx("开始探索次数 "..tostring(fighttimes+1))
     local xLS, yLS = findMultiColorInRegionFuzzy(0x43331a,"1|1|0x43331b,6|6|0x3c2e1f,7|7|0x3d2e1e", 95, 1445, 934, 1455, 945) --出战式神的颜色
     if xLS ~= -1 and yLS ~= -1 then
-      specailChapter = selectSpecailChapter() --特定章节
       discoverDetail()
     else
       if fighttimes > 0 then
         waitRandomSS(45,65)
-        selectChapter(specailChapter)
+        selectChapter(_specailChapter)
       else
         selectDefaultChapter()
       end
@@ -49,6 +48,7 @@ function discoverDetail()
   local bossIsKO = false
   local onlyExp = setting["onlyExp"]
   local disSwipTimes = tonumber(setting["disSwipTimes"]) or 5
+	_specailChapter = selectSpecailChapter() --特定章节
   while(i < disSwipTimes and not bossIsKO) do
     checkinvite()
     swipRight(nil,nil,300)
@@ -326,7 +326,7 @@ end
 
 --组队探索队长
 function choseDiscoverType()
-  if setting["teamDiscover"] == "0" and string.find(setting["teamDiscoverRole"], "0", 1) then
+  if setting["teamDiscover"] == "0" and string.find(setting["teamDiscoverRole"], "0", 1) and _isVIP then
     tap(981,780)
     _Do(teamDisAsktb)
   else
@@ -336,9 +336,9 @@ end
 
 --组队探索队员
 function jointeamDiscover()
-
+  if  _isVIP then
     _Do(teamDisAnswertb)
-
+	end
 end
 
 

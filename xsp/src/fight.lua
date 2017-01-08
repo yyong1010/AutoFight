@@ -73,6 +73,7 @@ function checkFightisOver(canchangeSS)
     s(1000)
     local xFs, yFs = findMultiColorInRegionFuzzy(0x8e1a11,"16|-5|0xcdbeaa,28|0|0xcebfab,44|0|0x851e14",90, 655, 240, 770, 310)
     if xFs ~= -1 and yFs~= -1 then
+			--[[
       tap(948,556) --点击屏幕
       printFunction("--点击屏幕看经验")
       waitRandomSS(19,25)
@@ -82,6 +83,8 @@ function checkFightisOver(canchangeSS)
       tap(948,656) --点击屏幕
       printFunction("--点击屏幕收奖励")
       waitRandomSS(19,25)
+			]]
+			_Do(fightpara)
       fightisover = 1
       break
     end
@@ -151,17 +154,21 @@ function changeSS()
   local swiptimes = tonumber(setting["swiptimes"]) or 5
   local isnomax,x1,y1,x2,y2,x3,y3,x4,y4 = checkmax()
   local i = 0
-  printFunction(">>>>开始换式神"..i)
-  while (not isnomax) do
+  printFunction(">>>>找满级式神")
+  while (not isnomax and i < 10) do
     printFunction(">>>>开始换式神"..i)
     if (x1 ~= -1 and y1 ~= -1) or (x2 ~= -1 and y2 ~= -1) then
       tap(788,892)--点区域
       ss(3*1000)
-      local x9,y9 = findMultiColorInRegionFuzzy(0xeb601b,"4|0|0xf26f31,19|0|0xe1502a,21|0|0xe75c1e", 90,472,1026,496,1026)--第二张牌的星级颜色
-      local x10,y10 = findMultiColorInRegionFuzzy(0xc316ef,"4|0|0xbb35e4,22|0|0xc316ef,24|0|0xc51cef", 90,472,1026,496,1026)
+      --local x9,y9 = findMultiColorInRegionFuzzy(0xeb601b,"4|0|0xf26f31,19|0|0xe1502a,21|0|0xe75c1e", 90,472,1026,496,1026)--第二张牌的星级颜色
+      --local x10,y10 = findMultiColorInRegionFuzzy(0xc316ef,"4|0|0xbb35e4,22|0|0xc316ef,24|0|0xc51cef", 90,472,1026,496,1026)
+			local x9,y9= findMultiColorInRegionFuzzy(0x413127,"-7|39|0xffffff,30|52|0xf2f1f1,26|94|0x2e1f18,-5|142|0x3e2f28,-19|194|0xffffff", 90,92,784,129,978)
+			local x10,y10 = findMultiColorInRegionFuzzy(0x4d3c26,"16|17|0x44311b,9|40|0x9d9d9d,21|61|0xdcdcdc,42|61|0x433222", 90,88,780,130,841)
       if x9 ~= -1 or x10 ~= -1 then
-        printFunction(">>>>进入主战区域x9:"..x9..",y9:"..y9)
-
+        printFunction(">>>>进入主战区域x9:"..x9..",x10:"..x10)
+				tap(89,830)
+				ss()
+				tap(100,476)
         for i=1,swiptimes do
           swipRight(349,918,1150)
           ss()
@@ -169,28 +176,46 @@ function changeSS()
         if x1 ~= -1 then
           printFunction(">>>>换右战式神")
           voidRed(802,1002)
-          swip(902,915,300,342) --换右战式神
-          ss(3*1000)
+					ss(1000)
+					if setting["teamDiscover"] == "0" and string.find(setting["teamDiscoverRole"], "0", 1) then
+          swip(902,915,487,380)--换后排右战式神
+					else
+					swip(902,915,300,342) --换右战式神
+					end
+					ss(3*1000)
         end
         if x2 ~= -1 then
           printFunction(">>>>换左战式神")
           voidRed(1202,1402)
-          swip(1302,915,1600,342) --换左战式神
+					ss(1000)        
+					if setting["teamDiscover"] == "0" and string.find(setting["teamDiscoverRole"], "0", 1) then
+						swip(1302,915,1284,357)--换后排左战式神
+					else
+						swip(1302,915,1600,342) --换左战式神
+					end
           ss(3*1000)
         end
-        tap(57,65)--返回
-        ss(3*1000)
+				local xe,ye= findMultiColorInRegionFuzzy(0x413127,"-7|39|0xffffff,30|52|0xf2f1f1,26|94|0x2e1f18", 90,92,784,129,978)
+				if (xe ~= -1) then
+					tap(53,48)
+					ss(2*1000)
+				end
       end
     end
 
     if (x3 ~= -1 and y3 ~= -1) or (x4 ~= -1 and y4 ~= -1) then
       tap(728,379) --点区域
       ss(3*1000)
-      local x9,y9 = findMultiColorInRegionFuzzy(0xeb601b,"4|0|0xf26f31,19|0|0xe1502a,21|0|0xe75c1e",90,472,1026,496,1026)--第二张牌的星级颜色
-      local x10,y10 = findMultiColorInRegionFuzzy(0xc316ef,"4|0|0xbb35e4,22|0|0xc316ef,24|0|0xc51cef", 90,472,1026,496,1026)
-      if x9 ~= -1 or x10 ~=-1 then
-        printFunction(">>>>进入观战区域x9:"..x9..",y9:"..y9)
-
+      --local x9,y9 = findMultiColorInRegionFuzzy(0xeb601b,"4|0|0xf26f31,19|0|0xe1502a,21|0|0xe75c1e",90,472,1026,496,1026)--第二张牌的星级颜色
+      --local x10,y10 = findMultiColorInRegionFuzzy(0xc316ef,"4|0|0xbb35e4,22|0|0xc316ef,24|0|0xc51cef", 90,472,1026,496,1026)
+      local x9,y9= findMultiColorInRegionFuzzy(0x413127,"-7|39|0xffffff,30|52|0xf2f1f1,26|94|0x2e1f18", 90,92,784,129,978)
+			local x10,y10 = findMultiColorInRegionFuzzy(0x4d3c26,"16|17|0x44311b,9|40|0x9d9d9d,21|61|0xdcdcdc,42|61|0x433222", 90,88,780,130,841)
+      if x9 ~= -1 or x10 ~= -1 then
+        printFunction(">>>>进入观战区域x9:"..x9..",x10:"..x10)
+				
+				tap(89,830)
+				ss()
+				tap(100,476)
         for i=1,swiptimes-1 do
           swipRight(349,918,1150)
           ss()
@@ -198,21 +223,27 @@ function changeSS()
         if x3 ~= -1 then
           printFunction(">>>>换左观式神")
           voidRed(802,1002)
+					ss(1000)
           swip(902,915,583,377) --换左观式神
-          ss(3*1000)
+          ss(1000)
         end
         if x4 ~= -1 then
           printFunction(">>>>换右观式神")
           voidRed(1202,1402)
+					ss(1000)
           swip(1302,915,1180,377) --换右观式神
-          ss(3*1000)
+          ss(1000)
         end
-        tap(57,65)--返回
-        ss(3*1000)
+				local xe,ye= findMultiColorInRegionFuzzy(0x413127,"-7|39|0xffffff,30|52|0xf2f1f1,26|94|0x2e1f18", 90,92,784,129,978)
+				if (xe ~= -1) then
+					tap(53,48)
+					ss(2*1000)
+				end
       end
     end
 
     isnomax,x1,y1,x2,y2,x3,y3,x4,y4 = checkmax()
+		i = i + 1		
   end
 end
 
@@ -255,9 +286,11 @@ end
 
 function voidRed(lx,rx,direction)
   local d = direction or 1 --默认1向左，0向右
-  local x, y = findMultiColorInRegionFuzzy(0x21181a,"0|6|0xd2c5c3,0|17|0xd25148,6|17|0xe35d4e,10|17|0xe25a4c",90,lx,909,rx,926)
+  local xr, yr = findMultiColorInRegionFuzzy(0x21181a,"0|6|0xd2c5c3,0|17|0xd25148,6|17|0xe35d4e,10|17|0xe25a4c",90,lx,909,rx,926)
+	local xb, yb = findMultiColorInRegionFuzzy(0x4772c5,"21|7|0x8bb0e3,24|41|0x3d3836,54|25|0x81b1d7", 90,lx,879,rx,920)
+	local xbk, ybk = findMultiColorInRegionFuzzy(0xffffff,"49|-2|0x292625,25|16|0xefc6b2,23|39|0x252525,18|57|0xbc9550", 90,lx,877,rx,936)
   printFunction(">>>>检测是否有红达摩")
-  while(x ~= -1) do
+  while(xr ~= -1 or xb ~= -1 or xbk ~= -1) do
     if (d > 0) then
       printFunction(">>>>检测到红达摩，向左划")
       swipLeft(349,918,400)
@@ -266,16 +299,32 @@ function voidRed(lx,rx,direction)
       swipRight(349,918,400)
     end
     ss()
-    x, y = findMultiColorInRegionFuzzy(0x21181a,"0|6|0xd2c5c3,0|17|0xd25148,6|17|0xe35d4e,10|17|0xe25a4c",90,lx,909,rx,926)
+    xr, yr = findMultiColorInRegionFuzzy(0x21181a,"0|6|0xd2c5c3,0|17|0xd25148,6|17|0xe35d4e,10|17|0xe25a4c",90,lx,909,rx,926)
+		xb, yb = findMultiColorInRegionFuzzy(0x4772c5,"21|7|0x8bb0e3,24|41|0x3d3836,54|25|0x81b1d7", 90,lx,879,rx,920)
+		xbk, ybk = findMultiColorInRegionFuzzy(0xffffff,"49|-2|0x292625,25|16|0xefc6b2,23|39|0x252525,18|57|0xbc9550", 90,lx,877,rx,936)
   end
   printFunction(">>>>检测红达摩结束")
 end
 
 function checkmax()
-  local x1,y1 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,1100,570,1145,650)--右战
-  local x2,y2 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,400,340,460,450)--左战
-  local x3,y3 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,435,222,490,300)--左观
-  local x4,y4 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,596,189,650,260)--右观
+	local x9,y9= findMultiColorInRegionFuzzy(0x413127,"-7|39|0xffffff,30|52|0xf2f1f1,26|94|0x2e1f18", 90,92,784,129,978)
+	if (x9 ~= -1) then
+		tap(53,48)
+		ss(2*1000)
+	end
+	
+	local x1,y1, x2,y2
+
+	if setting["teamDiscover"] == "0" and string.find(setting["teamDiscoverRole"], "0", 1) then--组队探索队长区域
+		x1,y1 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,780,780,960,971)--右战
+		x2,y2 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,0,420,120,613)--左战		
+	else
+		x1,y1 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,1050,500,1175,690)--右战
+		x2,y2 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,390,310,515,450)--左战	
+	end	
+
+  local x3,y3 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,435,222,510,300)--左观
+  local x4,y4 = findMultiColorInRegionFuzzy(0xe5a11d,"4|0|0xeea418,4|3|0xfab01d,0|3|0xf7b31c", 90,585,180,650,308)--右观
   local isnomax = (x1 == -1 and y1 == -1) and (x2 == -1 and y2 == -1) and (x3 == -1 and y3 == -1) and (x4 == -1 and y4 == -1)
   printFunction( x1..":"..y1..","..x2..":"..y2..","..x3..":"..y3..","..x4..":"..y4)
   printFunction("检测是否已经换完:"..tostring(isnomax))
@@ -310,6 +359,18 @@ function checkinvite()
         ss()
         lua_exit()
       end
+    end
+  end
+end
+
+function checkGetGiftisOver()
+  while true do
+    local x, y = findMultiColorInRegionFuzzy(0xde901c,"41|9|0xe0af2c,66|-26|0xd33644,98|-7|0xc9b497,86|25|0x2e557e,103|81|0xbb471a,81|92|0x111110", 95, 0, 0, 1919, 1079)
+    if x ~= -1 then
+      tap(1127,896)
+      ss()
+    else
+      break
     end
   end
 end

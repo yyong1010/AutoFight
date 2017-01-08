@@ -1,6 +1,7 @@
 
 function test()
-jointeamDiscover()
+changeSS()
+lua_exit()--取消则退出
 end
 
 

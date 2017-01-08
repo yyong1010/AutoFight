@@ -4,6 +4,8 @@ taskstatus = createHUD()
 
 _buyJuiceTimes = 0
 
+_specailChapter= 1
+
 if not _isVIP then
     printFunction(">>>>当前运行版本为免费版")
     showHUD(runing,"当前运行版本为免费版,欢迎选购VIP版获得更多功能",18,"0xffffffff","0x4c000000",0,760,1020,400,50)
