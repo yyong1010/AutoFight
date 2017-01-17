@@ -13,9 +13,14 @@ function main()
   print("hello")
   require "util"--加载工具
   require "SettingACheck"--加载全局设置
-  start,setting = showUI("ui.json")--显示UI并获取设置
-	_orientation = setting["orientation"] == "0" and 2 or 1
-	init("0", _orientation)--初始化触摸操控脚本
+  if (_OS == 1) then --安卓
+    start,setting = showUI("ui.json")--显示UI并获取设置
+  	_orientation = setting["orientation"] == "0" and 2 or 1
+  	init("0", _orientation)--初始化触摸操控脚本
+  else  --iOS
+    init("0", 1)--初始化触摸操控脚本
+    start,setting = showUI("ui.json")--显示UI并获取设置
+  end
 
   if start == 0 or setting["BasicFunction"] == "" then
     printFunction("取消执行")
@@ -138,7 +143,6 @@ end
 --退出时隐藏HUD
 function beforeUserExit()
   hideHUD(runing)
-  hideHUD(troopsDonated)
 end
 
 xpcall(main, error)

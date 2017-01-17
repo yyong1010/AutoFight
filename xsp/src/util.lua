@@ -319,3 +319,13 @@ function wFile(content,fileName)
 	f:write(content)
 	f:close()
 end
+
+
+function parserSealCoordinate(x1,y1,rs)
+	baseX = 1920
+	baseY = 1080
+	x1 = x1*_fsh/baseX
+	y1 = y1*_fsw/baseY
+	printFunction(x1..":"..y1)
+	return x1,y1
+end

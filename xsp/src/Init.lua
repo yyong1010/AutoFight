@@ -11,7 +11,7 @@ if not _isVIP then
     showHUD(runing,"当前运行版本为免费版,欢迎选购VIP版获得更多功能",18,"0xffffffff","0x4c000000",0,760,1020,400,50)
     setting["AutoDayWork"] = 1
     setting["AutoLockSreen"] = 1
-    setting["onlyExp"] = 1
+    setting["discoverMode"] = 0
     setting["isJoinTeam"] = 1
     setting["autoChangeSS"] = 1
     setting["swiptimes"] = 1

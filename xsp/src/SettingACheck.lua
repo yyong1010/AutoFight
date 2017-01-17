@@ -1,4 +1,5 @@
 _isVIP = true
+_OS = 1  --android 1 IOS 2
 
 _isDebug = true
 
@@ -12,8 +13,8 @@ s()
 printFunction("Global Value:")
 --printFunction("_orientation:".._orientation, "_fsw:".._fsw, "_fsh:".._fsh, "_sw:".._sw, "_sh:".._sh)
 
-local supportSize = (_fsw == 1080 and _fsh == 1920) or (_fsw == 720 and _fsh == 1280)--检测是否支持该分辨率
-if(_fsw == 720)then
+local supportSize = (_fsw == 1080 and _fsh == 1920) or (_fsw == 720 and _fsh == 1280) or (_fsw == 1242 and _fsh == 2208)--检测是否支持该分辨率
+if supportSize then
 	setScreenScale(1080,1920,0)
 end
 if not supportSize then

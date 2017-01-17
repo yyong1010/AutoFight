@@ -1,4 +1,4 @@
-function findSeal(v)
+function findSeal(vName)
   local i = 0
   local isFound = 0 --0没找到，1战斗失败，2战斗成功
   local wtimes = 45 --设置等待次数
@@ -7,9 +7,10 @@ function findSeal(v)
   local isClick = false
   local refleshTimes = setting["RefleshTimes"] or 300
 
-  if _fsw == 720 and v~= "all" then
-    v = v.."720"
-  end
+  local v = parserSeal(vName)
+  --local x1,y1 = parserSealCoordinate(798, 280)
+  --local x2,y2 = parserSealCoordinate(885, 610)
+
   while (isFound < 1) do
 
     checkinvite()
@@ -21,7 +22,7 @@ function findSeal(v)
     --for y=280,736,152 do
     --xS, yS = findImageInRegionFuzzy(v..".png",  80, 798, y, 885, y+50, 0xffffff)fggfgh
     if v ~= "all" then
-      xS, yS = findImageInRegionFuzzy(v..".png",  80, 798, 280, 885, 610, 0xffffff)
+      xS, yS = findImageInRegionFuzzy(v..".png",  80, 798, 280,885, 610, 0)
       --xS,yS  = 1,302
       if xS ~= -1 and yS ~= -1 then
         printFunction("--找到封印>>>>:"..v)
@@ -137,3 +138,23 @@ function findSeal(v)
   printFunction("返回战斗结果:"..isFound)
   return isFound
 end
+
+
+function parserSeal(v)
+  if v == "all" then
+    return v
+  end
+
+  if _fsw == 720 then
+    v = v.."720"
+  end
+
+  if _fsw == 1242 then
+    v = v.."6s"
+  end
+
+  return v
+end
+
+
+
