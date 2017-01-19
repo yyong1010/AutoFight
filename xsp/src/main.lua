@@ -145,4 +145,5 @@ function beforeUserExit()
   hideHUD(runing)
 end
 
-xpcall(main, error)
+--xpcall(main, error)
+pcall(main, error)

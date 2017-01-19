@@ -22,7 +22,7 @@ function findSeal(vName)
     --for y=280,736,152 do
     --xS, yS = findImageInRegionFuzzy(v..".png",  80, 798, y, 885, y+50, 0xffffff)fggfgh
     if v ~= "all" then
-      xS, yS = findImageInRegionFuzzy(v..".png",  80, 798, 280,885, 610, 0)
+      xS, yS = findImageInRegionFuzzy(v..".png",  60, 798, 280,885, 610, 0)
       --xS,yS  = 1,302
       if xS ~= -1 and yS ~= -1 then
         printFunction("--找到封印>>>>:"..v)
