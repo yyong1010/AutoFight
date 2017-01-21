@@ -22,7 +22,7 @@ function main()
     start,setting = showUI("ui.json")--显示UI并获取设置
   end
 
-  if start == 0 or setting["BasicFunction"] == "" then
+  if start == 0 then
     printFunction("取消执行")
     lua_exit()--取消则退出
   end
