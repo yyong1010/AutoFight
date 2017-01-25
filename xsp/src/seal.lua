@@ -59,7 +59,8 @@ function selectSeal()
     printFunction("--向下拉")
     ss()
     checkinvite()
-		tap(374,581)  --点击妖气封印
+		--tap(374,581)  --点击妖气封印
+		tap(374,465)
     printFunction("--点击妖气封印")
     ss(2*1000)
   else

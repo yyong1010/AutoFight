@@ -308,14 +308,13 @@
                "select" : "1",
                "type" : "CheckBoxGroup"
             },
-            {
-               "align" : "left",
-               "color" : "255,0,0",
+							{
+               "id" : "yearFunction",
                "rect" : "240,880,950,260",
-                    "text" : "石距自行注意时间，因为一小时一次，就不设次数了，只打一次",
-               "select" : "0",
+               "list" : "年兽",
                "size" : 30,
-               "type" : "Label"
+               "select" : "1",
+               "type" : "CheckBoxGroup"
             },
             {
                "align" : "left",

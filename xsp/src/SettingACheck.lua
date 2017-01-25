@@ -1,5 +1,5 @@
 _isVIP = true
-_OS = 1  --android 1 IOS 2
+_OS = 2  --android 1 IOS 2
 
 _isDebug = true
 

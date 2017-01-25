@@ -41,7 +41,7 @@ function main()
     require "groupjiejie"
     require "test"
     require "screen"
-    require "teamdiscoverpara"
+    require "teamdiscoverpara"		
     printTable(setting)
     ss(2*1000)
 
@@ -121,6 +121,12 @@ function main()
 
     if setting["ShijuFunction"] == "0" then
       shijuDefault()
+      s(15*1000)
+    end
+
+    if setting["yearFunction"] == "0" then
+		 require "year"	
+      yearDefault()
       s(15*1000)
     end
 

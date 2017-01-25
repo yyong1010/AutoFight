@@ -11,8 +11,8 @@ function shijuDefault()
     showHUDx("正在执行石距")
     createisOK = false
 
-    --local xLS, yLS = findImageInRegionFuzzy("team.png", 80, 300, 930, 430, 980, 0xffffff)
-    local xLS, yLS = findColorInRegionFuzzy(0xe8e0cf, 100, 354, 909, 356, 911) --庭院组队颜色
+    --local xLS, yLS = findMultiColorInRegionFuzzy(0xcbc7b6,"5|0|0x9360a4,5|3|0xa27cb3,0|3|0xc8c4b3", 90,402,956,407,959) --庭院组队颜色
+		local xLS, yLS = findMultiColorInRegionFuzzy(0xe3e3e3,"22|25|0xe2e2e2,43|32|0x733aa1,39|20|0xa16ec3",90,375,933,418,965) --庭院组队颜色(节日)
     local xTS, yTS = findMultiColorInRegionFuzzy(0xcc5e74,"7|0|0xffd9d9,7|5|0xe6d5d5,0|5|0xe8d7cf", 90,1791,181,1798,186)--组队界面右上角大叉颜色
     if xTS ~=-1 and yTS ~= -1 then
       printFunction("-->>>>已经在组队界面")
